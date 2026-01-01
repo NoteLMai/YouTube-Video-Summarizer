@@ -1,0 +1,1124 @@
+/* YouTube Video Summarizer - NoteLM.ai */
+/* Panel styles for YouTube video page integration */
+
+:root {
+  --nlm-primary-color: #3b82f6;
+  --nlm-primary-hover: #2563eb;
+  --nlm-bg-color: #ffffff;
+  --nlm-bg-secondary: #f8fafc;
+  --nlm-text-color: #1e293b;
+  --nlm-text-secondary: #64748b;
+  --nlm-border-color: #e2e8f0;
+  --nlm-border-radius: 12px;
+  --nlm-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --nlm-success-color: #10b981;
+  --nlm-error-color: #ef4444;
+  --nlm-warning-color: #f59e0b;
+}
+
+/* Dark mode support (YouTube dark theme) */
+html[dark] {
+  --nlm-bg-color: #1e1e2e;
+  --nlm-bg-secondary: #282a36;
+  --nlm-text-color: #f1f5f9;
+  --nlm-text-secondary: #94a3b8;
+  --nlm-border-color: #3f3f5a;
+  --nlm-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+}
+
+/* Main container */
+#nlm-summarizer-panel {
+  width: 400px;
+  background-color: var(--nlm-bg-color);
+  border: 1px solid var(--nlm-border-color);
+  border-radius: var(--nlm-border-radius);
+  box-shadow: var(--nlm-shadow);
+  margin-bottom: 16px;
+  font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  color: var(--nlm-text-color);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Header */
+.nlm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--nlm-border-color);
+  background: linear-gradient(135deg, var(--nlm-bg-color) 0%, var(--nlm-bg-secondary) 100%);
+}
+
+.nlm-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nlm-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.nlm-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--nlm-text-color);
+}
+
+.nlm-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nlm-icon-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nlm-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.nlm-icon-btn:hover {
+  background-color: var(--nlm-bg-secondary);
+  color: var(--nlm-primary-color);
+}
+
+.nlm-icon-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Content area */
+.nlm-content {
+  padding: 16px;
+  min-height: 120px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Empty state / Initial state */
+.nlm-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.nlm-empty-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  color: var(--nlm-text-secondary);
+  opacity: 0.5;
+}
+
+.nlm-empty-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--nlm-text-color);
+  margin-bottom: 8px;
+}
+
+.nlm-empty-desc {
+  font-size: 13px;
+  color: var(--nlm-text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Language selector */
+.nlm-language-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.nlm-lang-label {
+  font-size: 13px;
+  color: var(--nlm-text-secondary);
+  white-space: nowrap;
+}
+
+.nlm-lang-select {
+  padding: 8px 12px;
+  background: var(--nlm-bg-secondary);
+  border: 1px solid var(--nlm-border-color);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--nlm-text-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 100px;
+}
+
+.nlm-lang-select:hover {
+  border-color: var(--nlm-primary-color);
+}
+
+.nlm-lang-select:focus {
+  outline: none;
+  border-color: var(--nlm-primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Primary button */
+.nlm-btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.nlm-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.nlm-btn-primary:active {
+  transform: translateY(0);
+}
+
+.nlm-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.nlm-btn-primary svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Secondary button */
+.nlm-btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--nlm-bg-secondary);
+  color: var(--nlm-text-color);
+  border: 1px solid var(--nlm-border-color);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nlm-btn-secondary:hover {
+  background: var(--nlm-bg-color);
+  border-color: var(--nlm-primary-color);
+  color: var(--nlm-primary-color);
+}
+
+.nlm-btn-secondary svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Loading state */
+.nlm-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.nlm-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--nlm-border-color);
+  border-top-color: var(--nlm-primary-color);
+  border-radius: 50%;
+  animation: nlm-spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes nlm-spin {
+  to { transform: rotate(360deg); }
+}
+
+.nlm-loading-text {
+  font-size: 14px;
+  color: var(--nlm-text-secondary);
+}
+
+/* Summary result */
+.nlm-summary {
+  line-height: 1.7;
+  color: var(--nlm-text-color);
+}
+
+.nlm-summary h1, .nlm-summary h2, .nlm-summary h3 {
+  margin: 16px 0 8px 0;
+  font-weight: 600;
+  color: var(--nlm-text-color);
+}
+
+.nlm-summary h1 { font-size: 18px; }
+.nlm-summary h2 { font-size: 16px; }
+.nlm-summary h3 { font-size: 15px; }
+
+.nlm-summary p {
+  margin: 8px 0;
+}
+
+.nlm-summary ul, .nlm-summary ol {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.nlm-summary li {
+  margin: 4px 0;
+}
+
+.nlm-summary strong {
+  font-weight: 600;
+  color: var(--nlm-primary-color);
+}
+
+.nlm-summary code {
+  background: var(--nlm-bg-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 13px;
+}
+
+/* Error state */
+.nlm-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.nlm-error-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--nlm-error-color);
+  margin-bottom: 12px;
+}
+
+.nlm-error-icon.nlm-warning-color {
+  color: var(--nlm-warning-color);
+}
+
+.nlm-error-icon.nlm-info-color {
+  color: var(--nlm-primary-color);
+}
+
+.nlm-error-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.nlm-error-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--nlm-text-color);
+  margin-bottom: 8px;
+}
+
+.nlm-error-message {
+  font-size: 13px;
+  color: var(--nlm-text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Detailed error styles */
+.nlm-error-detailed .nlm-error-title {
+  color: var(--nlm-text-color);
+}
+
+/* Single suggestion style */
+.nlm-error-suggestion {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 10px;
+  margin-bottom: 16px;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.nlm-suggestion-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--nlm-primary-color);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.nlm-suggestion-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.nlm-suggestion-text {
+  font-size: 12px;
+  color: var(--nlm-text-secondary);
+  line-height: 1.5;
+}
+
+/* Multiple suggestions list style */
+.nlm-error-suggestions {
+  padding: 14px 16px;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 10px;
+  margin-bottom: 16px;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.nlm-suggestions-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--nlm-primary-color);
+  margin-bottom: 10px;
+}
+
+.nlm-suggestions-header svg {
+  width: 16px;
+  height: 16px;
+}
+
+.nlm-suggestions-list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 12px;
+  color: var(--nlm-text-secondary);
+  line-height: 1.8;
+}
+
+.nlm-suggestions-list li {
+  margin: 4px 0;
+}
+
+.nlm-suggestions-list li::marker {
+  color: var(--nlm-primary-color);
+  font-weight: 600;
+}
+
+.nlm-error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.nlm-error-actions .nlm-btn-primary,
+.nlm-error-actions .nlm-btn-secondary {
+  width: auto;
+  min-width: 120px;
+}
+
+/* Settings Modal */
+.nlm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  backdrop-filter: blur(4px);
+}
+
+.nlm-modal {
+  background: var(--nlm-bg-color);
+  border-radius: var(--nlm-border-radius);
+  width: 400px;
+  max-width: 90vw;
+  box-shadow: var(--nlm-shadow);
+  animation: nlm-modal-in 0.2s ease;
+}
+
+@keyframes nlm-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.nlm-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--nlm-border-color);
+}
+
+.nlm-modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--nlm-text-color);
+}
+
+.nlm-modal-close {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nlm-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.nlm-modal-close:hover {
+  background: var(--nlm-bg-secondary);
+  color: var(--nlm-text-color);
+}
+
+.nlm-modal-body {
+  padding: 20px;
+}
+
+.nlm-form-group {
+  margin-bottom: 16px;
+}
+
+.nlm-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--nlm-text-color);
+  margin-bottom: 8px;
+}
+
+.nlm-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--nlm-bg-secondary);
+  border: 1px solid var(--nlm-border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--nlm-text-color);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.nlm-input:focus {
+  outline: none;
+  border-color: var(--nlm-primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.nlm-input::placeholder {
+  color: var(--nlm-text-secondary);
+}
+
+.nlm-help-text {
+  font-size: 12px;
+  color: var(--nlm-text-secondary);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.nlm-help-text a {
+  color: var(--nlm-primary-color);
+  text-decoration: none;
+}
+
+.nlm-help-text a:hover {
+  text-decoration: underline;
+}
+
+.nlm-modal-footer {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--nlm-border-color);
+}
+
+.nlm-modal-footer .nlm-btn-primary,
+.nlm-modal-footer .nlm-btn-secondary {
+  flex: 1;
+}
+
+/* Status indicator */
+.nlm-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--nlm-bg-secondary);
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.nlm-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.nlm-status-dot.success {
+  background: var(--nlm-success-color);
+}
+
+.nlm-status-dot.warning {
+  background: var(--nlm-warning-color);
+}
+
+.nlm-status-dot.error {
+  background: var(--nlm-error-color);
+}
+
+/* Footer */
+.nlm-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-top: 1px solid var(--nlm-border-color);
+  background: var(--nlm-bg-secondary);
+  font-size: 12px;
+  color: var(--nlm-text-secondary);
+}
+
+.nlm-footer a {
+  color: var(--nlm-primary-color);
+  text-decoration: none;
+}
+
+.nlm-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Regenerate section with language selector */
+.nlm-regenerate-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--nlm-border-color);
+}
+
+.nlm-regenerate-lang {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.nlm-lang-label-inline {
+  font-size: 13px;
+  color: var(--nlm-text-secondary);
+  white-space: nowrap;
+}
+
+.nlm-lang-select-compact {
+  flex: 1;
+  padding: 6px 10px;
+  background: var(--nlm-bg-secondary);
+  border: 1px solid var(--nlm-border-color);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--nlm-text-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nlm-lang-select-compact:hover {
+  border-color: var(--nlm-primary-color);
+}
+
+.nlm-lang-select-compact:focus {
+  outline: none;
+  border-color: var(--nlm-primary-color);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Action bar (copy, etc) */
+.nlm-action-bar {
+  display: flex;
+  gap: 8px;
+}
+
+.nlm-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--nlm-bg-secondary);
+  color: var(--nlm-text-color);
+  border: 1px solid var(--nlm-border-color);
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nlm-action-btn:hover {
+  border-color: var(--nlm-primary-color);
+  color: var(--nlm-primary-color);
+}
+
+.nlm-action-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Primary action button style (for regenerate) */
+.nlm-action-btn-primary {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+  border-color: var(--nlm-primary-color);
+  color: var(--nlm-primary-color);
+}
+
+.nlm-action-btn-primary:hover {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(99, 102, 241, 0.2) 100%);
+}
+
+/* Toast notification */
+.nlm-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  background: var(--nlm-text-color);
+  color: var(--nlm-bg-color);
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 999999;
+  animation: nlm-toast-in 0.3s ease;
+}
+
+@keyframes nlm-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Scrollbar styling */
+.nlm-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nlm-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nlm-content::-webkit-scrollbar-thumb {
+  background: var(--nlm-border-color);
+  border-radius: 3px;
+}
+
+.nlm-content::-webkit-scrollbar-thumb:hover {
+  background: var(--nlm-text-secondary);
+}
+
+/* Collapsed state */
+#nlm-summarizer-panel.collapsed .nlm-content,
+#nlm-summarizer-panel.collapsed .nlm-footer {
+  display: none;
+}
+
+#nlm-summarizer-panel.collapsed {
+  min-height: auto;
+}
+
+/* No subtitles warning */
+.nlm-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.nlm-warning-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--nlm-warning-color);
+  flex-shrink: 0;
+}
+
+.nlm-warning-text {
+  font-size: 13px;
+  color: var(--nlm-text-color);
+  line-height: 1.5;
+}
+
+/* Subtitle hint */
+.nlm-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.nlm-hint-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--nlm-primary-color);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.nlm-hint-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nlm-hint-text {
+  font-size: 12px;
+  color: var(--nlm-text-secondary);
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* ============================================================
+   TIMESTAMP STYLES - Clickable video navigation
+   ============================================================ */
+
+.nlm-timestamp {
+  color: #3ea6ff;
+  text-decoration: none;
+  font-family: 'Roboto Mono', 'SF Mono', Consolas, monospace;
+  font-size: 0.85em;
+  font-weight: 500;
+  background: rgba(62, 166, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.nlm-timestamp:hover {
+  background: rgba(62, 166, 255, 0.25);
+  color: #5fb8ff;
+  text-decoration: none;
+}
+
+.nlm-timestamp:active {
+  background: rgba(62, 166, 255, 0.35);
+  transform: scale(0.98);
+}
+
+/* Light mode timestamp adjustments */
+html:not([dark]) .nlm-timestamp {
+  color: #1a73e8;
+  background: rgba(26, 115, 232, 0.1);
+}
+
+html:not([dark]) .nlm-timestamp:hover {
+  background: rgba(26, 115, 232, 0.2);
+  color: #1557b0;
+}
+
+/* ============================================================
+   HASHTAG STYLES - Clickable YouTube hashtag links
+   ============================================================ */
+
+.nlm-hashtag {
+  color: #3ea6ff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 2px 8px;
+  background: rgba(62, 166, 255, 0.08);
+  border-radius: 12px;
+  transition: all 0.15s ease;
+  display: inline-block;
+  margin: 2px 4px 2px 0;
+}
+
+.nlm-hashtag:hover {
+  background: rgba(62, 166, 255, 0.2);
+  color: #5fb8ff;
+  text-decoration: none;
+}
+
+.nlm-hashtag:active {
+  transform: scale(0.98);
+}
+
+/* Light mode hashtag adjustments */
+html:not([dark]) .nlm-hashtag {
+  color: #1a73e8;
+  background: rgba(26, 115, 232, 0.08);
+}
+
+html:not([dark]) .nlm-hashtag:hover {
+  background: rgba(26, 115, 232, 0.15);
+  color: #1557b0;
+}
+
+/* ============================================================
+   BLOCKQUOTE STYLES - Notable quotes section
+   ============================================================ */
+
+.nlm-summary blockquote {
+  border-left: 3px solid var(--nlm-primary-color);
+  margin: 12px 0;
+  padding: 10px 16px;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--nlm-text-secondary);
+}
+
+html[dark] .nlm-summary blockquote {
+  background: rgba(62, 166, 255, 0.08);
+  border-left-color: #3ea6ff;
+}
+
+.nlm-summary blockquote .nlm-timestamp {
+  font-style: normal;
+}
+
+/* ============================================================
+   ENHANCED HEADING STYLES - Chapters and sections
+   ============================================================ */
+
+.nlm-summary h2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--nlm-text-color);
+  margin: 20px 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--nlm-border-color);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nlm-summary h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nlm-text-color);
+  margin: 16px 0 10px 0;
+}
+
+/* First heading should not have top margin */
+.nlm-summary h2:first-child,
+.nlm-summary h3:first-child {
+  margin-top: 0;
+}
+
+/* ============================================================
+   ENHANCED LIST STYLES - Key points, chapters, takeaways
+   ============================================================ */
+
+.nlm-summary ul {
+  margin: 10px 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.nlm-summary li {
+  margin: 8px 0;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.nlm-summary li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  background: var(--nlm-primary-color);
+  border-radius: 50%;
+}
+
+/* Nested lists */
+.nlm-summary ul ul {
+  margin: 6px 0 6px 10px;
+}
+
+.nlm-summary ul ul li::before {
+  width: 4px;
+  height: 4px;
+  background: var(--nlm-text-secondary);
+}
+
+/* ============================================================
+   ENHANCED PARAGRAPH AND TEXT STYLES
+   ============================================================ */
+
+.nlm-summary p {
+  margin: 10px 0;
+  line-height: 1.7;
+  color: var(--nlm-text-color);
+}
+
+.nlm-summary strong {
+  color: var(--nlm-text-color);
+  font-weight: 600;
+}
+
+/* Links within summary */
+.nlm-summary a:not(.nlm-timestamp) {
+  color: var(--nlm-primary-color);
+  text-decoration: none;
+}
+
+.nlm-summary a:not(.nlm-timestamp):hover {
+  text-decoration: underline;
+}
+
+/* Code blocks */
+.nlm-summary code {
+  background: var(--nlm-bg-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Roboto Mono', 'SF Mono', Consolas, monospace;
+  font-size: 0.9em;
+  color: var(--nlm-text-color);
+}
+
+/* ============================================================
+   CHAPTER-SPECIFIC STYLES
+   ============================================================ */
+
+/* Chapters list with timestamps */
+.nlm-summary li .nlm-timestamp:first-child {
+  margin-right: 8px;
+}
+
+/* Make chapter titles stand out */
+.nlm-summary li strong:first-of-type {
+  color: var(--nlm-text-color);
+}
+
+/* ============================================================
+   TAGS SECTION STYLES
+   ============================================================ */
+
+.nlm-summary .nlm-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.nlm-summary .nlm-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--nlm-bg-secondary);
+  border: 1px solid var(--nlm-border-color);
+  border-radius: 16px;
+  font-size: 12px;
+  color: var(--nlm-text-secondary);
+}
+
+/* ============================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================ */
+
+@media (max-width: 450px) {
+  #nlm-summarizer-panel {
+    width: 100%;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+  
+  .nlm-timestamp {
+    font-size: 0.8em;
+    padding: 2px 4px;
+  }
+  
+  .nlm-summary h2 {
+    font-size: 14px;
+  }
+  
+  .nlm-summary h3 {
+    font-size: 13px;
+  }
+}
+
+/* ============================================================
+   ANIMATION FOR TIMESTAMP FEEDBACK
+   ============================================================ */
+
+@keyframes nlm-timestamp-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(62, 166, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(62, 166, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(62, 166, 255, 0);
+  }
+}
+
+.nlm-timestamp:active {
+  animation: nlm-timestamp-pulse 0.3s ease-out;
+}
+
