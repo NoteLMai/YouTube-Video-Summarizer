@@ -1,0 +1,868 @@
+{
+  "extName": {
+    "message": "YouTube 影片摘要",
+    "description": "The name of the extension displayed in Chrome"
+  },
+  "extDescription": {
+    "message": "使用您自己的 Gemini API 密鑰，透過 AI 總結 YouTube 影片",
+    "description": "The description of the extension"
+  },
+  "extShortName": {
+    "message": "YT 摘要",
+    "description": "Short name for the extension"
+  },
+  "panelTitle": {
+    "message": "YouTube 影片摘要",
+    "description": "Title shown in the panel header"
+  },
+  "settings": {
+    "message": "設定",
+    "description": "Button tooltip for opening settings"
+  },
+  "collapse": {
+    "message": "收合",
+    "description": "Button tooltip to collapse the panel"
+  },
+  "expand": {
+    "message": "展開",
+    "description": "Button tooltip to expand the panel"
+  },
+  "poweredBy": {
+    "message": "由 Gemini AI 驅動",
+    "description": "Footer text showing the AI provider"
+  },
+  "moreToolsAt": {
+    "message": "更多工具請瀏覽",
+    "description": "Footer text before the NoteLM.ai link"
+  },
+  "generating": {
+    "message": "正在生成摘要...",
+    "description": "Generic loading message"
+  },
+  "loadingStage1": {
+    "message": "正在準備影片內容...",
+    "description": "Loading stage 1 message"
+  },
+  "loadingStage2": {
+    "message": "正在分析字幕...",
+    "description": "Loading stage 2 message"
+  },
+  "loadingStage3": {
+    "message": "正在生成 AI 摘要...",
+    "description": "Loading stage 3 message"
+  },
+  "loadingStage4": {
+    "message": "正在格式化結果...",
+    "description": "Loading stage 4 message"
+  },
+  "estimatedTime": {
+    "message": "預計剩餘時間",
+    "description": "Label for estimated time remaining"
+  },
+  "seconds": {
+    "message": "秒",
+    "description": "Unit label for seconds"
+  },
+  "almostDone": {
+    "message": "即將完成...",
+    "description": "Message when loading is nearly complete"
+  },
+  "takingLonger": {
+    "message": "這比平時花費更長時間...",
+    "description": "Message when loading takes longer than expected"
+  },
+  "pleaseWait": {
+    "message": "請稍候，AI 正在思考...",
+    "description": "Message asking user to wait during generation"
+  },
+  "outputLanguage": {
+    "message": "輸出語言",
+    "description": "Label for language selector"
+  },
+  "copy": {
+    "message": "複製",
+    "description": "Button text for copying summary"
+  },
+  "regenerate": {
+    "message": "重新生成",
+    "description": "Button text for regenerating summary"
+  },
+  "summarizeVideo": {
+    "message": "生成摘要",
+    "description": "Main action button text"
+  },
+  "tryAgain": {
+    "message": "重試",
+    "description": "Button text to retry after error"
+  },
+  "refreshPage": {
+    "message": "刷新頁面",
+    "description": "Button text to refresh the page"
+  },
+  "configureApiKey": {
+    "message": "配置 API 密鑰",
+    "description": "Button text to configure API key"
+  },
+  "setupRequired": {
+    "message": "需要設定",
+    "description": "Title when API key is not configured"
+  },
+  "setupDescription": {
+    "message": "添加您的 Gemini API 密鑰以開始總結影片。它是免費的，且保存在您的設備上。",
+    "description": "Description for initial setup"
+  },
+  "readyToSummarize": {
+    "message": "準備就緒",
+    "description": "Title when extension is ready"
+  },
+  "readyDescription": {
+    "message": "點擊下方按鈕，生成此影片的 AI 摘要。",
+    "description": "Description when ready to summarize"
+  },
+  "subtitleHint": {
+    "message": "為獲得最佳效果：1）先播放影片幾秒鐘，2）如果有字幕，請點擊「CC」按鈕啟用字幕。",
+    "description": "Hint about enabling subtitles"
+  },
+  "geminiApiKey": {
+    "message": "Gemini API 密鑰",
+    "description": "Label for API key input field"
+  },
+  "enterApiKey": {
+    "message": "請輸入您的 Gemini API 密鑰",
+    "description": "Placeholder for API key input"
+  },
+  "getApiKey": {
+    "message": "了解如何獲取免費 API 密鑰，請瀏覽",
+    "description": "Help text for getting API key"
+  },
+  "apiKeyConfigured": {
+    "message": "API 密鑰已配置",
+    "description": "Status message when API key is set"
+  },
+  "cancel": {
+    "message": "取消",
+    "description": "Cancel button text"
+  },
+  "save": {
+    "message": "儲存",
+    "description": "Save button text"
+  },
+  "verify": {
+    "message": "驗證",
+    "description": "Verify button text"
+  },
+  "verifying": {
+    "message": "驗證中...",
+    "description": "Status while verifying API key"
+  },
+  "selectModel": {
+    "message": "選擇模型",
+    "description": "Label for model selection"
+  },
+  "model": {
+    "message": "模型",
+    "description": "Label for model field"
+  },
+  "noModelsAvailable": {
+    "message": "沒有可用的模型",
+    "description": "Message when no models are found"
+  },
+  "apiKeyVerified": {
+    "message": "API 密鑰驗證成功！",
+    "description": "Success message after verification"
+  },
+  "apiKeyInvalid": {
+    "message": "無效的 API 密鑰",
+    "description": "Error message for invalid key"
+  },
+  "verifyFirst": {
+    "message": "請先驗證您的 API 密鑰",
+    "description": "Prompt to verify before saving"
+  },
+  "loadingModels": {
+    "message": "正在載入模型...",
+    "description": "Status while loading models"
+  },
+  "modelSelected": {
+    "message": "模型已選擇",
+    "description": "Confirmation when model is selected"
+  },
+  "recommendedModel": {
+    "message": "推薦",
+    "description": "Badge text for recommended model"
+  },
+  "currentModel": {
+    "message": "當前模型",
+    "description": "Label for currently selected model"
+  },
+  "apiKeySaved": {
+    "message": "API 密鑰儲存成功！",
+    "description": "Toast message after saving API key"
+  },
+  "apiKeyCleared": {
+    "message": "API 密鑰已清除",
+    "description": "Toast message after clearing API key"
+  },
+  "copied": {
+    "message": "摘要已複製到剪貼板！",
+    "description": "Toast message after copying"
+  },
+  "copyFailed": {
+    "message": "複製摘要失敗",
+    "description": "Toast message when copy fails"
+  },
+  "error": {
+    "message": "錯誤",
+    "description": "Generic error title"
+  },
+  "howToFix": {
+    "message": "解決方法：",
+    "description": "Header for error fix suggestions"
+  },
+  "noSubtitles": {
+    "message": "沒有可用的字幕。請先播放影片以載入字幕。",
+    "description": "Error when subtitles not found"
+  },
+  "failedToFetchSubtitles": {
+    "message": "獲取影片字幕失敗。",
+    "description": "Error when subtitle fetch fails"
+  },
+  "videoNotPlayed": {
+    "message": "請先播放影片",
+    "description": "Error title when video hasn't been played"
+  },
+  "playVideoToCapture": {
+    "message": "請播放影片幾秒鐘，以便我們捕捉字幕。",
+    "description": "Error message explaining to play video"
+  },
+  "ccNotEnabled": {
+    "message": "啟用字幕 (CC)",
+    "description": "Error title when CC not enabled"
+  },
+  "enableCCFirst": {
+    "message": "需要啟用字幕才能捕捉它們。",
+    "description": "Error message about enabling CC"
+  },
+  "subtitleNotCaptured": {
+    "message": "未捕捉到字幕",
+    "description": "Error title when subtitles weren't captured"
+  },
+  "refreshMayHelp": {
+    "message": "我們無法捕捉字幕數據。這有時是由於時間問題導致的。",
+    "description": "Error message suggesting refresh"
+  },
+  "noSubtitlesAvailable": {
+    "message": "沒有可用的字幕",
+    "description": "Error title when video has no subtitles"
+  },
+  "videoNoSubtitles": {
+    "message": "此影片似乎沒有字幕或隱藏式字幕。",
+    "description": "Error message for video without CC"
+  },
+  "subtitleError": {
+    "message": "字幕錯誤",
+    "description": "Generic subtitle error title"
+  },
+  "couldNotGetSubtitles": {
+    "message": "無法獲取字幕數據。",
+    "description": "Generic subtitle error message"
+  },
+  "subtitleFetchError": {
+    "message": "載入字幕失敗",
+    "description": "Title for subtitle fetch error"
+  },
+  "subtitleFetchErrorMsg": {
+    "message": "無法從 YouTube 獲取字幕數據。",
+    "description": "Message for subtitle fetch error"
+  },
+  "subtitleFetchStep1": {
+    "message": "刷新頁面 (F5)",
+    "description": "Step 1 for subtitle fetch error"
+  },
+  "subtitleFetchStep2": {
+    "message": "播放影片 5-10 秒",
+    "description": "Step 2 for subtitle fetch error"
+  },
+  "subtitleFetchStep3": {
+    "message": "確保 CC 字幕按鈕已啟用",
+    "description": "Step 3 for subtitle fetch error"
+  },
+  "subtitleFetchStep4": {
+    "message": "點擊下方「重試」按鈕",
+    "description": "Step 4 for subtitle fetch error"
+  },
+  "insufficientContent": {
+    "message": "內容不足",
+    "description": "Error title for insufficient content"
+  },
+  "subtitlesTooShort": {
+    "message": "字幕內容太短，無法生成有意義的摘要。",
+    "description": "Error message for short subtitles"
+  },
+  "tryLongerVideo": {
+    "message": "此影片可能太短或口述內容很少。",
+    "description": "Suggestion for short video error"
+  },
+  "invalidApiKey": {
+    "message": "無效的 API 密鑰",
+    "description": "Error title for invalid API key"
+  },
+  "apiKeyInvalidMsg": {
+    "message": "您的 Gemini API 密鑰無效或已被撤銷。",
+    "description": "Error message for invalid API key"
+  },
+  "checkApiKey": {
+    "message": "請在設定中檢查您的 API 密鑰，或瀏覽 notelm.ai/support/api-key-guide 獲取幫助。",
+    "description": "Suggestion for API key error"
+  },
+  "apiKeyTooShort": {
+    "message": "API 密鑰似乎無效。請檢查並重新輸入您的 Gemini API 密鑰。",
+    "description": "Error for malformed API key"
+  },
+  "getNewApiKey": {
+    "message": "了解如何在 notelm.ai 獲取有效的 API 密鑰",
+    "description": "Help text for getting new API key"
+  },
+  "requestError": {
+    "message": "請求錯誤",
+    "description": "Generic request error title"
+  },
+  "badRequestMsg": {
+    "message": "請求 Gemini API 失敗。",
+    "description": "Message for bad request error"
+  },
+  "tryAgainLater": {
+    "message": "請稍後重試。",
+    "description": "Generic retry suggestion"
+  },
+  "unauthorized": {
+    "message": "未授權",
+    "description": "Unauthorized error title"
+  },
+  "apiKeyUnauthorized": {
+    "message": "您的 API 密鑰未被授權使用此服務。",
+    "description": "Unauthorized error message"
+  },
+  "checkApiKeyPermissions": {
+    "message": "請確保您的 API 密鑰具有正確的權限。",
+    "description": "Suggestion for permission error"
+  },
+  "accessDenied": {
+    "message": "訪問被拒絕",
+    "description": "Access denied error title"
+  },
+  "apiKeyForbidden": {
+    "message": "此 API 密鑰禁止訪問 Gemini API。",
+    "description": "Forbidden access error message"
+  },
+  "checkApiKeyOrRegion": {
+    "message": "您的 API 密鑰可能受到限制，或者 Gemini 在您的地區不可用。",
+    "description": "Suggestion for region restriction"
+  },
+  "rateLimitExceeded": {
+    "message": "超出速率限制",
+    "description": "Rate limit error title"
+  },
+  "tooManyRequests": {
+    "message": "您已超出 API 速率限制或配額。",
+    "description": "Rate limit error message"
+  },
+  "waitAndRetry": {
+    "message": "請等待幾分鐘後重試。如果問題持續存在，請考慮升級您的 API 計劃。",
+    "description": "Suggestion for rate limit error"
+  },
+  "serverError": {
+    "message": "伺服器錯誤",
+    "description": "Server error title"
+  },
+  "geminiServerError": {
+    "message": "Gemini API 遇到問題。",
+    "description": "Server error message"
+  },
+  "apiError": {
+    "message": "API 錯誤",
+    "description": "Generic API error title"
+  },
+  "unknownApiError": {
+    "message": "調用 Gemini API 時發生錯誤。",
+    "description": "Unknown API error message"
+  },
+  "contentFiltered": {
+    "message": "內容被過濾",
+    "description": "Content filtered error title"
+  },
+  "safetyFilterTriggered": {
+    "message": "內容被安全設定過濾。",
+    "description": "Safety filter error message"
+  },
+  "tryDifferentVideo": {
+    "message": "請嘗試不那麼敏感的影片內容。",
+    "description": "Suggestion for content filter"
+  },
+  "noSummaryGenerated": {
+    "message": "未生成摘要",
+    "description": "No response error title"
+  },
+  "aiDidNotRespond": {
+    "message": "AI 沒有生成回應。",
+    "description": "No response error message"
+  },
+  "summaryIncomplete": {
+    "message": "摘要可能不完整",
+    "description": "Warning for truncated summary"
+  },
+  "outputTruncated": {
+    "message": "由於長度限制，AI 回應被截斷。",
+    "description": "Truncation warning message"
+  },
+  "tryDifferentModel": {
+    "message": "嘗試切換到更強大的模型（例如 gemini-2.5-pro）並重新生成。",
+    "description": "Suggestion for truncation"
+  },
+  "switchModel": {
+    "message": "切換模型",
+    "description": "Button text to switch model"
+  },
+  "retryWithOptions": {
+    "message": "使用選項重試",
+    "description": "Button text for retry with options"
+  },
+  "step1Play": {
+    "message": "點擊播放影片",
+    "description": "Step instruction to play video"
+  },
+  "step2Wait": {
+    "message": "等待 3-5 秒",
+    "description": "Step instruction to wait"
+  },
+  "step3Summarize": {
+    "message": "再次點擊「生成摘要」",
+    "description": "Step instruction to summarize again"
+  },
+  "step1EnableCC": {
+    "message": "點擊影片播放器上的 CC 按鈕",
+    "description": "Step instruction to enable CC"
+  },
+  "step2PlayAgain": {
+    "message": "播放影片幾秒鐘",
+    "description": "Step instruction to play again"
+  },
+  "tryRefresh": {
+    "message": "刷新頁面 (F5)",
+    "description": "Step instruction to refresh"
+  },
+  "playWithCC": {
+    "message": "啟用 CC 後播放影片",
+    "description": "Step instruction to play with CC"
+  },
+  "trySummarize": {
+    "message": "再次嘗試生成摘要",
+    "description": "Step instruction to try again"
+  },
+  "tryRefreshCheck": {
+    "message": "嘗試刷新頁面 - 有時 CC 按鈕載入較晚",
+    "description": "Suggestion about late-loading CC"
+  },
+  "checkOtherVideos": {
+    "message": "如果沒有 CC 按鈕，則該影片沒有字幕",
+    "description": "Information about missing CC button"
+  },
+  "tryAnotherVideo": {
+    "message": "嘗試有 CC 的其他影片",
+    "description": "Suggestion to try another video"
+  },
+  "refreshAndRetry": {
+    "message": "刷新頁面並重試。",
+    "description": "Generic refresh and retry suggestion"
+  },
+  "langAfrikaans": {
+    "message": "南非荷蘭語",
+    "description": "Language name: Afrikaans"
+  },
+  "langAmharic": {
+    "message": "阿姆哈拉語",
+    "description": "Language name: Amharic"
+  },
+  "langArabic": {
+    "message": "阿拉伯語",
+    "description": "Language name: Arabic"
+  },
+  "langAssamese": {
+    "message": "阿薩姆語",
+    "description": "Language name: Assamese"
+  },
+  "langAzerbaijani": {
+    "message": "阿塞拜疆語",
+    "description": "Language name: Azerbaijani"
+  },
+  "langBelarusian": {
+    "message": "白俄羅斯語",
+    "description": "Language name: Belarusian"
+  },
+  "langBulgarian": {
+    "message": "保加利亞語",
+    "description": "Language name: Bulgarian"
+  },
+  "langBangla": {
+    "message": "孟加拉語",
+    "description": "Language name: Bangla"
+  },
+  "langBosnian": {
+    "message": "波斯尼亞語",
+    "description": "Language name: Bosnian"
+  },
+  "langCatalan": {
+    "message": "加泰羅尼亞語",
+    "description": "Language name: Catalan"
+  },
+  "langCzech": {
+    "message": "捷克語",
+    "description": "Language name: Czech"
+  },
+  "langDanish": {
+    "message": "丹麥語",
+    "description": "Language name: Danish"
+  },
+  "langGerman": {
+    "message": "德語",
+    "description": "Language name: German"
+  },
+  "langGreek": {
+    "message": "希臘語",
+    "description": "Language name: Greek"
+  },
+  "langEnglish": {
+    "message": "英語",
+    "description": "Language name: English"
+  },
+  "langEnglishUK": {
+    "message": "英語（英國）",
+    "description": "Language name: English UK"
+  },
+  "langEnglishIN": {
+    "message": "英語（印度）",
+    "description": "Language name: English India"
+  },
+  "langSpanish": {
+    "message": "西班牙語",
+    "description": "Language name: Spanish"
+  },
+  "langSpanishLatam": {
+    "message": "西班牙語（拉美）",
+    "description": "Language name: Spanish Latin America"
+  },
+  "langSpanishUS": {
+    "message": "西班牙語（美國）",
+    "description": "Language name: Spanish US"
+  },
+  "langEstonian": {
+    "message": "愛沙尼亞語",
+    "description": "Language name: Estonian"
+  },
+  "langBasque": {
+    "message": "巴斯克語",
+    "description": "Language name: Basque"
+  },
+  "langPersian": {
+    "message": "波斯語",
+    "description": "Language name: Persian"
+  },
+  "langFinnish": {
+    "message": "芬蘭語",
+    "description": "Language name: Finnish"
+  },
+  "langFilipino": {
+    "message": "菲律賓語",
+    "description": "Language name: Filipino"
+  },
+  "langFrench": {
+    "message": "法語",
+    "description": "Language name: French"
+  },
+  "langFrenchCA": {
+    "message": "法語（加拿大）",
+    "description": "Language name: French Canada"
+  },
+  "langGalician": {
+    "message": "加利西亞語",
+    "description": "Language name: Galician"
+  },
+  "langGujarati": {
+    "message": "古吉拉特語",
+    "description": "Language name: Gujarati"
+  },
+  "langHindi": {
+    "message": "印地語",
+    "description": "Language name: Hindi"
+  },
+  "langCroatian": {
+    "message": "克羅地亞語",
+    "description": "Language name: Croatian"
+  },
+  "langHungarian": {
+    "message": "匈牙利語",
+    "description": "Language name: Hungarian"
+  },
+  "langArmenian": {
+    "message": "亞美尼亞語",
+    "description": "Language name: Armenian"
+  },
+  "langIndonesian": {
+    "message": "印尼語",
+    "description": "Language name: Indonesian"
+  },
+  "langIcelandic": {
+    "message": "冰島語",
+    "description": "Language name: Icelandic"
+  },
+  "langItalian": {
+    "message": "意大利語",
+    "description": "Language name: Italian"
+  },
+  "langHebrew": {
+    "message": "希伯來語",
+    "description": "Language name: Hebrew"
+  },
+  "langJapanese": {
+    "message": "日語",
+    "description": "Language name: Japanese"
+  },
+  "langGeorgian": {
+    "message": "格魯吉亞語",
+    "description": "Language name: Georgian"
+  },
+  "langKazakh": {
+    "message": "哈薩克語",
+    "description": "Language name: Kazakh"
+  },
+  "langKhmer": {
+    "message": "高棉語",
+    "description": "Language name: Khmer"
+  },
+  "langKannada": {
+    "message": "卡納達語",
+    "description": "Language name: Kannada"
+  },
+  "langKorean": {
+    "message": "韓語",
+    "description": "Language name: Korean"
+  },
+  "langKyrgyz": {
+    "message": "吉爾吉斯語",
+    "description": "Language name: Kyrgyz"
+  },
+  "langLao": {
+    "message": "老撾語",
+    "description": "Language name: Lao"
+  },
+  "langLithuanian": {
+    "message": "立陶宛語",
+    "description": "Language name: Lithuanian"
+  },
+  "langLatvian": {
+    "message": "拉脫維亞語",
+    "description": "Language name: Latvian"
+  },
+  "langMacedonian": {
+    "message": "馬其頓語",
+    "description": "Language name: Macedonian"
+  },
+  "langMalayalam": {
+    "message": "馬拉雅拉姆語",
+    "description": "Language name: Malayalam"
+  },
+  "langMongolian": {
+    "message": "蒙古語",
+    "description": "Language name: Mongolian"
+  },
+  "langMarathi": {
+    "message": "馬拉地語",
+    "description": "Language name: Marathi"
+  },
+  "langMalay": {
+    "message": "馬來語",
+    "description": "Language name: Malay"
+  },
+  "langBurmese": {
+    "message": "緬甸語",
+    "description": "Language name: Burmese"
+  },
+  "langNepali": {
+    "message": "尼泊爾語",
+    "description": "Language name: Nepali"
+  },
+  "langDutch": {
+    "message": "荷蘭語",
+    "description": "Language name: Dutch"
+  },
+  "langNorwegian": {
+    "message": "挪威語",
+    "description": "Language name: Norwegian"
+  },
+  "langOdia": {
+    "message": "奧里亞語",
+    "description": "Language name: Odia"
+  },
+  "langPunjabi": {
+    "message": "旁遮普語",
+    "description": "Language name: Punjabi"
+  },
+  "langPolish": {
+    "message": "波蘭語",
+    "description": "Language name: Polish"
+  },
+  "langPortuguese": {
+    "message": "葡萄牙語",
+    "description": "Language name: Portuguese"
+  },
+  "langPortuguesePT": {
+    "message": "葡萄牙語（葡萄牙）",
+    "description": "Language name: Portuguese Portugal"
+  },
+  "langRomanian": {
+    "message": "羅馬尼亞語",
+    "description": "Language name: Romanian"
+  },
+  "langRussian": {
+    "message": "俄語",
+    "description": "Language name: Russian"
+  },
+  "langSinhala": {
+    "message": "僧伽羅語",
+    "description": "Language name: Sinhala"
+  },
+  "langSlovak": {
+    "message": "斯洛伐克語",
+    "description": "Language name: Slovak"
+  },
+  "langSlovenian": {
+    "message": "斯洛文尼亞語",
+    "description": "Language name: Slovenian"
+  },
+  "langAlbanian": {
+    "message": "阿爾巴尼亞語",
+    "description": "Language name: Albanian"
+  },
+  "langSerbian": {
+    "message": "塞爾維亞語",
+    "description": "Language name: Serbian"
+  },
+  "langSerbianLatin": {
+    "message": "塞爾維亞語（拉丁文）",
+    "description": "Language name: Serbian Latin"
+  },
+  "langSwedish": {
+    "message": "瑞典語",
+    "description": "Language name: Swedish"
+  },
+  "langSwahili": {
+    "message": "斯瓦希里語",
+    "description": "Language name: Swahili"
+  },
+  "langTamil": {
+    "message": "泰米爾語",
+    "description": "Language name: Tamil"
+  },
+  "langTelugu": {
+    "message": "泰盧固語",
+    "description": "Language name: Telugu"
+  },
+  "langThai": {
+    "message": "泰語",
+    "description": "Language name: Thai"
+  },
+  "langTurkish": {
+    "message": "土耳其語",
+    "description": "Language name: Turkish"
+  },
+  "langUkrainian": {
+    "message": "烏克蘭語",
+    "description": "Language name: Ukrainian"
+  },
+  "langUrdu": {
+    "message": "烏爾都語",
+    "description": "Language name: Urdu"
+  },
+  "langUzbek": {
+    "message": "烏茲別克語",
+    "description": "Language name: Uzbek"
+  },
+  "langVietnamese": {
+    "message": "越南語",
+    "description": "Language name: Vietnamese"
+  },
+  "langChineseCN": {
+    "message": "簡體中文",
+    "description": "Language name: Chinese Simplified"
+  },
+  "langChineseHK": {
+    "message": "中文（香港）",
+    "description": "Language name: Chinese Hong Kong"
+  },
+  "langChineseTW": {
+    "message": "繁體中文（台灣）",
+    "description": "Language name: Chinese Traditional"
+  },
+  "langZulu": {
+    "message": "祖魯語",
+    "description": "Language name: Zulu"
+  },
+  "searchLanguagePlaceholder": {
+    "message": "搜尋：en, English, 中文, Español...",
+    "description": "Placeholder for language search input"
+  },
+  "noLanguagesFound": {
+    "message": "未找到語言",
+    "description": "Message when no languages match search"
+  },
+  "unknown": {
+    "message": "未知",
+    "description": "Default text when a value is unknown"
+  },
+  "untitledVideo": {
+    "message": "無標題影片",
+    "description": "Default title when video title cannot be determined"
+  },
+  "unknownChannel": {
+    "message": "未知頻道",
+    "description": "Default channel name when channel cannot be determined"
+  },
+  "unknownError": {
+    "message": "未知錯誤",
+    "description": "Generic unknown error message"
+  },
+  "anUnknownErrorOccurred": {
+    "message": "發生未知錯誤",
+    "description": "Detailed unknown error message"
+  },
+  "jumpToTimestamp": {
+    "message": "跳至 $1",
+    "description": "Tooltip for timestamp links, $1 is the timestamp",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "5:23"
+      }
+    }
+  },
+  "searchHashtagOnYouTube": {
+    "message": "在 YouTube 上搜尋 #$1",
+    "description": "Tooltip for hashtag links, $1 is the hashtag",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "tutorial"
+      }
+    }
+  },
+  "modelsFound": {
+    "message": "$1 個模型",
+    "description": "Number of models found after API key verification",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "12"
+      }
+    }
+  }
+}

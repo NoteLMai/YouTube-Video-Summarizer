@@ -1,8 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "YouTube Video Summarizer - NoteLM.ai",
-  "version": "1.0.0",
-  "description": "Summarize YouTube videos with AI using your own Gemini API key",
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_extShortName__",
+  "version": "1.2.0",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
   "permissions": ["storage", "webRequest"],
   "host_permissions": [
     "https://*.youtube.com/*",
@@ -18,20 +20,20 @@
     "run_at": "document_end"
   }],
   "action": {
-    "default_title": "YouTube Video Summarizer - NoteLM.ai",
+    "default_title": "__MSG_extName__",
     "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
     }
   },
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
   },
   "web_accessible_resources": [{
-    "resources": ["icons/icon128.png", "icons/icon48.png", "icons/icon16.png"],
+    "resources": ["icon128.png", "icon48.png", "icon16.png"],
     "matches": ["https://*.youtube.com/*"]
   }]
 }

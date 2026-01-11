@@ -1,0 +1,868 @@
+{
+  "extName": {
+    "message": "Resumo de Vídeo do YouTube",
+    "description": "The name of the extension displayed in Chrome"
+  },
+  "extDescription": {
+    "message": "Resuma vídeos do YouTube com IA, usando sua chave de API Gemini",
+    "description": "The description of the extension"
+  },
+  "extShortName": {
+    "message": "Resumo YT",
+    "description": "Short name for the extension"
+  },
+  "panelTitle": {
+    "message": "Resumo de Vídeo do YouTube",
+    "description": "Title shown in the panel header"
+  },
+  "settings": {
+    "message": "Configurações",
+    "description": "Button tooltip for opening settings"
+  },
+  "collapse": {
+    "message": "Recolher",
+    "description": "Button tooltip to collapse the panel"
+  },
+  "expand": {
+    "message": "Expandir",
+    "description": "Button tooltip to expand the panel"
+  },
+  "poweredBy": {
+    "message": "Desenvolvido com Gemini AI",
+    "description": "Footer text showing the AI provider"
+  },
+  "moreToolsAt": {
+    "message": "Mais ferramentas em",
+    "description": "Footer text before the NoteLM.ai link"
+  },
+  "generating": {
+    "message": "Gerando resumo...",
+    "description": "Generic loading message"
+  },
+  "loadingStage1": {
+    "message": "Preparando conteúdo do vídeo...",
+    "description": "Loading stage 1 message"
+  },
+  "loadingStage2": {
+    "message": "Analisando legendas...",
+    "description": "Loading stage 2 message"
+  },
+  "loadingStage3": {
+    "message": "Gerando resumo com IA...",
+    "description": "Loading stage 3 message"
+  },
+  "loadingStage4": {
+    "message": "Formatando resultado...",
+    "description": "Loading stage 4 message"
+  },
+  "estimatedTime": {
+    "message": "Tempo restante estimado",
+    "description": "Label for estimated time remaining"
+  },
+  "seconds": {
+    "message": "segundos",
+    "description": "Unit label for seconds"
+  },
+  "almostDone": {
+    "message": "Quase pronto...",
+    "description": "Message when loading is nearly complete"
+  },
+  "takingLonger": {
+    "message": "Está demorando mais que o normal...",
+    "description": "Message when loading takes longer than expected"
+  },
+  "pleaseWait": {
+    "message": "Por favor aguarde, a IA está pensando...",
+    "description": "Message asking user to wait during generation"
+  },
+  "outputLanguage": {
+    "message": "Idioma de saída",
+    "description": "Label for language selector"
+  },
+  "copy": {
+    "message": "Copiar",
+    "description": "Button text for copying summary"
+  },
+  "regenerate": {
+    "message": "Regenerar",
+    "description": "Button text for regenerating summary"
+  },
+  "summarizeVideo": {
+    "message": "Gerar Resumo",
+    "description": "Main action button text"
+  },
+  "tryAgain": {
+    "message": "Tentar Novamente",
+    "description": "Button text to retry after error"
+  },
+  "refreshPage": {
+    "message": "Atualizar Página",
+    "description": "Button text to refresh the page"
+  },
+  "configureApiKey": {
+    "message": "Configurar Chave API",
+    "description": "Button text to configure API key"
+  },
+  "setupRequired": {
+    "message": "Configuração Necessária",
+    "description": "Title when API key is not configured"
+  },
+  "setupDescription": {
+    "message": "Adicione sua chave de API Gemini para começar a resumir vídeos. É grátis e seus dados ficam no seu dispositivo.",
+    "description": "Description for initial setup"
+  },
+  "readyToSummarize": {
+    "message": "Pronto",
+    "description": "Title when extension is ready"
+  },
+  "readyDescription": {
+    "message": "Clique no botão abaixo para gerar um resumo com IA deste vídeo.",
+    "description": "Description when ready to summarize"
+  },
+  "subtitleHint": {
+    "message": "Para melhores resultados: 1) Reproduza o vídeo por alguns segundos primeiro, 2) Se houver legendas, clique no botão \"CC\" para ativá-las.",
+    "description": "Hint about enabling subtitles"
+  },
+  "geminiApiKey": {
+    "message": "Chave API Gemini",
+    "description": "Label for API key input field"
+  },
+  "enterApiKey": {
+    "message": "Digite sua chave API Gemini",
+    "description": "Placeholder for API key input"
+  },
+  "getApiKey": {
+    "message": "Para obter uma chave API gratuita, visite",
+    "description": "Help text for getting API key"
+  },
+  "apiKeyConfigured": {
+    "message": "Chave API Configurada",
+    "description": "Status message when API key is set"
+  },
+  "cancel": {
+    "message": "Cancelar",
+    "description": "Cancel button text"
+  },
+  "save": {
+    "message": "Salvar",
+    "description": "Save button text"
+  },
+  "verify": {
+    "message": "Verificar",
+    "description": "Verify button text"
+  },
+  "verifying": {
+    "message": "Verificando...",
+    "description": "Status while verifying API key"
+  },
+  "selectModel": {
+    "message": "Selecionar Modelo",
+    "description": "Label for model selection"
+  },
+  "model": {
+    "message": "Modelo",
+    "description": "Label for model field"
+  },
+  "noModelsAvailable": {
+    "message": "Nenhum modelo disponível",
+    "description": "Message when no models are found"
+  },
+  "apiKeyVerified": {
+    "message": "Chave API verificada!",
+    "description": "Success message after verification"
+  },
+  "apiKeyInvalid": {
+    "message": "Chave API inválida",
+    "description": "Error message for invalid key"
+  },
+  "verifyFirst": {
+    "message": "Por favor, verifique a chave API primeiro",
+    "description": "Prompt to verify before saving"
+  },
+  "loadingModels": {
+    "message": "Carregando modelos...",
+    "description": "Status while loading models"
+  },
+  "modelSelected": {
+    "message": "Modelo selecionado",
+    "description": "Confirmation when model is selected"
+  },
+  "recommendedModel": {
+    "message": "Recomendado",
+    "description": "Badge text for recommended model"
+  },
+  "currentModel": {
+    "message": "Modelo Atual",
+    "description": "Label for currently selected model"
+  },
+  "apiKeySaved": {
+    "message": "Chave API salva!",
+    "description": "Toast message after saving API key"
+  },
+  "apiKeyCleared": {
+    "message": "Chave API removida",
+    "description": "Toast message after clearing API key"
+  },
+  "copied": {
+    "message": "Resumo copiado para a área de transferência!",
+    "description": "Toast message after copying"
+  },
+  "copyFailed": {
+    "message": "Falha ao copiar resumo",
+    "description": "Toast message when copy fails"
+  },
+  "error": {
+    "message": "Erro",
+    "description": "Generic error title"
+  },
+  "howToFix": {
+    "message": "Como resolver:",
+    "description": "Header for error fix suggestions"
+  },
+  "noSubtitles": {
+    "message": "Nenhuma legenda encontrada. Por favor, reproduza o vídeo primeiro para carregar as legendas.",
+    "description": "Error when subtitles not found"
+  },
+  "failedToFetchSubtitles": {
+    "message": "Falha ao buscar legendas do vídeo.",
+    "description": "Error when subtitle fetch fails"
+  },
+  "videoNotPlayed": {
+    "message": "Por favor, reproduza o vídeo primeiro",
+    "description": "Error title when video hasn't been played"
+  },
+  "playVideoToCapture": {
+    "message": "Por favor, reproduza o vídeo por alguns segundos para capturar as legendas.",
+    "description": "Error message explaining to play video"
+  },
+  "ccNotEnabled": {
+    "message": "Ativar Legendas (CC)",
+    "description": "Error title when CC not enabled"
+  },
+  "enableCCFirst": {
+    "message": "Você precisa ativar as legendas para capturá-las.",
+    "description": "Error message about enabling CC"
+  },
+  "subtitleNotCaptured": {
+    "message": "Legendas não capturadas",
+    "description": "Error title when subtitles weren't captured"
+  },
+  "refreshMayHelp": {
+    "message": "Não foi possível capturar os dados das legendas. Isso pode acontecer devido a problemas de timing.",
+    "description": "Error message suggesting refresh"
+  },
+  "noSubtitlesAvailable": {
+    "message": "Nenhuma Legenda Disponível",
+    "description": "Error title when video has no subtitles"
+  },
+  "videoNoSubtitles": {
+    "message": "Este vídeo parece não ter legendas.",
+    "description": "Error message for video without CC"
+  },
+  "subtitleError": {
+    "message": "Erro de Legenda",
+    "description": "Generic subtitle error title"
+  },
+  "couldNotGetSubtitles": {
+    "message": "Não foi possível obter os dados das legendas.",
+    "description": "Generic subtitle error message"
+  },
+  "subtitleFetchError": {
+    "message": "Falha ao Carregar Legendas",
+    "description": "Title for subtitle fetch error"
+  },
+  "subtitleFetchErrorMsg": {
+    "message": "Não foi possível buscar dados de legendas do YouTube.",
+    "description": "Message for subtitle fetch error"
+  },
+  "subtitleFetchStep1": {
+    "message": "Atualizar a página (F5)",
+    "description": "Step 1 for subtitle fetch error"
+  },
+  "subtitleFetchStep2": {
+    "message": "Reproduzir o vídeo por 5-10 segundos",
+    "description": "Step 2 for subtitle fetch error"
+  },
+  "subtitleFetchStep3": {
+    "message": "Verificar se o botão CC de legendas está ativado",
+    "description": "Step 3 for subtitle fetch error"
+  },
+  "subtitleFetchStep4": {
+    "message": "Clicar em \"Tentar Novamente\" abaixo",
+    "description": "Step 4 for subtitle fetch error"
+  },
+  "insufficientContent": {
+    "message": "Conteúdo Insuficiente",
+    "description": "Error title for insufficient content"
+  },
+  "subtitlesTooShort": {
+    "message": "O conteúdo das legendas é muito curto para gerar um resumo significativo.",
+    "description": "Error message for short subtitles"
+  },
+  "tryLongerVideo": {
+    "message": "Este vídeo pode ser muito curto ou ter pouco conteúdo falado.",
+    "description": "Suggestion for short video error"
+  },
+  "invalidApiKey": {
+    "message": "Chave API Inválida",
+    "description": "Error title for invalid API key"
+  },
+  "apiKeyInvalidMsg": {
+    "message": "Sua chave API Gemini é inválida ou foi revogada.",
+    "description": "Error message for invalid API key"
+  },
+  "checkApiKey": {
+    "message": "Verifique sua chave API nas configurações ou visite notelm.ai/support/api-key-guide.",
+    "description": "Suggestion for API key error"
+  },
+  "apiKeyTooShort": {
+    "message": "A chave API parece ser inválida. Por favor, verifique sua chave API Gemini e digite novamente.",
+    "description": "Error for malformed API key"
+  },
+  "getNewApiKey": {
+    "message": "Saiba como obter uma chave API válida em notelm.ai",
+    "description": "Help text for getting new API key"
+  },
+  "requestError": {
+    "message": "Erro de Requisição",
+    "description": "Generic request error title"
+  },
+  "badRequestMsg": {
+    "message": "A requisição para a API Gemini falhou.",
+    "description": "Message for bad request error"
+  },
+  "tryAgainLater": {
+    "message": "Por favor, tente novamente mais tarde.",
+    "description": "Generic retry suggestion"
+  },
+  "unauthorized": {
+    "message": "Não Autorizado",
+    "description": "Unauthorized error title"
+  },
+  "apiKeyUnauthorized": {
+    "message": "Sua chave API não está autorizada a usar este serviço.",
+    "description": "Unauthorized error message"
+  },
+  "checkApiKeyPermissions": {
+    "message": "Certifique-se de que sua chave API tem as permissões corretas.",
+    "description": "Suggestion for permission error"
+  },
+  "accessDenied": {
+    "message": "Acesso Negado",
+    "description": "Access denied error title"
+  },
+  "apiKeyForbidden": {
+    "message": "O acesso à API Gemini é proibido com esta chave API.",
+    "description": "Forbidden access error message"
+  },
+  "checkApiKeyOrRegion": {
+    "message": "Sua chave API pode estar restrita ou o Gemini pode não estar disponível na sua região.",
+    "description": "Suggestion for region restriction"
+  },
+  "rateLimitExceeded": {
+    "message": "Limite de Taxa Excedido",
+    "description": "Rate limit error title"
+  },
+  "tooManyRequests": {
+    "message": "O limite de taxa ou cota da API foi excedido.",
+    "description": "Rate limit error message"
+  },
+  "waitAndRetry": {
+    "message": "Aguarde alguns minutos e tente novamente. Se o problema persistir, considere atualizar seu plano de API.",
+    "description": "Suggestion for rate limit error"
+  },
+  "serverError": {
+    "message": "Erro do Servidor",
+    "description": "Server error title"
+  },
+  "geminiServerError": {
+    "message": "A API Gemini está com problemas.",
+    "description": "Server error message"
+  },
+  "apiError": {
+    "message": "Erro de API",
+    "description": "Generic API error title"
+  },
+  "unknownApiError": {
+    "message": "Ocorreu um erro ao chamar a API Gemini.",
+    "description": "Unknown API error message"
+  },
+  "contentFiltered": {
+    "message": "Conteúdo Filtrado",
+    "description": "Content filtered error title"
+  },
+  "safetyFilterTriggered": {
+    "message": "O conteúdo foi filtrado devido às configurações de segurança.",
+    "description": "Safety filter error message"
+  },
+  "tryDifferentVideo": {
+    "message": "Tente um vídeo com conteúdo menos sensível.",
+    "description": "Suggestion for content filter"
+  },
+  "noSummaryGenerated": {
+    "message": "Nenhum Resumo Gerado",
+    "description": "No response error title"
+  },
+  "aiDidNotRespond": {
+    "message": "A IA não gerou uma resposta.",
+    "description": "No response error message"
+  },
+  "summaryIncomplete": {
+    "message": "O resumo pode estar incompleto",
+    "description": "Warning for truncated summary"
+  },
+  "outputTruncated": {
+    "message": "A resposta da IA foi truncada devido aos limites de tamanho.",
+    "description": "Truncation warning message"
+  },
+  "tryDifferentModel": {
+    "message": "Tente mudar para um modelo mais poderoso (ex: gemini-2.5-pro) e regenerar.",
+    "description": "Suggestion for truncation"
+  },
+  "switchModel": {
+    "message": "Mudar Modelo",
+    "description": "Button text to switch model"
+  },
+  "retryWithOptions": {
+    "message": "Tentar com Opções",
+    "description": "Button text for retry with options"
+  },
+  "step1Play": {
+    "message": "Reproduzir o vídeo",
+    "description": "Step instruction to play video"
+  },
+  "step2Wait": {
+    "message": "Aguardar 3-5 segundos",
+    "description": "Step instruction to wait"
+  },
+  "step3Summarize": {
+    "message": "Clicar em \"Gerar Resumo\" novamente",
+    "description": "Step instruction to summarize again"
+  },
+  "step1EnableCC": {
+    "message": "Clicar no botão CC no player de vídeo",
+    "description": "Step instruction to enable CC"
+  },
+  "step2PlayAgain": {
+    "message": "Reproduzir o vídeo por alguns segundos",
+    "description": "Step instruction to play again"
+  },
+  "tryRefresh": {
+    "message": "Atualizar a página (F5)",
+    "description": "Step instruction to refresh"
+  },
+  "playWithCC": {
+    "message": "Reproduzir o vídeo com CC ativado",
+    "description": "Step instruction to play with CC"
+  },
+  "trySummarize": {
+    "message": "Tentar resumir novamente",
+    "description": "Step instruction to try again"
+  },
+  "tryRefreshCheck": {
+    "message": "Tente atualizar a página - o botão CC pode demorar para carregar",
+    "description": "Suggestion about late-loading CC"
+  },
+  "checkOtherVideos": {
+    "message": "Se o botão CC não aparecer, este vídeo não tem legendas",
+    "description": "Information about missing CC button"
+  },
+  "tryAnotherVideo": {
+    "message": "Tente outro vídeo que tenha CC",
+    "description": "Suggestion to try another video"
+  },
+  "refreshAndRetry": {
+    "message": "Atualize a página e tente novamente.",
+    "description": "Generic refresh and retry suggestion"
+  },
+  "langAfrikaans": {
+    "message": "Africâner",
+    "description": "Language name: Afrikaans"
+  },
+  "langAmharic": {
+    "message": "Amárico",
+    "description": "Language name: Amharic"
+  },
+  "langArabic": {
+    "message": "Árabe",
+    "description": "Language name: Arabic"
+  },
+  "langAssamese": {
+    "message": "Assamês",
+    "description": "Language name: Assamese"
+  },
+  "langAzerbaijani": {
+    "message": "Azerbaijano",
+    "description": "Language name: Azerbaijani"
+  },
+  "langBelarusian": {
+    "message": "Bielorrusso",
+    "description": "Language name: Belarusian"
+  },
+  "langBulgarian": {
+    "message": "Búlgaro",
+    "description": "Language name: Bulgarian"
+  },
+  "langBangla": {
+    "message": "Bengali",
+    "description": "Language name: Bangla"
+  },
+  "langBosnian": {
+    "message": "Bósnio",
+    "description": "Language name: Bosnian"
+  },
+  "langCatalan": {
+    "message": "Catalão",
+    "description": "Language name: Catalan"
+  },
+  "langCzech": {
+    "message": "Tcheco",
+    "description": "Language name: Czech"
+  },
+  "langDanish": {
+    "message": "Dinamarquês",
+    "description": "Language name: Danish"
+  },
+  "langGerman": {
+    "message": "Alemão",
+    "description": "Language name: German"
+  },
+  "langGreek": {
+    "message": "Grego",
+    "description": "Language name: Greek"
+  },
+  "langEnglish": {
+    "message": "Inglês",
+    "description": "Language name: English"
+  },
+  "langEnglishUK": {
+    "message": "Inglês (Reino Unido)",
+    "description": "Language name: English UK"
+  },
+  "langEnglishIN": {
+    "message": "Inglês (Índia)",
+    "description": "Language name: English India"
+  },
+  "langSpanish": {
+    "message": "Espanhol",
+    "description": "Language name: Spanish"
+  },
+  "langSpanishLatam": {
+    "message": "Espanhol (América Latina)",
+    "description": "Language name: Spanish Latin America"
+  },
+  "langSpanishUS": {
+    "message": "Espanhol (EUA)",
+    "description": "Language name: Spanish US"
+  },
+  "langEstonian": {
+    "message": "Estoniano",
+    "description": "Language name: Estonian"
+  },
+  "langBasque": {
+    "message": "Basco",
+    "description": "Language name: Basque"
+  },
+  "langPersian": {
+    "message": "Persa",
+    "description": "Language name: Persian"
+  },
+  "langFinnish": {
+    "message": "Finlandês",
+    "description": "Language name: Finnish"
+  },
+  "langFilipino": {
+    "message": "Filipino",
+    "description": "Language name: Filipino"
+  },
+  "langFrench": {
+    "message": "Francês",
+    "description": "Language name: French"
+  },
+  "langFrenchCA": {
+    "message": "Francês (Canadá)",
+    "description": "Language name: French Canada"
+  },
+  "langGalician": {
+    "message": "Galego",
+    "description": "Language name: Galician"
+  },
+  "langGujarati": {
+    "message": "Guzerate",
+    "description": "Language name: Gujarati"
+  },
+  "langHindi": {
+    "message": "Hindi",
+    "description": "Language name: Hindi"
+  },
+  "langCroatian": {
+    "message": "Croata",
+    "description": "Language name: Croatian"
+  },
+  "langHungarian": {
+    "message": "Húngaro",
+    "description": "Language name: Hungarian"
+  },
+  "langArmenian": {
+    "message": "Armênio",
+    "description": "Language name: Armenian"
+  },
+  "langIndonesian": {
+    "message": "Indonésio",
+    "description": "Language name: Indonesian"
+  },
+  "langIcelandic": {
+    "message": "Islandês",
+    "description": "Language name: Icelandic"
+  },
+  "langItalian": {
+    "message": "Italiano",
+    "description": "Language name: Italian"
+  },
+  "langHebrew": {
+    "message": "Hebraico",
+    "description": "Language name: Hebrew"
+  },
+  "langJapanese": {
+    "message": "Japonês",
+    "description": "Language name: Japanese"
+  },
+  "langGeorgian": {
+    "message": "Georgiano",
+    "description": "Language name: Georgian"
+  },
+  "langKazakh": {
+    "message": "Cazaque",
+    "description": "Language name: Kazakh"
+  },
+  "langKhmer": {
+    "message": "Khmer",
+    "description": "Language name: Khmer"
+  },
+  "langKannada": {
+    "message": "Canarês",
+    "description": "Language name: Kannada"
+  },
+  "langKorean": {
+    "message": "Coreano",
+    "description": "Language name: Korean"
+  },
+  "langKyrgyz": {
+    "message": "Quirguiz",
+    "description": "Language name: Kyrgyz"
+  },
+  "langLao": {
+    "message": "Laosiano",
+    "description": "Language name: Lao"
+  },
+  "langLithuanian": {
+    "message": "Lituano",
+    "description": "Language name: Lithuanian"
+  },
+  "langLatvian": {
+    "message": "Letão",
+    "description": "Language name: Latvian"
+  },
+  "langMacedonian": {
+    "message": "Macedônio",
+    "description": "Language name: Macedonian"
+  },
+  "langMalayalam": {
+    "message": "Malaiala",
+    "description": "Language name: Malayalam"
+  },
+  "langMongolian": {
+    "message": "Mongol",
+    "description": "Language name: Mongolian"
+  },
+  "langMarathi": {
+    "message": "Marata",
+    "description": "Language name: Marathi"
+  },
+  "langMalay": {
+    "message": "Malaio",
+    "description": "Language name: Malay"
+  },
+  "langBurmese": {
+    "message": "Birmanês",
+    "description": "Language name: Burmese"
+  },
+  "langNepali": {
+    "message": "Nepalês",
+    "description": "Language name: Nepali"
+  },
+  "langDutch": {
+    "message": "Holandês",
+    "description": "Language name: Dutch"
+  },
+  "langNorwegian": {
+    "message": "Norueguês",
+    "description": "Language name: Norwegian"
+  },
+  "langOdia": {
+    "message": "Oriá",
+    "description": "Language name: Odia"
+  },
+  "langPunjabi": {
+    "message": "Punjabi",
+    "description": "Language name: Punjabi"
+  },
+  "langPolish": {
+    "message": "Polonês",
+    "description": "Language name: Polish"
+  },
+  "langPortuguese": {
+    "message": "Português",
+    "description": "Language name: Portuguese"
+  },
+  "langPortuguesePT": {
+    "message": "Português (Portugal)",
+    "description": "Language name: Portuguese Portugal"
+  },
+  "langRomanian": {
+    "message": "Romeno",
+    "description": "Language name: Romanian"
+  },
+  "langRussian": {
+    "message": "Russo",
+    "description": "Language name: Russian"
+  },
+  "langSinhala": {
+    "message": "Cingalês",
+    "description": "Language name: Sinhala"
+  },
+  "langSlovak": {
+    "message": "Eslovaco",
+    "description": "Language name: Slovak"
+  },
+  "langSlovenian": {
+    "message": "Esloveno",
+    "description": "Language name: Slovenian"
+  },
+  "langAlbanian": {
+    "message": "Albanês",
+    "description": "Language name: Albanian"
+  },
+  "langSerbian": {
+    "message": "Sérvio",
+    "description": "Language name: Serbian"
+  },
+  "langSerbianLatin": {
+    "message": "Sérvio (Latino)",
+    "description": "Language name: Serbian Latin"
+  },
+  "langSwedish": {
+    "message": "Sueco",
+    "description": "Language name: Swedish"
+  },
+  "langSwahili": {
+    "message": "Suaíli",
+    "description": "Language name: Swahili"
+  },
+  "langTamil": {
+    "message": "Tâmil",
+    "description": "Language name: Tamil"
+  },
+  "langTelugu": {
+    "message": "Telugu",
+    "description": "Language name: Telugu"
+  },
+  "langThai": {
+    "message": "Tailandês",
+    "description": "Language name: Thai"
+  },
+  "langTurkish": {
+    "message": "Turco",
+    "description": "Language name: Turkish"
+  },
+  "langUkrainian": {
+    "message": "Ucraniano",
+    "description": "Language name: Ukrainian"
+  },
+  "langUrdu": {
+    "message": "Urdu",
+    "description": "Language name: Urdu"
+  },
+  "langUzbek": {
+    "message": "Uzbeque",
+    "description": "Language name: Uzbek"
+  },
+  "langVietnamese": {
+    "message": "Vietnamita",
+    "description": "Language name: Vietnamese"
+  },
+  "langChineseCN": {
+    "message": "Chinês (Simplificado)",
+    "description": "Language name: Chinese Simplified"
+  },
+  "langChineseHK": {
+    "message": "Chinês (Hong Kong)",
+    "description": "Language name: Chinese Hong Kong"
+  },
+  "langChineseTW": {
+    "message": "Chinês (Tradicional)",
+    "description": "Language name: Chinese Traditional"
+  },
+  "langZulu": {
+    "message": "Zulu",
+    "description": "Language name: Zulu"
+  },
+  "searchLanguagePlaceholder": {
+    "message": "Pesquisar: en, English, 中文, Español...",
+    "description": "Placeholder for language search input"
+  },
+  "noLanguagesFound": {
+    "message": "Nenhum idioma encontrado",
+    "description": "Message when no languages match search"
+  },
+  "unknown": {
+    "message": "Desconhecido",
+    "description": "Default text when a value is unknown"
+  },
+  "untitledVideo": {
+    "message": "Vídeo Sem Título",
+    "description": "Default title when video title cannot be determined"
+  },
+  "unknownChannel": {
+    "message": "Canal Desconhecido",
+    "description": "Default channel name when channel cannot be determined"
+  },
+  "unknownError": {
+    "message": "Erro desconhecido",
+    "description": "Generic unknown error message"
+  },
+  "anUnknownErrorOccurred": {
+    "message": "Ocorreu um erro desconhecido",
+    "description": "Detailed unknown error message"
+  },
+  "jumpToTimestamp": {
+    "message": "Ir para $1",
+    "description": "Tooltip for timestamp links, $1 is the timestamp",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "5:23"
+      }
+    }
+  },
+  "searchHashtagOnYouTube": {
+    "message": "Pesquisar #$1 no YouTube",
+    "description": "Tooltip for hashtag links, $1 is the hashtag",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "tutorial"
+      }
+    }
+  },
+  "modelsFound": {
+    "message": "$1 modelos",
+    "description": "Number of models found after API key verification",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "12"
+      }
+    }
+  }
+}

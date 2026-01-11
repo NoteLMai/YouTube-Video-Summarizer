@@ -1,0 +1,868 @@
+{
+  "extName": {
+    "message": "YouTube 동영상 요약",
+    "description": "The name of the extension displayed in Chrome"
+  },
+  "extDescription": {
+    "message": "Gemini API 키를 사용하여 AI로 YouTube 동영상 요약",
+    "description": "The description of the extension"
+  },
+  "extShortName": {
+    "message": "YT 요약",
+    "description": "Short name for the extension"
+  },
+  "panelTitle": {
+    "message": "YouTube 동영상 요약",
+    "description": "Title shown in the panel header"
+  },
+  "settings": {
+    "message": "설정",
+    "description": "Button tooltip for opening settings"
+  },
+  "collapse": {
+    "message": "접기",
+    "description": "Button tooltip to collapse the panel"
+  },
+  "expand": {
+    "message": "펼치기",
+    "description": "Button tooltip to expand the panel"
+  },
+  "poweredBy": {
+    "message": "Gemini AI 기반",
+    "description": "Footer text showing the AI provider"
+  },
+  "moreToolsAt": {
+    "message": "더 많은 도구는",
+    "description": "Footer text before the NoteLM.ai link"
+  },
+  "generating": {
+    "message": "요약 생성 중...",
+    "description": "Generic loading message"
+  },
+  "loadingStage1": {
+    "message": "동영상 콘텐츠 준비 중...",
+    "description": "Loading stage 1 message"
+  },
+  "loadingStage2": {
+    "message": "자막 분석 중...",
+    "description": "Loading stage 2 message"
+  },
+  "loadingStage3": {
+    "message": "AI 요약 생성 중...",
+    "description": "Loading stage 3 message"
+  },
+  "loadingStage4": {
+    "message": "결과 포맷 중...",
+    "description": "Loading stage 4 message"
+  },
+  "estimatedTime": {
+    "message": "예상 남은 시간",
+    "description": "Label for estimated time remaining"
+  },
+  "seconds": {
+    "message": "초",
+    "description": "Unit label for seconds"
+  },
+  "almostDone": {
+    "message": "거의 완료...",
+    "description": "Message when loading is nearly complete"
+  },
+  "takingLonger": {
+    "message": "평소보다 시간이 더 걸리고 있습니다...",
+    "description": "Message when loading takes longer than expected"
+  },
+  "pleaseWait": {
+    "message": "잠시 기다려 주세요, AI가 생각 중입니다...",
+    "description": "Message asking user to wait during generation"
+  },
+  "outputLanguage": {
+    "message": "출력 언어",
+    "description": "Label for language selector"
+  },
+  "copy": {
+    "message": "복사",
+    "description": "Button text for copying summary"
+  },
+  "regenerate": {
+    "message": "다시 생성",
+    "description": "Button text for regenerating summary"
+  },
+  "summarizeVideo": {
+    "message": "요약 생성",
+    "description": "Main action button text"
+  },
+  "tryAgain": {
+    "message": "다시 시도",
+    "description": "Button text to retry after error"
+  },
+  "refreshPage": {
+    "message": "페이지 새로고침",
+    "description": "Button text to refresh the page"
+  },
+  "configureApiKey": {
+    "message": "API 키 설정",
+    "description": "Button text to configure API key"
+  },
+  "setupRequired": {
+    "message": "설정 필요",
+    "description": "Title when API key is not configured"
+  },
+  "setupDescription": {
+    "message": "Gemini API 키를 추가하여 동영상 요약을 시작하세요. 무료이며 데이터는 기기에 저장됩니다.",
+    "description": "Description for initial setup"
+  },
+  "readyToSummarize": {
+    "message": "준비 완료",
+    "description": "Title when extension is ready"
+  },
+  "readyDescription": {
+    "message": "아래 버튼을 클릭하여 이 동영상의 AI 요약을 생성하세요.",
+    "description": "Description when ready to summarize"
+  },
+  "subtitleHint": {
+    "message": "최상의 결과를 위해: 1) 먼저 동영상을 몇 초 재생하고, 2) 자막이 있으면 「CC」 버튼을 클릭하여 자막을 활성화하세요.",
+    "description": "Hint about enabling subtitles"
+  },
+  "geminiApiKey": {
+    "message": "Gemini API 키",
+    "description": "Label for API key input field"
+  },
+  "enterApiKey": {
+    "message": "Gemini API 키를 입력하세요",
+    "description": "Placeholder for API key input"
+  },
+  "getApiKey": {
+    "message": "무료 API 키를 얻는 방법은",
+    "description": "Help text for getting API key"
+  },
+  "apiKeyConfigured": {
+    "message": "API 키 설정됨",
+    "description": "Status message when API key is set"
+  },
+  "cancel": {
+    "message": "취소",
+    "description": "Cancel button text"
+  },
+  "save": {
+    "message": "저장",
+    "description": "Save button text"
+  },
+  "verify": {
+    "message": "확인",
+    "description": "Verify button text"
+  },
+  "verifying": {
+    "message": "확인 중...",
+    "description": "Status while verifying API key"
+  },
+  "selectModel": {
+    "message": "모델 선택",
+    "description": "Label for model selection"
+  },
+  "model": {
+    "message": "모델",
+    "description": "Label for model field"
+  },
+  "noModelsAvailable": {
+    "message": "사용 가능한 모델이 없습니다",
+    "description": "Message when no models are found"
+  },
+  "apiKeyVerified": {
+    "message": "API 키가 확인되었습니다!",
+    "description": "Success message after verification"
+  },
+  "apiKeyInvalid": {
+    "message": "잘못된 API 키",
+    "description": "Error message for invalid key"
+  },
+  "verifyFirst": {
+    "message": "먼저 API 키를 확인해 주세요",
+    "description": "Prompt to verify before saving"
+  },
+  "loadingModels": {
+    "message": "모델 로딩 중...",
+    "description": "Status while loading models"
+  },
+  "modelSelected": {
+    "message": "모델이 선택되었습니다",
+    "description": "Confirmation when model is selected"
+  },
+  "recommendedModel": {
+    "message": "추천",
+    "description": "Badge text for recommended model"
+  },
+  "currentModel": {
+    "message": "현재 모델",
+    "description": "Label for currently selected model"
+  },
+  "apiKeySaved": {
+    "message": "API 키가 저장되었습니다!",
+    "description": "Toast message after saving API key"
+  },
+  "apiKeyCleared": {
+    "message": "API 키가 삭제되었습니다",
+    "description": "Toast message after clearing API key"
+  },
+  "copied": {
+    "message": "요약이 클립보드에 복사되었습니다!",
+    "description": "Toast message after copying"
+  },
+  "copyFailed": {
+    "message": "요약 복사에 실패했습니다",
+    "description": "Toast message when copy fails"
+  },
+  "error": {
+    "message": "오류",
+    "description": "Generic error title"
+  },
+  "howToFix": {
+    "message": "해결 방법:",
+    "description": "Header for error fix suggestions"
+  },
+  "noSubtitles": {
+    "message": "자막이 없습니다. 먼저 동영상을 재생하여 자막을 로드하세요.",
+    "description": "Error when subtitles not found"
+  },
+  "failedToFetchSubtitles": {
+    "message": "동영상 자막을 가져오지 못했습니다.",
+    "description": "Error when subtitle fetch fails"
+  },
+  "videoNotPlayed": {
+    "message": "먼저 동영상을 재생하세요",
+    "description": "Error title when video hasn't been played"
+  },
+  "playVideoToCapture": {
+    "message": "자막을 캡처하려면 동영상을 몇 초 재생해 주세요.",
+    "description": "Error message explaining to play video"
+  },
+  "ccNotEnabled": {
+    "message": "자막 활성화 (CC)",
+    "description": "Error title when CC not enabled"
+  },
+  "enableCCFirst": {
+    "message": "자막을 캡처하려면 자막을 활성화해야 합니다.",
+    "description": "Error message about enabling CC"
+  },
+  "subtitleNotCaptured": {
+    "message": "자막을 캡처하지 못했습니다",
+    "description": "Error title when subtitles weren't captured"
+  },
+  "refreshMayHelp": {
+    "message": "자막 데이터를 캡처하지 못했습니다. 타이밍 문제로 인해 발생할 수 있습니다.",
+    "description": "Error message suggesting refresh"
+  },
+  "noSubtitlesAvailable": {
+    "message": "사용 가능한 자막 없음",
+    "description": "Error title when video has no subtitles"
+  },
+  "videoNoSubtitles": {
+    "message": "이 동영상에는 자막이 없는 것 같습니다.",
+    "description": "Error message for video without CC"
+  },
+  "subtitleError": {
+    "message": "자막 오류",
+    "description": "Generic subtitle error title"
+  },
+  "couldNotGetSubtitles": {
+    "message": "자막 데이터를 가져올 수 없습니다.",
+    "description": "Generic subtitle error message"
+  },
+  "subtitleFetchError": {
+    "message": "자막 로드 실패",
+    "description": "Title for subtitle fetch error"
+  },
+  "subtitleFetchErrorMsg": {
+    "message": "YouTube에서 자막 데이터를 가져올 수 없습니다.",
+    "description": "Message for subtitle fetch error"
+  },
+  "subtitleFetchStep1": {
+    "message": "페이지 새로고침 (F5)",
+    "description": "Step 1 for subtitle fetch error"
+  },
+  "subtitleFetchStep2": {
+    "message": "동영상을 5-10초 재생",
+    "description": "Step 2 for subtitle fetch error"
+  },
+  "subtitleFetchStep3": {
+    "message": "CC 자막 버튼이 활성화되어 있는지 확인",
+    "description": "Step 3 for subtitle fetch error"
+  },
+  "subtitleFetchStep4": {
+    "message": "아래 「다시 시도」 버튼 클릭",
+    "description": "Step 4 for subtitle fetch error"
+  },
+  "insufficientContent": {
+    "message": "콘텐츠 부족",
+    "description": "Error title for insufficient content"
+  },
+  "subtitlesTooShort": {
+    "message": "자막 내용이 너무 짧아서 의미 있는 요약을 생성할 수 없습니다.",
+    "description": "Error message for short subtitles"
+  },
+  "tryLongerVideo": {
+    "message": "이 동영상이 너무 짧거나 말하는 내용이 적을 수 있습니다.",
+    "description": "Suggestion for short video error"
+  },
+  "invalidApiKey": {
+    "message": "잘못된 API 키",
+    "description": "Error title for invalid API key"
+  },
+  "apiKeyInvalidMsg": {
+    "message": "Gemini API 키가 유효하지 않거나 취소되었습니다.",
+    "description": "Error message for invalid API key"
+  },
+  "checkApiKey": {
+    "message": "설정에서 API 키를 확인하거나 notelm.ai/support/api-key-guide를 방문하세요.",
+    "description": "Suggestion for API key error"
+  },
+  "apiKeyTooShort": {
+    "message": "API 키가 유효하지 않은 것 같습니다. Gemini API 키를 확인하고 다시 입력해 주세요.",
+    "description": "Error for malformed API key"
+  },
+  "getNewApiKey": {
+    "message": "notelm.ai에서 유효한 API 키를 얻는 방법 확인",
+    "description": "Help text for getting new API key"
+  },
+  "requestError": {
+    "message": "요청 오류",
+    "description": "Generic request error title"
+  },
+  "badRequestMsg": {
+    "message": "Gemini API 요청에 실패했습니다.",
+    "description": "Message for bad request error"
+  },
+  "tryAgainLater": {
+    "message": "나중에 다시 시도해 주세요.",
+    "description": "Generic retry suggestion"
+  },
+  "unauthorized": {
+    "message": "인증되지 않음",
+    "description": "Unauthorized error title"
+  },
+  "apiKeyUnauthorized": {
+    "message": "API 키가 이 서비스를 사용할 권한이 없습니다.",
+    "description": "Unauthorized error message"
+  },
+  "checkApiKeyPermissions": {
+    "message": "API 키에 올바른 권한이 있는지 확인하세요.",
+    "description": "Suggestion for permission error"
+  },
+  "accessDenied": {
+    "message": "접근 거부",
+    "description": "Access denied error title"
+  },
+  "apiKeyForbidden": {
+    "message": "이 API 키로는 Gemini API에 접근할 수 없습니다.",
+    "description": "Forbidden access error message"
+  },
+  "checkApiKeyOrRegion": {
+    "message": "API 키가 제한되어 있거나 해당 지역에서 Gemini를 사용할 수 없을 수 있습니다.",
+    "description": "Suggestion for region restriction"
+  },
+  "rateLimitExceeded": {
+    "message": "속도 제한 초과",
+    "description": "Rate limit error title"
+  },
+  "tooManyRequests": {
+    "message": "API 속도 제한 또는 할당량을 초과했습니다.",
+    "description": "Rate limit error message"
+  },
+  "waitAndRetry": {
+    "message": "몇 분 후에 다시 시도해 주세요. 문제가 지속되면 API 플랜 업그레이드를 고려해 주세요.",
+    "description": "Suggestion for rate limit error"
+  },
+  "serverError": {
+    "message": "서버 오류",
+    "description": "Server error title"
+  },
+  "geminiServerError": {
+    "message": "Gemini API에 문제가 발생했습니다.",
+    "description": "Server error message"
+  },
+  "apiError": {
+    "message": "API 오류",
+    "description": "Generic API error title"
+  },
+  "unknownApiError": {
+    "message": "Gemini API 호출 중 오류가 발생했습니다.",
+    "description": "Unknown API error message"
+  },
+  "contentFiltered": {
+    "message": "콘텐츠 필터링됨",
+    "description": "Content filtered error title"
+  },
+  "safetyFilterTriggered": {
+    "message": "안전 설정에 의해 콘텐츠가 필터링되었습니다.",
+    "description": "Safety filter error message"
+  },
+  "tryDifferentVideo": {
+    "message": "덜 민감한 콘텐츠의 동영상을 시도해 보세요.",
+    "description": "Suggestion for content filter"
+  },
+  "noSummaryGenerated": {
+    "message": "요약이 생성되지 않았습니다",
+    "description": "No response error title"
+  },
+  "aiDidNotRespond": {
+    "message": "AI가 응답을 생성하지 않았습니다.",
+    "description": "No response error message"
+  },
+  "summaryIncomplete": {
+    "message": "요약이 불완전할 수 있습니다",
+    "description": "Warning for truncated summary"
+  },
+  "outputTruncated": {
+    "message": "길이 제한으로 인해 AI 응답이 잘렸습니다.",
+    "description": "Truncation warning message"
+  },
+  "tryDifferentModel": {
+    "message": "더 강력한 모델(예: gemini-2.5-pro)로 전환하여 다시 생성해 보세요.",
+    "description": "Suggestion for truncation"
+  },
+  "switchModel": {
+    "message": "모델 전환",
+    "description": "Button text to switch model"
+  },
+  "retryWithOptions": {
+    "message": "옵션으로 다시 시도",
+    "description": "Button text for retry with options"
+  },
+  "step1Play": {
+    "message": "동영상 재생 클릭",
+    "description": "Step instruction to play video"
+  },
+  "step2Wait": {
+    "message": "3-5초 대기",
+    "description": "Step instruction to wait"
+  },
+  "step3Summarize": {
+    "message": "「요약 생성」을 다시 클릭",
+    "description": "Step instruction to summarize again"
+  },
+  "step1EnableCC": {
+    "message": "동영상 플레이어의 CC 버튼 클릭",
+    "description": "Step instruction to enable CC"
+  },
+  "step2PlayAgain": {
+    "message": "동영상을 몇 초 재생",
+    "description": "Step instruction to play again"
+  },
+  "tryRefresh": {
+    "message": "페이지 새로고침 (F5)",
+    "description": "Step instruction to refresh"
+  },
+  "playWithCC": {
+    "message": "CC를 활성화하고 동영상 재생",
+    "description": "Step instruction to play with CC"
+  },
+  "trySummarize": {
+    "message": "요약을 다시 시도",
+    "description": "Step instruction to try again"
+  },
+  "tryRefreshCheck": {
+    "message": "페이지를 새로고침해 보세요 - CC 버튼 로드가 늦어질 수 있습니다",
+    "description": "Suggestion about late-loading CC"
+  },
+  "checkOtherVideos": {
+    "message": "CC 버튼이 없으면 이 동영상에는 자막이 없습니다",
+    "description": "Information about missing CC button"
+  },
+  "tryAnotherVideo": {
+    "message": "CC가 있는 다른 동영상을 시도해 보세요",
+    "description": "Suggestion to try another video"
+  },
+  "refreshAndRetry": {
+    "message": "페이지를 새로고침하고 다시 시도하세요.",
+    "description": "Generic refresh and retry suggestion"
+  },
+  "langAfrikaans": {
+    "message": "아프리칸스어",
+    "description": "Language name: Afrikaans"
+  },
+  "langAmharic": {
+    "message": "암하라어",
+    "description": "Language name: Amharic"
+  },
+  "langArabic": {
+    "message": "아랍어",
+    "description": "Language name: Arabic"
+  },
+  "langAssamese": {
+    "message": "아삼어",
+    "description": "Language name: Assamese"
+  },
+  "langAzerbaijani": {
+    "message": "아제르바이잔어",
+    "description": "Language name: Azerbaijani"
+  },
+  "langBelarusian": {
+    "message": "벨라루스어",
+    "description": "Language name: Belarusian"
+  },
+  "langBulgarian": {
+    "message": "불가리아어",
+    "description": "Language name: Bulgarian"
+  },
+  "langBangla": {
+    "message": "벵골어",
+    "description": "Language name: Bangla"
+  },
+  "langBosnian": {
+    "message": "보스니아어",
+    "description": "Language name: Bosnian"
+  },
+  "langCatalan": {
+    "message": "카탈루냐어",
+    "description": "Language name: Catalan"
+  },
+  "langCzech": {
+    "message": "체코어",
+    "description": "Language name: Czech"
+  },
+  "langDanish": {
+    "message": "덴마크어",
+    "description": "Language name: Danish"
+  },
+  "langGerman": {
+    "message": "독일어",
+    "description": "Language name: German"
+  },
+  "langGreek": {
+    "message": "그리스어",
+    "description": "Language name: Greek"
+  },
+  "langEnglish": {
+    "message": "영어",
+    "description": "Language name: English"
+  },
+  "langEnglishUK": {
+    "message": "영어 (영국)",
+    "description": "Language name: English UK"
+  },
+  "langEnglishIN": {
+    "message": "영어 (인도)",
+    "description": "Language name: English India"
+  },
+  "langSpanish": {
+    "message": "스페인어",
+    "description": "Language name: Spanish"
+  },
+  "langSpanishLatam": {
+    "message": "스페인어 (라틴아메리카)",
+    "description": "Language name: Spanish Latin America"
+  },
+  "langSpanishUS": {
+    "message": "스페인어 (미국)",
+    "description": "Language name: Spanish US"
+  },
+  "langEstonian": {
+    "message": "에스토니아어",
+    "description": "Language name: Estonian"
+  },
+  "langBasque": {
+    "message": "바스크어",
+    "description": "Language name: Basque"
+  },
+  "langPersian": {
+    "message": "페르시아어",
+    "description": "Language name: Persian"
+  },
+  "langFinnish": {
+    "message": "핀란드어",
+    "description": "Language name: Finnish"
+  },
+  "langFilipino": {
+    "message": "필리핀어",
+    "description": "Language name: Filipino"
+  },
+  "langFrench": {
+    "message": "프랑스어",
+    "description": "Language name: French"
+  },
+  "langFrenchCA": {
+    "message": "프랑스어 (캐나다)",
+    "description": "Language name: French Canada"
+  },
+  "langGalician": {
+    "message": "갈리시아어",
+    "description": "Language name: Galician"
+  },
+  "langGujarati": {
+    "message": "구자라트어",
+    "description": "Language name: Gujarati"
+  },
+  "langHindi": {
+    "message": "힌디어",
+    "description": "Language name: Hindi"
+  },
+  "langCroatian": {
+    "message": "크로아티아어",
+    "description": "Language name: Croatian"
+  },
+  "langHungarian": {
+    "message": "헝가리어",
+    "description": "Language name: Hungarian"
+  },
+  "langArmenian": {
+    "message": "아르메니아어",
+    "description": "Language name: Armenian"
+  },
+  "langIndonesian": {
+    "message": "인도네시아어",
+    "description": "Language name: Indonesian"
+  },
+  "langIcelandic": {
+    "message": "아이슬란드어",
+    "description": "Language name: Icelandic"
+  },
+  "langItalian": {
+    "message": "이탈리아어",
+    "description": "Language name: Italian"
+  },
+  "langHebrew": {
+    "message": "히브리어",
+    "description": "Language name: Hebrew"
+  },
+  "langJapanese": {
+    "message": "일본어",
+    "description": "Language name: Japanese"
+  },
+  "langGeorgian": {
+    "message": "조지아어",
+    "description": "Language name: Georgian"
+  },
+  "langKazakh": {
+    "message": "카자흐어",
+    "description": "Language name: Kazakh"
+  },
+  "langKhmer": {
+    "message": "크메르어",
+    "description": "Language name: Khmer"
+  },
+  "langKannada": {
+    "message": "칸나다어",
+    "description": "Language name: Kannada"
+  },
+  "langKorean": {
+    "message": "한국어",
+    "description": "Language name: Korean"
+  },
+  "langKyrgyz": {
+    "message": "키르기스어",
+    "description": "Language name: Kyrgyz"
+  },
+  "langLao": {
+    "message": "라오어",
+    "description": "Language name: Lao"
+  },
+  "langLithuanian": {
+    "message": "리투아니아어",
+    "description": "Language name: Lithuanian"
+  },
+  "langLatvian": {
+    "message": "라트비아어",
+    "description": "Language name: Latvian"
+  },
+  "langMacedonian": {
+    "message": "마케도니아어",
+    "description": "Language name: Macedonian"
+  },
+  "langMalayalam": {
+    "message": "말라얄람어",
+    "description": "Language name: Malayalam"
+  },
+  "langMongolian": {
+    "message": "몽골어",
+    "description": "Language name: Mongolian"
+  },
+  "langMarathi": {
+    "message": "마라티어",
+    "description": "Language name: Marathi"
+  },
+  "langMalay": {
+    "message": "말레이어",
+    "description": "Language name: Malay"
+  },
+  "langBurmese": {
+    "message": "버마어",
+    "description": "Language name: Burmese"
+  },
+  "langNepali": {
+    "message": "네팔어",
+    "description": "Language name: Nepali"
+  },
+  "langDutch": {
+    "message": "네덜란드어",
+    "description": "Language name: Dutch"
+  },
+  "langNorwegian": {
+    "message": "노르웨이어",
+    "description": "Language name: Norwegian"
+  },
+  "langOdia": {
+    "message": "오디아어",
+    "description": "Language name: Odia"
+  },
+  "langPunjabi": {
+    "message": "펀자브어",
+    "description": "Language name: Punjabi"
+  },
+  "langPolish": {
+    "message": "폴란드어",
+    "description": "Language name: Polish"
+  },
+  "langPortuguese": {
+    "message": "포르투갈어",
+    "description": "Language name: Portuguese"
+  },
+  "langPortuguesePT": {
+    "message": "포르투갈어 (포르투갈)",
+    "description": "Language name: Portuguese Portugal"
+  },
+  "langRomanian": {
+    "message": "루마니아어",
+    "description": "Language name: Romanian"
+  },
+  "langRussian": {
+    "message": "러시아어",
+    "description": "Language name: Russian"
+  },
+  "langSinhala": {
+    "message": "싱할라어",
+    "description": "Language name: Sinhala"
+  },
+  "langSlovak": {
+    "message": "슬로바키아어",
+    "description": "Language name: Slovak"
+  },
+  "langSlovenian": {
+    "message": "슬로베니아어",
+    "description": "Language name: Slovenian"
+  },
+  "langAlbanian": {
+    "message": "알바니아어",
+    "description": "Language name: Albanian"
+  },
+  "langSerbian": {
+    "message": "세르비아어",
+    "description": "Language name: Serbian"
+  },
+  "langSerbianLatin": {
+    "message": "세르비아어 (라틴 문자)",
+    "description": "Language name: Serbian Latin"
+  },
+  "langSwedish": {
+    "message": "스웨덴어",
+    "description": "Language name: Swedish"
+  },
+  "langSwahili": {
+    "message": "스와힐리어",
+    "description": "Language name: Swahili"
+  },
+  "langTamil": {
+    "message": "타밀어",
+    "description": "Language name: Tamil"
+  },
+  "langTelugu": {
+    "message": "텔루구어",
+    "description": "Language name: Telugu"
+  },
+  "langThai": {
+    "message": "태국어",
+    "description": "Language name: Thai"
+  },
+  "langTurkish": {
+    "message": "터키어",
+    "description": "Language name: Turkish"
+  },
+  "langUkrainian": {
+    "message": "우크라이나어",
+    "description": "Language name: Ukrainian"
+  },
+  "langUrdu": {
+    "message": "우르두어",
+    "description": "Language name: Urdu"
+  },
+  "langUzbek": {
+    "message": "우즈베크어",
+    "description": "Language name: Uzbek"
+  },
+  "langVietnamese": {
+    "message": "베트남어",
+    "description": "Language name: Vietnamese"
+  },
+  "langChineseCN": {
+    "message": "중국어 (간체)",
+    "description": "Language name: Chinese Simplified"
+  },
+  "langChineseHK": {
+    "message": "중국어 (홍콩)",
+    "description": "Language name: Chinese Hong Kong"
+  },
+  "langChineseTW": {
+    "message": "중국어 (번체)",
+    "description": "Language name: Chinese Traditional"
+  },
+  "langZulu": {
+    "message": "줄루어",
+    "description": "Language name: Zulu"
+  },
+  "searchLanguagePlaceholder": {
+    "message": "검색: en, English, 中文, Español...",
+    "description": "Placeholder for language search input"
+  },
+  "noLanguagesFound": {
+    "message": "언어를 찾을 수 없습니다",
+    "description": "Message when no languages match search"
+  },
+  "unknown": {
+    "message": "알 수 없음",
+    "description": "Default text when a value is unknown"
+  },
+  "untitledVideo": {
+    "message": "제목 없는 동영상",
+    "description": "Default title when video title cannot be determined"
+  },
+  "unknownChannel": {
+    "message": "알 수 없는 채널",
+    "description": "Default channel name when channel cannot be determined"
+  },
+  "unknownError": {
+    "message": "알 수 없는 오류",
+    "description": "Generic unknown error message"
+  },
+  "anUnknownErrorOccurred": {
+    "message": "알 수 없는 오류가 발생했습니다",
+    "description": "Detailed unknown error message"
+  },
+  "jumpToTimestamp": {
+    "message": "$1로 이동",
+    "description": "Tooltip for timestamp links, $1 is the timestamp",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "5:23"
+      }
+    }
+  },
+  "searchHashtagOnYouTube": {
+    "message": "YouTube에서 #$1 검색",
+    "description": "Tooltip for hashtag links, $1 is the hashtag",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "tutorial"
+      }
+    }
+  },
+  "modelsFound": {
+    "message": "$1개 모델",
+    "description": "Number of models found after API key verification",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "12"
+      }
+    }
+  }
+}

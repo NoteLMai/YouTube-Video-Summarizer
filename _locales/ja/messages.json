@@ -1,0 +1,868 @@
+{
+  "extName": {
+    "message": "YouTube動画要約",
+    "description": "The name of the extension displayed in Chrome"
+  },
+  "extDescription": {
+    "message": "Gemini APIキーを使用して、AIでYouTube動画を要約",
+    "description": "The description of the extension"
+  },
+  "extShortName": {
+    "message": "YT要約",
+    "description": "Short name for the extension"
+  },
+  "panelTitle": {
+    "message": "YouTube動画要約",
+    "description": "Title shown in the panel header"
+  },
+  "settings": {
+    "message": "設定",
+    "description": "Button tooltip for opening settings"
+  },
+  "collapse": {
+    "message": "折りたたむ",
+    "description": "Button tooltip to collapse the panel"
+  },
+  "expand": {
+    "message": "展開",
+    "description": "Button tooltip to expand the panel"
+  },
+  "poweredBy": {
+    "message": "Gemini AI搭載",
+    "description": "Footer text showing the AI provider"
+  },
+  "moreToolsAt": {
+    "message": "その他のツールは",
+    "description": "Footer text before the NoteLM.ai link"
+  },
+  "generating": {
+    "message": "要約を生成中...",
+    "description": "Generic loading message"
+  },
+  "loadingStage1": {
+    "message": "動画コンテンツを準備中...",
+    "description": "Loading stage 1 message"
+  },
+  "loadingStage2": {
+    "message": "字幕を分析中...",
+    "description": "Loading stage 2 message"
+  },
+  "loadingStage3": {
+    "message": "AI要約を生成中...",
+    "description": "Loading stage 3 message"
+  },
+  "loadingStage4": {
+    "message": "結果をフォーマット中...",
+    "description": "Loading stage 4 message"
+  },
+  "estimatedTime": {
+    "message": "推定残り時間",
+    "description": "Label for estimated time remaining"
+  },
+  "seconds": {
+    "message": "秒",
+    "description": "Unit label for seconds"
+  },
+  "almostDone": {
+    "message": "もうすぐ完了...",
+    "description": "Message when loading is nearly complete"
+  },
+  "takingLonger": {
+    "message": "通常より時間がかかっています...",
+    "description": "Message when loading takes longer than expected"
+  },
+  "pleaseWait": {
+    "message": "お待ちください、AIが考えています...",
+    "description": "Message asking user to wait during generation"
+  },
+  "outputLanguage": {
+    "message": "出力言語",
+    "description": "Label for language selector"
+  },
+  "copy": {
+    "message": "コピー",
+    "description": "Button text for copying summary"
+  },
+  "regenerate": {
+    "message": "再生成",
+    "description": "Button text for regenerating summary"
+  },
+  "summarizeVideo": {
+    "message": "要約を生成",
+    "description": "Main action button text"
+  },
+  "tryAgain": {
+    "message": "再試行",
+    "description": "Button text to retry after error"
+  },
+  "refreshPage": {
+    "message": "ページを更新",
+    "description": "Button text to refresh the page"
+  },
+  "configureApiKey": {
+    "message": "APIキーを設定",
+    "description": "Button text to configure API key"
+  },
+  "setupRequired": {
+    "message": "設定が必要",
+    "description": "Title when API key is not configured"
+  },
+  "setupDescription": {
+    "message": "Gemini APIキーを追加して動画の要約を開始しましょう。無料で、データはデバイスに保存されます。",
+    "description": "Description for initial setup"
+  },
+  "readyToSummarize": {
+    "message": "準備完了",
+    "description": "Title when extension is ready"
+  },
+  "readyDescription": {
+    "message": "下のボタンをクリックして、この動画のAI要約を生成します。",
+    "description": "Description when ready to summarize"
+  },
+  "subtitleHint": {
+    "message": "最良の結果を得るには：1）まず動画を数秒再生、2）字幕がある場合は「CC」ボタンをクリックして字幕を有効にしてください。",
+    "description": "Hint about enabling subtitles"
+  },
+  "geminiApiKey": {
+    "message": "Gemini APIキー",
+    "description": "Label for API key input field"
+  },
+  "enterApiKey": {
+    "message": "Gemini APIキーを入力してください",
+    "description": "Placeholder for API key input"
+  },
+  "getApiKey": {
+    "message": "無料のAPIキーの取得方法については",
+    "description": "Help text for getting API key"
+  },
+  "apiKeyConfigured": {
+    "message": "APIキー設定済み",
+    "description": "Status message when API key is set"
+  },
+  "cancel": {
+    "message": "キャンセル",
+    "description": "Cancel button text"
+  },
+  "save": {
+    "message": "保存",
+    "description": "Save button text"
+  },
+  "verify": {
+    "message": "確認",
+    "description": "Verify button text"
+  },
+  "verifying": {
+    "message": "確認中...",
+    "description": "Status while verifying API key"
+  },
+  "selectModel": {
+    "message": "モデルを選択",
+    "description": "Label for model selection"
+  },
+  "model": {
+    "message": "モデル",
+    "description": "Label for model field"
+  },
+  "noModelsAvailable": {
+    "message": "利用可能なモデルがありません",
+    "description": "Message when no models are found"
+  },
+  "apiKeyVerified": {
+    "message": "APIキーの確認が完了しました！",
+    "description": "Success message after verification"
+  },
+  "apiKeyInvalid": {
+    "message": "無効なAPIキー",
+    "description": "Error message for invalid key"
+  },
+  "verifyFirst": {
+    "message": "まずAPIキーを確認してください",
+    "description": "Prompt to verify before saving"
+  },
+  "loadingModels": {
+    "message": "モデルを読み込み中...",
+    "description": "Status while loading models"
+  },
+  "modelSelected": {
+    "message": "モデルが選択されました",
+    "description": "Confirmation when model is selected"
+  },
+  "recommendedModel": {
+    "message": "推奨",
+    "description": "Badge text for recommended model"
+  },
+  "currentModel": {
+    "message": "現在のモデル",
+    "description": "Label for currently selected model"
+  },
+  "apiKeySaved": {
+    "message": "APIキーが保存されました！",
+    "description": "Toast message after saving API key"
+  },
+  "apiKeyCleared": {
+    "message": "APIキーが削除されました",
+    "description": "Toast message after clearing API key"
+  },
+  "copied": {
+    "message": "要約がクリップボードにコピーされました！",
+    "description": "Toast message after copying"
+  },
+  "copyFailed": {
+    "message": "要約のコピーに失敗しました",
+    "description": "Toast message when copy fails"
+  },
+  "error": {
+    "message": "エラー",
+    "description": "Generic error title"
+  },
+  "howToFix": {
+    "message": "解決方法：",
+    "description": "Header for error fix suggestions"
+  },
+  "noSubtitles": {
+    "message": "字幕がありません。まず動画を再生して字幕を読み込んでください。",
+    "description": "Error when subtitles not found"
+  },
+  "failedToFetchSubtitles": {
+    "message": "動画の字幕の取得に失敗しました。",
+    "description": "Error when subtitle fetch fails"
+  },
+  "videoNotPlayed": {
+    "message": "まず動画を再生してください",
+    "description": "Error title when video hasn't been played"
+  },
+  "playVideoToCapture": {
+    "message": "字幕を取得するために、動画を数秒再生してください。",
+    "description": "Error message explaining to play video"
+  },
+  "ccNotEnabled": {
+    "message": "字幕を有効にする (CC)",
+    "description": "Error title when CC not enabled"
+  },
+  "enableCCFirst": {
+    "message": "字幕を取得するには、字幕を有効にする必要があります。",
+    "description": "Error message about enabling CC"
+  },
+  "subtitleNotCaptured": {
+    "message": "字幕を取得できませんでした",
+    "description": "Error title when subtitles weren't captured"
+  },
+  "refreshMayHelp": {
+    "message": "字幕データを取得できませんでした。タイミングの問題で発生することがあります。",
+    "description": "Error message suggesting refresh"
+  },
+  "noSubtitlesAvailable": {
+    "message": "字幕がありません",
+    "description": "Error title when video has no subtitles"
+  },
+  "videoNoSubtitles": {
+    "message": "この動画には字幕がないようです。",
+    "description": "Error message for video without CC"
+  },
+  "subtitleError": {
+    "message": "字幕エラー",
+    "description": "Generic subtitle error title"
+  },
+  "couldNotGetSubtitles": {
+    "message": "字幕データを取得できませんでした。",
+    "description": "Generic subtitle error message"
+  },
+  "subtitleFetchError": {
+    "message": "字幕の読み込みに失敗",
+    "description": "Title for subtitle fetch error"
+  },
+  "subtitleFetchErrorMsg": {
+    "message": "YouTubeから字幕データを取得できませんでした。",
+    "description": "Message for subtitle fetch error"
+  },
+  "subtitleFetchStep1": {
+    "message": "ページを更新する (F5)",
+    "description": "Step 1 for subtitle fetch error"
+  },
+  "subtitleFetchStep2": {
+    "message": "動画を5〜10秒再生する",
+    "description": "Step 2 for subtitle fetch error"
+  },
+  "subtitleFetchStep3": {
+    "message": "CC字幕ボタンが有効になっていることを確認",
+    "description": "Step 3 for subtitle fetch error"
+  },
+  "subtitleFetchStep4": {
+    "message": "下の「再試行」ボタンをクリック",
+    "description": "Step 4 for subtitle fetch error"
+  },
+  "insufficientContent": {
+    "message": "コンテンツ不足",
+    "description": "Error title for insufficient content"
+  },
+  "subtitlesTooShort": {
+    "message": "字幕の内容が短すぎて、意味のある要約を生成できません。",
+    "description": "Error message for short subtitles"
+  },
+  "tryLongerVideo": {
+    "message": "この動画は短すぎるか、話されている内容が少ない可能性があります。",
+    "description": "Suggestion for short video error"
+  },
+  "invalidApiKey": {
+    "message": "無効なAPIキー",
+    "description": "Error title for invalid API key"
+  },
+  "apiKeyInvalidMsg": {
+    "message": "Gemini APIキーが無効か、取り消されています。",
+    "description": "Error message for invalid API key"
+  },
+  "checkApiKey": {
+    "message": "設定でAPIキーを確認するか、notelm.ai/support/api-key-guideをご覧ください。",
+    "description": "Suggestion for API key error"
+  },
+  "apiKeyTooShort": {
+    "message": "APIキーが無効のようです。Gemini APIキーを確認して再入力してください。",
+    "description": "Error for malformed API key"
+  },
+  "getNewApiKey": {
+    "message": "notelm.aiで有効なAPIキーの取得方法を確認",
+    "description": "Help text for getting new API key"
+  },
+  "requestError": {
+    "message": "リクエストエラー",
+    "description": "Generic request error title"
+  },
+  "badRequestMsg": {
+    "message": "Gemini APIへのリクエストが失敗しました。",
+    "description": "Message for bad request error"
+  },
+  "tryAgainLater": {
+    "message": "後でもう一度お試しください。",
+    "description": "Generic retry suggestion"
+  },
+  "unauthorized": {
+    "message": "未認証",
+    "description": "Unauthorized error title"
+  },
+  "apiKeyUnauthorized": {
+    "message": "お使いのAPIキーはこのサービスの使用が認証されていません。",
+    "description": "Unauthorized error message"
+  },
+  "checkApiKeyPermissions": {
+    "message": "APIキーに正しい権限があることを確認してください。",
+    "description": "Suggestion for permission error"
+  },
+  "accessDenied": {
+    "message": "アクセス拒否",
+    "description": "Access denied error title"
+  },
+  "apiKeyForbidden": {
+    "message": "このAPIキーではGemini APIへのアクセスが禁止されています。",
+    "description": "Forbidden access error message"
+  },
+  "checkApiKeyOrRegion": {
+    "message": "APIキーが制限されているか、お住まいの地域でGeminiが利用できない可能性があります。",
+    "description": "Suggestion for region restriction"
+  },
+  "rateLimitExceeded": {
+    "message": "レート制限超過",
+    "description": "Rate limit error title"
+  },
+  "tooManyRequests": {
+    "message": "APIレート制限または使用量を超過しました。",
+    "description": "Rate limit error message"
+  },
+  "waitAndRetry": {
+    "message": "数分待ってから再試行してください。問題が続く場合は、APIプランのアップグレードをご検討ください。",
+    "description": "Suggestion for rate limit error"
+  },
+  "serverError": {
+    "message": "サーバーエラー",
+    "description": "Server error title"
+  },
+  "geminiServerError": {
+    "message": "Gemini APIで問題が発生しています。",
+    "description": "Server error message"
+  },
+  "apiError": {
+    "message": "APIエラー",
+    "description": "Generic API error title"
+  },
+  "unknownApiError": {
+    "message": "Gemini APIの呼び出し中にエラーが発生しました。",
+    "description": "Unknown API error message"
+  },
+  "contentFiltered": {
+    "message": "コンテンツがフィルタリングされました",
+    "description": "Content filtered error title"
+  },
+  "safetyFilterTriggered": {
+    "message": "安全設定によりコンテンツがフィルタリングされました。",
+    "description": "Safety filter error message"
+  },
+  "tryDifferentVideo": {
+    "message": "より適切なコンテンツの動画をお試しください。",
+    "description": "Suggestion for content filter"
+  },
+  "noSummaryGenerated": {
+    "message": "要約が生成されませんでした",
+    "description": "No response error title"
+  },
+  "aiDidNotRespond": {
+    "message": "AIが応答を生成しませんでした。",
+    "description": "No response error message"
+  },
+  "summaryIncomplete": {
+    "message": "要約が不完全な可能性があります",
+    "description": "Warning for truncated summary"
+  },
+  "outputTruncated": {
+    "message": "長さ制限により、AI応答が切り捨てられました。",
+    "description": "Truncation warning message"
+  },
+  "tryDifferentModel": {
+    "message": "より強力なモデル（例：gemini-2.5-pro）に切り替えて再生成してみてください。",
+    "description": "Suggestion for truncation"
+  },
+  "switchModel": {
+    "message": "モデルを切り替え",
+    "description": "Button text to switch model"
+  },
+  "retryWithOptions": {
+    "message": "オプションで再試行",
+    "description": "Button text for retry with options"
+  },
+  "step1Play": {
+    "message": "動画を再生する",
+    "description": "Step instruction to play video"
+  },
+  "step2Wait": {
+    "message": "3〜5秒待つ",
+    "description": "Step instruction to wait"
+  },
+  "step3Summarize": {
+    "message": "「要約を生成」を再度クリック",
+    "description": "Step instruction to summarize again"
+  },
+  "step1EnableCC": {
+    "message": "動画プレーヤーのCCボタンをクリック",
+    "description": "Step instruction to enable CC"
+  },
+  "step2PlayAgain": {
+    "message": "動画を数秒再生する",
+    "description": "Step instruction to play again"
+  },
+  "tryRefresh": {
+    "message": "ページを更新する (F5)",
+    "description": "Step instruction to refresh"
+  },
+  "playWithCC": {
+    "message": "CCを有効にして動画を再生",
+    "description": "Step instruction to play with CC"
+  },
+  "trySummarize": {
+    "message": "要約を再度試す",
+    "description": "Step instruction to try again"
+  },
+  "tryRefreshCheck": {
+    "message": "ページを更新してみてください - CCボタンの読み込みが遅れることがあります",
+    "description": "Suggestion about late-loading CC"
+  },
+  "checkOtherVideos": {
+    "message": "CCボタンが表示されない場合、この動画には字幕がありません",
+    "description": "Information about missing CC button"
+  },
+  "tryAnotherVideo": {
+    "message": "CCのある別の動画をお試しください",
+    "description": "Suggestion to try another video"
+  },
+  "refreshAndRetry": {
+    "message": "ページを更新して再試行してください。",
+    "description": "Generic refresh and retry suggestion"
+  },
+  "langAfrikaans": {
+    "message": "アフリカーンス語",
+    "description": "Language name: Afrikaans"
+  },
+  "langAmharic": {
+    "message": "アムハラ語",
+    "description": "Language name: Amharic"
+  },
+  "langArabic": {
+    "message": "アラビア語",
+    "description": "Language name: Arabic"
+  },
+  "langAssamese": {
+    "message": "アッサム語",
+    "description": "Language name: Assamese"
+  },
+  "langAzerbaijani": {
+    "message": "アゼルバイジャン語",
+    "description": "Language name: Azerbaijani"
+  },
+  "langBelarusian": {
+    "message": "ベラルーシ語",
+    "description": "Language name: Belarusian"
+  },
+  "langBulgarian": {
+    "message": "ブルガリア語",
+    "description": "Language name: Bulgarian"
+  },
+  "langBangla": {
+    "message": "ベンガル語",
+    "description": "Language name: Bangla"
+  },
+  "langBosnian": {
+    "message": "ボスニア語",
+    "description": "Language name: Bosnian"
+  },
+  "langCatalan": {
+    "message": "カタルーニャ語",
+    "description": "Language name: Catalan"
+  },
+  "langCzech": {
+    "message": "チェコ語",
+    "description": "Language name: Czech"
+  },
+  "langDanish": {
+    "message": "デンマーク語",
+    "description": "Language name: Danish"
+  },
+  "langGerman": {
+    "message": "ドイツ語",
+    "description": "Language name: German"
+  },
+  "langGreek": {
+    "message": "ギリシャ語",
+    "description": "Language name: Greek"
+  },
+  "langEnglish": {
+    "message": "英語",
+    "description": "Language name: English"
+  },
+  "langEnglishUK": {
+    "message": "英語（イギリス）",
+    "description": "Language name: English UK"
+  },
+  "langEnglishIN": {
+    "message": "英語（インド）",
+    "description": "Language name: English India"
+  },
+  "langSpanish": {
+    "message": "スペイン語",
+    "description": "Language name: Spanish"
+  },
+  "langSpanishLatam": {
+    "message": "スペイン語（ラテンアメリカ）",
+    "description": "Language name: Spanish Latin America"
+  },
+  "langSpanishUS": {
+    "message": "スペイン語（アメリカ）",
+    "description": "Language name: Spanish US"
+  },
+  "langEstonian": {
+    "message": "エストニア語",
+    "description": "Language name: Estonian"
+  },
+  "langBasque": {
+    "message": "バスク語",
+    "description": "Language name: Basque"
+  },
+  "langPersian": {
+    "message": "ペルシア語",
+    "description": "Language name: Persian"
+  },
+  "langFinnish": {
+    "message": "フィンランド語",
+    "description": "Language name: Finnish"
+  },
+  "langFilipino": {
+    "message": "フィリピン語",
+    "description": "Language name: Filipino"
+  },
+  "langFrench": {
+    "message": "フランス語",
+    "description": "Language name: French"
+  },
+  "langFrenchCA": {
+    "message": "フランス語（カナダ）",
+    "description": "Language name: French Canada"
+  },
+  "langGalician": {
+    "message": "ガリシア語",
+    "description": "Language name: Galician"
+  },
+  "langGujarati": {
+    "message": "グジャラート語",
+    "description": "Language name: Gujarati"
+  },
+  "langHindi": {
+    "message": "ヒンディー語",
+    "description": "Language name: Hindi"
+  },
+  "langCroatian": {
+    "message": "クロアチア語",
+    "description": "Language name: Croatian"
+  },
+  "langHungarian": {
+    "message": "ハンガリー語",
+    "description": "Language name: Hungarian"
+  },
+  "langArmenian": {
+    "message": "アルメニア語",
+    "description": "Language name: Armenian"
+  },
+  "langIndonesian": {
+    "message": "インドネシア語",
+    "description": "Language name: Indonesian"
+  },
+  "langIcelandic": {
+    "message": "アイスランド語",
+    "description": "Language name: Icelandic"
+  },
+  "langItalian": {
+    "message": "イタリア語",
+    "description": "Language name: Italian"
+  },
+  "langHebrew": {
+    "message": "ヘブライ語",
+    "description": "Language name: Hebrew"
+  },
+  "langJapanese": {
+    "message": "日本語",
+    "description": "Language name: Japanese"
+  },
+  "langGeorgian": {
+    "message": "ジョージア語",
+    "description": "Language name: Georgian"
+  },
+  "langKazakh": {
+    "message": "カザフ語",
+    "description": "Language name: Kazakh"
+  },
+  "langKhmer": {
+    "message": "クメール語",
+    "description": "Language name: Khmer"
+  },
+  "langKannada": {
+    "message": "カンナダ語",
+    "description": "Language name: Kannada"
+  },
+  "langKorean": {
+    "message": "韓国語",
+    "description": "Language name: Korean"
+  },
+  "langKyrgyz": {
+    "message": "キルギス語",
+    "description": "Language name: Kyrgyz"
+  },
+  "langLao": {
+    "message": "ラオ語",
+    "description": "Language name: Lao"
+  },
+  "langLithuanian": {
+    "message": "リトアニア語",
+    "description": "Language name: Lithuanian"
+  },
+  "langLatvian": {
+    "message": "ラトビア語",
+    "description": "Language name: Latvian"
+  },
+  "langMacedonian": {
+    "message": "マケドニア語",
+    "description": "Language name: Macedonian"
+  },
+  "langMalayalam": {
+    "message": "マラヤーラム語",
+    "description": "Language name: Malayalam"
+  },
+  "langMongolian": {
+    "message": "モンゴル語",
+    "description": "Language name: Mongolian"
+  },
+  "langMarathi": {
+    "message": "マラーティー語",
+    "description": "Language name: Marathi"
+  },
+  "langMalay": {
+    "message": "マレー語",
+    "description": "Language name: Malay"
+  },
+  "langBurmese": {
+    "message": "ビルマ語",
+    "description": "Language name: Burmese"
+  },
+  "langNepali": {
+    "message": "ネパール語",
+    "description": "Language name: Nepali"
+  },
+  "langDutch": {
+    "message": "オランダ語",
+    "description": "Language name: Dutch"
+  },
+  "langNorwegian": {
+    "message": "ノルウェー語",
+    "description": "Language name: Norwegian"
+  },
+  "langOdia": {
+    "message": "オリヤー語",
+    "description": "Language name: Odia"
+  },
+  "langPunjabi": {
+    "message": "パンジャブ語",
+    "description": "Language name: Punjabi"
+  },
+  "langPolish": {
+    "message": "ポーランド語",
+    "description": "Language name: Polish"
+  },
+  "langPortuguese": {
+    "message": "ポルトガル語",
+    "description": "Language name: Portuguese"
+  },
+  "langPortuguesePT": {
+    "message": "ポルトガル語（ポルトガル）",
+    "description": "Language name: Portuguese Portugal"
+  },
+  "langRomanian": {
+    "message": "ルーマニア語",
+    "description": "Language name: Romanian"
+  },
+  "langRussian": {
+    "message": "ロシア語",
+    "description": "Language name: Russian"
+  },
+  "langSinhala": {
+    "message": "シンハラ語",
+    "description": "Language name: Sinhala"
+  },
+  "langSlovak": {
+    "message": "スロバキア語",
+    "description": "Language name: Slovak"
+  },
+  "langSlovenian": {
+    "message": "スロベニア語",
+    "description": "Language name: Slovenian"
+  },
+  "langAlbanian": {
+    "message": "アルバニア語",
+    "description": "Language name: Albanian"
+  },
+  "langSerbian": {
+    "message": "セルビア語",
+    "description": "Language name: Serbian"
+  },
+  "langSerbianLatin": {
+    "message": "セルビア語（ラテン文字）",
+    "description": "Language name: Serbian Latin"
+  },
+  "langSwedish": {
+    "message": "スウェーデン語",
+    "description": "Language name: Swedish"
+  },
+  "langSwahili": {
+    "message": "スワヒリ語",
+    "description": "Language name: Swahili"
+  },
+  "langTamil": {
+    "message": "タミル語",
+    "description": "Language name: Tamil"
+  },
+  "langTelugu": {
+    "message": "テルグ語",
+    "description": "Language name: Telugu"
+  },
+  "langThai": {
+    "message": "タイ語",
+    "description": "Language name: Thai"
+  },
+  "langTurkish": {
+    "message": "トルコ語",
+    "description": "Language name: Turkish"
+  },
+  "langUkrainian": {
+    "message": "ウクライナ語",
+    "description": "Language name: Ukrainian"
+  },
+  "langUrdu": {
+    "message": "ウルドゥー語",
+    "description": "Language name: Urdu"
+  },
+  "langUzbek": {
+    "message": "ウズベク語",
+    "description": "Language name: Uzbek"
+  },
+  "langVietnamese": {
+    "message": "ベトナム語",
+    "description": "Language name: Vietnamese"
+  },
+  "langChineseCN": {
+    "message": "中国語（簡体字）",
+    "description": "Language name: Chinese Simplified"
+  },
+  "langChineseHK": {
+    "message": "中国語（香港）",
+    "description": "Language name: Chinese Hong Kong"
+  },
+  "langChineseTW": {
+    "message": "中国語（繁体字）",
+    "description": "Language name: Chinese Traditional"
+  },
+  "langZulu": {
+    "message": "ズールー語",
+    "description": "Language name: Zulu"
+  },
+  "searchLanguagePlaceholder": {
+    "message": "検索：en, English, 中文, Español...",
+    "description": "Placeholder for language search input"
+  },
+  "noLanguagesFound": {
+    "message": "言語が見つかりません",
+    "description": "Message when no languages match search"
+  },
+  "unknown": {
+    "message": "不明",
+    "description": "Default text when a value is unknown"
+  },
+  "untitledVideo": {
+    "message": "タイトルなしの動画",
+    "description": "Default title when video title cannot be determined"
+  },
+  "unknownChannel": {
+    "message": "不明なチャンネル",
+    "description": "Default channel name when channel cannot be determined"
+  },
+  "unknownError": {
+    "message": "不明なエラー",
+    "description": "Generic unknown error message"
+  },
+  "anUnknownErrorOccurred": {
+    "message": "不明なエラーが発生しました",
+    "description": "Detailed unknown error message"
+  },
+  "jumpToTimestamp": {
+    "message": "$1 にジャンプ",
+    "description": "Tooltip for timestamp links, $1 is the timestamp",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "5:23"
+      }
+    }
+  },
+  "searchHashtagOnYouTube": {
+    "message": "YouTubeで #$1 を検索",
+    "description": "Tooltip for hashtag links, $1 is the hashtag",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "tutorial"
+      }
+    }
+  },
+  "modelsFound": {
+    "message": "$1 個のモデル",
+    "description": "Number of models found after API key verification",
+    "placeholders": {
+      "1": {
+        "content": "$1",
+        "example": "12"
+      }
+    }
+  }
+}

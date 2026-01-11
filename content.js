@@ -1,8 +1,13 @@
 // YouTube Video Summarizer - NoteLM.ai
 // Content Script: Panel injection, API key management, and Gemini AI integration
-// Version 2.0 - Enhanced with timestamps, chapters, and optimized prompts
+// Version 1.2 - i18n internationalization support
+// Uses Chrome's chrome.i18n API for UI localization
+// Localized strings are in _locales/[lang]/messages.json
 
-// UI Strings (hardcoded English - summary output language is configurable separately)
+// ============================================================
+// LEGACY UI STRINGS (kept as fallback, not used by i18n function)
+// New translations should be added to _locales/[lang]/messages.json
+// ============================================================
 const UI_STRINGS = {
   // Panel
   panelTitle: 'YouTube Video Summarizer',
@@ -12,8 +17,17 @@ const UI_STRINGS = {
   poweredBy: 'Built with Gemini AI',
   moreToolsAt: 'More tools at',
   
-  // Loading
+  // Loading - Progress stages
   generating: 'Generating summary...',
+  loadingStage1: 'Preparing video content...',
+  loadingStage2: 'Analyzing transcript...',
+  loadingStage3: 'Generating AI summary...',
+  loadingStage4: 'Formatting results...',
+  estimatedTime: 'Estimated time',
+  seconds: 'seconds',
+  almostDone: 'Almost done...',
+  takingLonger: 'This is taking longer than usual...',
+  pleaseWait: 'Please wait, AI is thinking...',
   
   // Actions
   outputLanguage: 'Output Language',
@@ -34,10 +48,22 @@ const UI_STRINGS = {
   // Settings Modal
   geminiApiKey: 'Gemini API Key',
   enterApiKey: 'Enter your Gemini API key',
-  getApiKey: 'Get your free API key from',
+  getApiKey: 'Learn how to get your free API key at',
   apiKeyConfigured: 'API key configured',
   cancel: 'Cancel',
   save: 'Save',
+  verify: 'Verify',
+  verifying: 'Verifying...',
+  selectModel: 'Select Model',
+  model: 'Model',
+  noModelsAvailable: 'No models available',
+  apiKeyVerified: 'API key verified!',
+  apiKeyInvalid: 'Invalid API key',
+  verifyFirst: 'Please verify your API key first',
+  loadingModels: 'Loading models...',
+  modelSelected: 'Model selected',
+  recommendedModel: 'Recommended',
+  currentModel: 'Current model',
   
   // Toast Messages
   apiKeySaved: 'API key saved successfully!',
@@ -71,9 +97,9 @@ const UI_STRINGS = {
   // Errors - API
   invalidApiKey: 'Invalid API Key',
   apiKeyInvalidMsg: 'Your Gemini API key is invalid or has been revoked.',
-  checkApiKey: 'Please check your API key in settings or get a new one from Google AI Studio.',
+  checkApiKey: 'Please check your API key in settings or visit notelm.ai/support/api-key-guide for help.',
   apiKeyTooShort: 'The API key appears to be invalid. Please check and re-enter your Gemini API key.',
-  getNewApiKey: 'Get a valid API key from Google AI Studio',
+  getNewApiKey: 'Learn how to get a valid API key at notelm.ai',
   requestError: 'Request Error',
   badRequestMsg: 'The request to Gemini API failed.',
   tryAgainLater: 'Please try again later.',
@@ -95,6 +121,11 @@ const UI_STRINGS = {
   tryDifferentVideo: 'Try a different video with less sensitive content.',
   noSummaryGenerated: 'No Summary Generated',
   aiDidNotRespond: 'The AI did not generate a response.',
+  summaryIncomplete: 'Summary May Be Incomplete',
+  outputTruncated: 'The AI response was cut off due to length limits.',
+  tryDifferentModel: 'Try switching to a more powerful model (e.g. gemini-2.5-pro) and regenerate.',
+  switchModel: 'Switch Model',
+  retryWithOptions: 'Retry with Options',
   
   // Step instructions
   step1Play: 'Click play on the video',
@@ -111,45 +142,76 @@ const UI_STRINGS = {
   refreshAndRetry: 'Refresh the page and try again.',
   
   // Language options for output (native names for selector display)
+  // YouTube i18nLanguages API BCP-47 codes - sorted alphabetically by code
+  langAfrikaans: 'Afrikaans',
+  langAmharic: 'አማርኛ',
+  langArabic: 'العربية',
+  langAssamese: 'অসমীয়া',
   langAzerbaijani: 'Azərbaycan',
+  langBelarusian: 'Беларуская',
   langBulgarian: 'Български',
-  langBengali: 'বাংলা',
+  langBangla: 'বাংলা',
+  langBosnian: 'Bosanski',
   langCatalan: 'Català',
   langCzech: 'Čeština',
   langDanish: 'Dansk',
   langGerman: 'Deutsch',
   langGreek: 'Ελληνικά',
   langEnglish: 'English',
+  langEnglishUK: 'English (UK)',
+  langEnglishIN: 'English (India)',
   langSpanish: 'Español',
+  langSpanishLatam: 'Español (Latinoamérica)',
+  langSpanishUS: 'Español (US)',
+  langEstonian: 'Eesti',
+  langBasque: 'Euskara',
+  langPersian: 'فارسی',
   langFinnish: 'Suomi',
   langFilipino: 'Filipino',
   langFrench: 'Français',
+  langFrenchCA: 'Français (Canada)',
+  langGalician: 'Galego',
   langGujarati: 'ગુજરાતી',
   langHindi: 'हिन्दी',
   langCroatian: 'Hrvatski',
   langHungarian: 'Magyar',
+  langArmenian: 'Հայերեն',
   langIndonesian: 'Bahasa Indonesia',
+  langIcelandic: 'Íslenska',
   langItalian: 'Italiano',
+  langHebrew: 'עברית',
   langJapanese: '日本語',
+  langGeorgian: 'ქართული',
   langKazakh: 'Қазақша',
   langKhmer: 'ខ្មែរ',
   langKannada: 'ಕನ್ನಡ',
   langKorean: '한국어',
+  langKyrgyz: 'Кыргызча',
+  langLao: 'ລາວ',
+  langLithuanian: 'Lietuvių',
+  langLatvian: 'Latviešu',
+  langMacedonian: 'Македонски',
   langMalayalam: 'മലയാളം',
+  langMongolian: 'Монгол',
   langMarathi: 'मराठी',
   langMalay: 'Bahasa Melayu',
   langBurmese: 'မြန်မာ',
   langNepali: 'नेपाली',
   langDutch: 'Nederlands',
   langNorwegian: 'Norsk',
+  langOdia: 'ଓଡ଼ିଆ',
   langPunjabi: 'ਪੰਜਾਬੀ',
   langPolish: 'Polski',
   langPortuguese: 'Português',
+  langPortuguesePT: 'Português (Portugal)',
   langRomanian: 'Română',
   langRussian: 'Русский',
   langSinhala: 'සිංහල',
   langSlovak: 'Slovenčina',
+  langSlovenian: 'Slovenščina',
+  langAlbanian: 'Shqip',
   langSerbian: 'Српски',
+  langSerbianLatin: 'Srpski (latinica)',
   langSwedish: 'Svenska',
   langSwahili: 'Kiswahili',
   langTamil: 'தமிழ்',
@@ -157,65 +219,119 @@ const UI_STRINGS = {
   langThai: 'ภาษาไทย',
   langTurkish: 'Türkçe',
   langUkrainian: 'Українська',
+  langUrdu: 'اردو',
   langUzbek: "Oʻzbek",
   langVietnamese: 'Tiếng Việt',
-  langChinese: '中文',
-  langTraditionalChinese: '繁體中文'
+  langChineseCN: '中文 (简体)',
+  langChineseHK: '中文 (香港)',
+  langChineseTW: '中文 (繁體)',
+  langZulu: 'isiZulu'
 };
 
-// i18n helper function (now uses hardcoded strings)
-const i18n = (key) => UI_STRINGS[key] || key;
+/**
+ * Chrome i18n helper function
+ * Retrieves localized messages from _locales/[lang]/messages.json
+ * @param {string} key - The message key from messages.json
+ * @param {string|string[]} [substitutions] - Optional substitution strings for placeholders
+ * @returns {string} The localized message or the key if not found
+ */
+const i18n = (key, substitutions) => {
+  const message = chrome.i18n.getMessage(key, substitutions);
+  return message || key;
+};
 
 const STORAGE_KEYS = {
   API_KEY: 'nlm_gemini_api_key',
   SUBTITLE_URL: 'yt_subtitle_url',
   VIDEO_ID: 'yt_current_video_id',
-  OUTPUT_LANG: 'nlm_output_language'
+  OUTPUT_LANG: 'nlm_output_language',
+  SELECTED_MODEL: 'nlm_selected_model',
+  AVAILABLE_MODELS: 'nlm_available_models'
 };
 
 // Get default language based on browser language
+// Maps browser locale to YouTube i18nLanguages BCP-47 codes
 const getDefaultOutputLanguage = () => {
   const browserLang = chrome.i18n.getUILanguage();
   const langMap = {
+    // Direct mappings to YouTube BCP-47 codes
+    'af': 'af',
+    'am': 'am',
+    'ar': 'ar',
+    'as': 'as',
     'az': 'az',
+    'be': 'be',
     'bg': 'bg',
     'bn': 'bn',
+    'bs': 'bs',
     'ca': 'ca',
     'cs': 'cs',
     'da': 'da',
     'de': 'de',
     'el': 'el',
+    'en': 'en',
+    'en-GB': 'en-GB',
+    'en-IN': 'en-IN',
+    'en-US': 'en',
+    'en-AU': 'en-GB',
     'es': 'es',
+    'es-419': 'es-419',
+    'es-US': 'es-US',
+    'es-MX': 'es-419',
+    'es-AR': 'es-419',
+    'et': 'et',
+    'eu': 'eu',
+    'fa': 'fa',
     'fi': 'fi',
     'fil': 'fil',
     'fr': 'fr',
+    'fr-CA': 'fr-CA',
+    'gl': 'gl',
     'gu': 'gu',
     'hi': 'hi',
     'hr': 'hr',
     'hu': 'hu',
+    'hy': 'hy',
     'id': 'id',
+    'is': 'is',
     'it': 'it',
+    'iw': 'iw',
+    'he': 'iw',  // Hebrew: standard BCP-47 'he' maps to YouTube's 'iw'
     'ja': 'ja',
+    'ka': 'ka',
     'kk': 'kk',
     'km': 'km',
     'kn': 'kn',
     'ko': 'ko',
+    'ky': 'ky',
+    'lo': 'lo',
+    'lt': 'lt',
+    'lv': 'lv',
+    'mk': 'mk',
     'ml': 'ml',
+    'mn': 'mn',
     'mr': 'mr',
     'ms': 'ms',
     'my': 'my',
     'ne': 'ne',
     'nl': 'nl',
     'no': 'no',
+    'nb': 'no',  // Norwegian Bokmål maps to 'no'
+    'nn': 'no',  // Norwegian Nynorsk maps to 'no'
+    'or': 'or',
     'pa': 'pa',
     'pl': 'pl',
     'pt': 'pt',
     'pt-BR': 'pt',
+    'pt-PT': 'pt-PT',
     'ro': 'ro',
     'ru': 'ru',
     'si': 'si',
     'sk': 'sk',
+    'sl': 'sl',
+    'sq': 'sq',
     'sr': 'sr',
+    'sr-Latn': 'sr-Latn',
     'sv': 'sv',
     'sw': 'sw',
     'ta': 'ta',
@@ -223,78 +339,170 @@ const getDefaultOutputLanguage = () => {
     'th': 'th',
     'tr': 'tr',
     'uk': 'uk',
+    'ur': 'ur',
     'uz': 'uz',
     'vi': 'vi',
-    'zh-CN': 'zh',
+    'zh-CN': 'zh-CN',
+    'zh-Hans': 'zh-CN',
     'zh-TW': 'zh-TW',
-    'zh-HK': 'zh-TW'
+    'zh-Hant': 'zh-TW',
+    'zh-HK': 'zh-HK',
+    'zu': 'zu'
   };
   
   // Check exact match first
   if (langMap[browserLang]) return langMap[browserLang];
   
-  // Check language prefix
+  // Check language prefix for regional variants
   const prefix = browserLang.split('-')[0];
-  if (prefix === 'zh') return 'zh';
+  if (prefix === 'zh') return 'zh-CN';  // Default Chinese to Simplified
+  if (prefix === 'en') return 'en';
+  if (prefix === 'es') return 'es';
+  if (prefix === 'fr') return 'fr';
+  if (prefix === 'pt') return 'pt';
   if (langMap[prefix]) return langMap[prefix];
   
   return 'en';
 };
 
-const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+// Gemini API endpoints
+const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta';
+const GEMINI_MODELS_ENDPOINT = `${GEMINI_API_BASE}/models`;
+const getGeminiGenerateEndpoint = (modelName) => `${GEMINI_API_BASE}/models/${modelName}:generateContent`;
 
-// Language display names for the prompt (sorted alphabetically by code)
+// Default model if none selected (most capable model)
+const DEFAULT_MODEL = 'gemini-2.5-pro';
+
+// Model ranking for sorting (higher = better)
+// Based on https://ai.google.dev/gemini-api/docs/models official ordering
+const MODEL_RANKING = {
+  // Gemini 3 series (newest, most capable) - Dec 2025
+  'gemini-3-pro': 200,
+  'gemini-3-pro-preview': 195,
+  'gemini-3-flash': 190,
+  'gemini-3-flash-preview': 185,
+  // Gemini 2.5 series
+  'gemini-2.5-flash': 170,           // Fast and intelligent (stable)
+  'gemini-2.5-flash-preview': 165,
+  'gemini-2.5-flash-lite': 160,      // Ultra fast
+  'gemini-2.5-flash-lite-preview': 155,
+  'gemini-2.5-pro': 150,             // Advanced thinking model
+  'gemini-2.5-pro-preview': 145,
+  // Gemini 2.0 series (previous generation)
+  'gemini-2.0-flash': 130,
+  'gemini-2.0-flash-001': 125,
+  'gemini-2.0-flash-lite': 120,
+  'gemini-2.0-flash-lite-001': 115,
+  // Gemini 1.5 series (legacy)
+  'gemini-1.5-pro': 100,
+  'gemini-1.5-flash': 95,
+  'gemini-1.5-flash-8b': 90,
+  // Gemini 1.0 series (legacy)
+  'gemini-pro': 50,
+  // Default for unknown models
+  'default': 10
+};
+
+// Models to exclude (non-text output models)
+// These models don't output text or are specialized for other tasks
+const EXCLUDED_MODEL_PATTERNS = [
+  'image',           // Image generation models (gemini-*-image-*)
+  'tts',             // Text-to-speech models (gemini-*-tts)
+  'audio',           // Audio/Live models (gemini-*-audio-*, native-audio)
+  'embedding',       // Embedding models
+  'aqa',             // AQA (Attributed Question Answering) models
+  'vision',          // Vision-only models
+  'veo',             // Video generation
+  'imagen',          // Image generation
+  'lyria',           // Music generation
+];
+
+// Language display names for the prompt
+// YouTube i18nLanguages API BCP-47 codes - sorted alphabetically by code
 const LANGUAGE_NAMES = {
-  az: 'Azerbaijani',
-  bg: 'Bulgarian',
-  bn: 'Bengali',
-  ca: 'Catalan',
-  cs: 'Czech',
-  da: 'Danish',
-  de: 'German',
-  el: 'Greek',
-  en: 'English',
-  es: 'Spanish',
-  fi: 'Finnish',
-  fil: 'Filipino',
-  fr: 'French',
-  gu: 'Gujarati',
-  hi: 'Hindi',
-  hr: 'Croatian',
-  hu: 'Hungarian',
-  id: 'Indonesian',
-  it: 'Italian',
-  ja: 'Japanese',
-  kk: 'Kazakh',
-  km: 'Khmer',
-  kn: 'Kannada',
-  ko: 'Korean',
-  ml: 'Malayalam',
-  mr: 'Marathi',
-  ms: 'Malay',
-  my: 'Burmese',
-  ne: 'Nepali',
-  nl: 'Dutch',
-  no: 'Norwegian',
-  pa: 'Punjabi',
-  pl: 'Polish',
-  pt: 'Portuguese',
-  ro: 'Romanian',
-  ru: 'Russian',
-  si: 'Sinhala',
-  sk: 'Slovak',
-  sr: 'Serbian',
-  sv: 'Swedish',
-  sw: 'Swahili',
-  ta: 'Tamil',
-  te: 'Telugu',
-  th: 'Thai',
-  tr: 'Turkish',
-  uk: 'Ukrainian',
-  uz: 'Uzbek',
-  vi: 'Vietnamese',
-  zh: 'Chinese (Simplified)',
-  'zh-TW': 'Chinese (Traditional)'
+  'af': 'Afrikaans',
+  'am': 'Amharic',
+  'ar': 'Arabic',
+  'as': 'Assamese',
+  'az': 'Azerbaijani',
+  'be': 'Belarusian',
+  'bg': 'Bulgarian',
+  'bn': 'Bangla',
+  'bs': 'Bosnian',
+  'ca': 'Catalan',
+  'cs': 'Czech',
+  'da': 'Danish',
+  'de': 'German',
+  'el': 'Greek',
+  'en': 'English',
+  'en-GB': 'English (United Kingdom)',
+  'en-IN': 'English (India)',
+  'es': 'Spanish',
+  'es-419': 'Spanish (Latin America)',
+  'es-US': 'Spanish (United States)',
+  'et': 'Estonian',
+  'eu': 'Basque',
+  'fa': 'Persian',
+  'fi': 'Finnish',
+  'fil': 'Filipino',
+  'fr': 'French',
+  'fr-CA': 'French (Canada)',
+  'gl': 'Galician',
+  'gu': 'Gujarati',
+  'hi': 'Hindi',
+  'hr': 'Croatian',
+  'hu': 'Hungarian',
+  'hy': 'Armenian',
+  'id': 'Indonesian',
+  'is': 'Icelandic',
+  'it': 'Italian',
+  'iw': 'Hebrew',
+  'ja': 'Japanese',
+  'ka': 'Georgian',
+  'kk': 'Kazakh',
+  'km': 'Khmer',
+  'kn': 'Kannada',
+  'ko': 'Korean',
+  'ky': 'Kyrgyz',
+  'lo': 'Lao',
+  'lt': 'Lithuanian',
+  'lv': 'Latvian',
+  'mk': 'Macedonian',
+  'ml': 'Malayalam',
+  'mn': 'Mongolian',
+  'mr': 'Marathi',
+  'ms': 'Malay',
+  'my': 'Burmese',
+  'ne': 'Nepali',
+  'nl': 'Dutch',
+  'no': 'Norwegian',
+  'or': 'Odia',
+  'pa': 'Punjabi',
+  'pl': 'Polish',
+  'pt': 'Portuguese',
+  'pt-PT': 'Portuguese (Portugal)',
+  'ro': 'Romanian',
+  'ru': 'Russian',
+  'si': 'Sinhala',
+  'sk': 'Slovak',
+  'sl': 'Slovenian',
+  'sq': 'Albanian',
+  'sr': 'Serbian',
+  'sr-Latn': 'Serbian (Latin)',
+  'sv': 'Swedish',
+  'sw': 'Swahili',
+  'ta': 'Tamil',
+  'te': 'Telugu',
+  'th': 'Thai',
+  'tr': 'Turkish',
+  'uk': 'Ukrainian',
+  'ur': 'Urdu',
+  'uz': 'Uzbek',
+  'vi': 'Vietnamese',
+  'zh-CN': 'Chinese (Simplified)',
+  'zh-HK': 'Chinese (Hong Kong)',
+  'zh-TW': 'Chinese (Traditional)',
+  'zu': 'Zulu'
 };
 
 // Icons as SVG strings
@@ -321,6 +529,14 @@ class YouTubeSummarizer {
     this.apiKey = null;
     this.outputLanguage = getDefaultOutputLanguage();
     this.currentError = null; // Store current error for display
+    this.selectedModel = DEFAULT_MODEL; // User's selected model
+    this.availableModels = []; // List of available models from API
+    
+    // Loading progress state
+    this.loadingStage = 0; // 0-4 stages
+    this.loadingStartTime = null;
+    this.loadingTimer = null;
+    this.estimatedDuration = 15; // seconds
     
     this.init();
   }
@@ -329,9 +545,11 @@ class YouTubeSummarizer {
     // Wait for YouTube page to load
     await this.waitForElement('#secondary');
     
-    // Load saved API key and output language
+    // Load saved API key, output language, and model selection
     await this.loadApiKey();
     await this.loadOutputLanguage();
+    await this.loadSelectedModel();
+    await this.loadAvailableModels();
     
     // Create and inject panel
     this.createPanel();
@@ -471,6 +689,193 @@ class YouTubeSummarizer {
         resolve();
       });
     });
+  }
+
+  async loadSelectedModel() {
+    return new Promise((resolve) => {
+      chrome.storage.local.get([STORAGE_KEYS.SELECTED_MODEL], (result) => {
+        if (result[STORAGE_KEYS.SELECTED_MODEL]) {
+          this.selectedModel = result[STORAGE_KEYS.SELECTED_MODEL];
+        }
+        resolve();
+      });
+    });
+  }
+
+  async saveSelectedModel(model) {
+    return new Promise((resolve) => {
+      chrome.storage.local.set({ [STORAGE_KEYS.SELECTED_MODEL]: model }, () => {
+        this.selectedModel = model;
+        resolve();
+      });
+    });
+  }
+
+  async loadAvailableModels() {
+    return new Promise((resolve) => {
+      chrome.storage.local.get([STORAGE_KEYS.AVAILABLE_MODELS], (result) => {
+        if (result[STORAGE_KEYS.AVAILABLE_MODELS]) {
+          this.availableModels = result[STORAGE_KEYS.AVAILABLE_MODELS];
+        }
+        resolve();
+      });
+    });
+  }
+
+  async saveAvailableModels(models) {
+    return new Promise((resolve) => {
+      chrome.storage.local.set({ [STORAGE_KEYS.AVAILABLE_MODELS]: models }, () => {
+        this.availableModels = models;
+        resolve();
+      });
+    });
+  }
+
+  // ============================================================
+  // MODEL MANAGEMENT - Fetch, validate, and select models
+  // ============================================================
+
+  /**
+   * Fetch available models from Gemini API
+   * This also serves as API key validation
+   */
+  async fetchAvailableModels(apiKey) {
+    const url = `${GEMINI_MODELS_ENDPOINT}?key=${apiKey}`;
+    
+    try {
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        if (response.status === 400 || response.status === 401 || response.status === 403) {
+          throw new Error('INVALID_API_KEY');
+        }
+        throw new Error(`API_ERROR_${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.models || !Array.isArray(data.models)) {
+        throw new Error('INVALID_RESPONSE');
+      }
+      
+      // Filter and process models - only include models that support generateContent and output text
+      const supportedModels = data.models
+        .filter(model => {
+          const modelId = model.name?.replace('models/', '') || '';
+          const modelIdLower = modelId.toLowerCase();
+          
+          // Check if model supports generateContent method
+          const supportsGenerate = model.supportedGenerationMethods?.includes('generateContent');
+          if (!supportsGenerate) return false;
+          
+          // Must be a Gemini model
+          if (!modelId.includes('gemini')) return false;
+          
+          // Exclude non-text output models (image, tts, audio, embedding, etc.)
+          const isExcluded = EXCLUDED_MODEL_PATTERNS.some(pattern => 
+            modelIdLower.includes(pattern.toLowerCase())
+          );
+          if (isExcluded) return false;
+          
+          return true;
+        })
+        .map(model => ({
+          id: model.name.replace('models/', ''), // e.g., "gemini-2.0-flash"
+          name: model.displayName || model.name.replace('models/', ''),
+          description: model.description || '',
+          inputTokenLimit: model.inputTokenLimit,
+          outputTokenLimit: model.outputTokenLimit
+        }));
+      
+      // Sort models by ranking (best first) based on official Google documentation order
+      supportedModels.sort((a, b) => {
+        const rankA = this.getModelRank(a.id);
+        const rankB = this.getModelRank(b.id);
+        return rankB - rankA; // Higher rank first
+      });
+      
+      return supportedModels;
+      
+    } catch (error) {
+      console.error('Error fetching models:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get model ranking score for sorting
+   * Based on https://ai.google.dev/gemini-api/docs/models official ordering
+   */
+  getModelRank(modelId) {
+    // Check exact match first
+    if (MODEL_RANKING[modelId]) {
+      return MODEL_RANKING[modelId];
+    }
+    
+    // Check partial matches - find the best matching prefix
+    let bestMatch = null;
+    let bestMatchLength = 0;
+    
+    for (const [key, rank] of Object.entries(MODEL_RANKING)) {
+      if (key !== 'default' && modelId.startsWith(key) && key.length > bestMatchLength) {
+        bestMatch = rank;
+        bestMatchLength = key.length;
+      }
+    }
+    
+    if (bestMatch !== null) {
+      return bestMatch - 1; // Slightly lower than exact match
+    }
+    
+    // Assign rank based on version number patterns (fallback)
+    // Following Google's official model ordering
+    if (modelId.includes('gemini-3')) {
+      if (modelId.includes('pro')) return 190;
+      if (modelId.includes('flash')) return 180;
+      return 175;
+    }
+    if (modelId.includes('2.5')) {
+      if (modelId.includes('flash-lite')) return 155;
+      if (modelId.includes('flash')) return 165;
+      if (modelId.includes('pro')) return 145;
+      return 140;
+    }
+    if (modelId.includes('2.0')) {
+      if (modelId.includes('flash-lite')) return 115;
+      if (modelId.includes('flash')) return 125;
+      return 110;
+    }
+    if (modelId.includes('1.5')) {
+      if (modelId.includes('pro')) return 100;
+      if (modelId.includes('flash')) return 95;
+      return 90;
+    }
+    if (modelId.includes('1.0') || modelId === 'gemini-pro') return 50;
+    
+    return MODEL_RANKING.default;
+  }
+
+  /**
+   * Get the best available model from the list
+   */
+  getBestModel(models) {
+    if (!models || models.length === 0) {
+      return DEFAULT_MODEL;
+    }
+    // Models are already sorted by rank, so first one is best
+    return models[0].id;
+  }
+
+  /**
+   * Validate API key by attempting to fetch models
+   */
+  async validateApiKey(apiKey) {
+    try {
+      const models = await this.fetchAvailableModels(apiKey);
+      return { valid: true, models };
+    } catch (error) {
+      return { valid: false, error: error.message };
+    }
   }
 
   // ============================================================
@@ -713,24 +1118,15 @@ TRANSCRIPT (with [M:SS] timestamp markers):
    * Call Gemini API with optimized parameters
    */
   async callGeminiAPI(prompt, transcriptText, metadata) {
-    const url = `${GEMINI_API_ENDPOINT}?key=${this.apiKey}`;
+    // Use selected model or default
+    const modelId = this.selectedModel || DEFAULT_MODEL;
+    const url = `${getGeminiGenerateEndpoint(modelId)}?key=${this.apiKey}`;
     
-    // Smart truncation: preserve beginning and end for context
-    const maxTranscriptLength = 28000;
-    let processedText = transcriptText;
+    // Send full transcript without truncation
+    // Gemini models support 1M+ input tokens, no need to truncate
+    const processedText = transcriptText;
     
-    if (transcriptText.length > maxTranscriptLength) {
-      const headLength = Math.floor(maxTranscriptLength * 0.7);
-      const tailLength = maxTranscriptLength - headLength - 100;
-      processedText = 
-        transcriptText.substring(0, headLength) +
-        '\n\n[... content condensed for length ...]\n\n' +
-        transcriptText.substring(transcriptText.length - tailLength);
-    }
-    
-    // Dynamic token limit based on video duration
-    const maxOutputTokens = metadata.durationSeconds > 1800 ? 4096 :
-                            metadata.durationSeconds > 900  ? 3072 : 2048;
+    console.log(`[NLM] Using model: ${modelId}, no output token limit`);
     
     const response = await fetch(url, {
       method: 'POST',
@@ -746,8 +1142,8 @@ TRANSCRIPT (with [M:SS] timestamp markers):
         generationConfig: {
           temperature: 0.3,        // Lower = more consistent output
           topP: 0.85,
-          topK: 40,
-          maxOutputTokens: maxOutputTokens
+          topK: 40
+          // No maxOutputTokens limit - let the model complete naturally
         }
       })
     });
@@ -769,7 +1165,7 @@ TRANSCRIPT (with [M:SS] timestamp markers):
             type: 'INVALID_API_KEY',
             title: i18n('invalidApiKey') || 'Invalid API Key',
             message: i18n('apiKeyInvalidMsg') || 'Your Gemini API key is invalid or has been revoked.',
-            suggestion: i18n('checkApiKey') || 'Please check your API key in settings or get a new one from Google AI Studio.',
+            suggestion: i18n('checkApiKey') || 'Please check your API key in settings or visit notelm.ai/support/api-key-guide for help.',
             icon: 'settings',
             action: 'settings'
           };
@@ -827,10 +1223,10 @@ TRANSCRIPT (with [M:SS] timestamp markers):
 
     const data = await response.json();
     const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    const finishReason = data.candidates?.[0]?.finishReason;
     
     if (!generatedText) {
       // Check for safety filters or other issues
-      const finishReason = data.candidates?.[0]?.finishReason;
       if (finishReason === 'SAFETY') {
         throw {
           type: 'CONTENT_FILTERED',
@@ -848,6 +1244,30 @@ TRANSCRIPT (with [M:SS] timestamp markers):
         suggestion: i18n('tryAgain') || 'Please try again.',
         icon: 'error'
       };
+    }
+
+    // Log response details for debugging
+    console.log(`[NLM] API Response - finishReason: ${finishReason}, textLength: ${generatedText?.length}`);
+    
+    // Check if output was truncated
+    // Possible finishReason values: STOP (normal), MAX_TOKENS (truncated), SAFETY, OTHER
+    const isTruncated = finishReason === 'MAX_TOKENS' || 
+                        finishReason === 'LENGTH' ||
+                        // Also check for incomplete markdown patterns
+                        (generatedText && (
+                          generatedText.endsWith('**[') ||
+                          generatedText.endsWith('- **') ||
+                          generatedText.endsWith('###') ||
+                          /\*\*\[\d+:?\d*$/.test(generatedText) // ends with incomplete timestamp
+                        ));
+    
+    if (isTruncated) {
+      console.warn(`[NLM] Summary was truncated! finishReason: ${finishReason}`);
+      this.summaryTruncated = true;
+      this.truncationReason = finishReason || 'INCOMPLETE_OUTPUT';
+    } else {
+      this.summaryTruncated = false;
+      this.truncationReason = null;
     }
 
     return generatedText;
@@ -882,6 +1302,91 @@ TRANSCRIPT (with [M:SS] timestamp markers):
   }
 
   /**
+   * Start loading progress animation
+   */
+  startLoadingProgress(estimatedSeconds = 15) {
+    this.loadingStage = 1;
+    this.loadingStartTime = Date.now();
+    this.estimatedDuration = estimatedSeconds;
+    
+    // Clear any existing timer
+    if (this.loadingTimer) {
+      clearInterval(this.loadingTimer);
+    }
+    
+    // Update progress every second
+    this.loadingTimer = setInterval(() => {
+      const elapsed = (Date.now() - this.loadingStartTime) / 1000;
+      
+      // Progress through stages based on elapsed time
+      if (elapsed < 2) {
+        this.loadingStage = 1; // Preparing
+      } else if (elapsed < 5) {
+        this.loadingStage = 2; // Analyzing
+      } else if (elapsed < this.estimatedDuration * 0.8) {
+        this.loadingStage = 3; // Generating
+      } else {
+        this.loadingStage = 4; // Formatting / Almost done
+      }
+      
+      // Update the loading display
+      this.updateLoadingDisplay();
+    }, 1000);
+  }
+
+  /**
+   * Stop loading progress animation
+   */
+  stopLoadingProgress() {
+    if (this.loadingTimer) {
+      clearInterval(this.loadingTimer);
+      this.loadingTimer = null;
+    }
+    this.loadingStage = 0;
+    this.loadingStartTime = null;
+  }
+
+  /**
+   * Update loading display without full re-render
+   */
+  updateLoadingDisplay() {
+    const loadingText = this.panel?.querySelector('.nlm-loading-text');
+    const progressBar = this.panel?.querySelector('.nlm-progress-bar-fill');
+    const timeDisplay = this.panel?.querySelector('.nlm-loading-time');
+    
+    if (loadingText) {
+      const stages = [
+        i18n('loadingStage1'),
+        i18n('loadingStage2'),
+        i18n('loadingStage3'),
+        i18n('loadingStage4')
+      ];
+      loadingText.textContent = stages[this.loadingStage - 1] || i18n('generating');
+    }
+    
+    if (progressBar && this.loadingStartTime) {
+      const elapsed = (Date.now() - this.loadingStartTime) / 1000;
+      // Ease out progress - never quite reaches 100% until done
+      const progress = Math.min(95, (elapsed / this.estimatedDuration) * 100 * 0.9 + this.loadingStage * 5);
+      progressBar.style.width = `${progress}%`;
+    }
+    
+    if (timeDisplay && this.loadingStartTime) {
+      const elapsed = Math.floor((Date.now() - this.loadingStartTime) / 1000);
+      const remaining = Math.max(0, this.estimatedDuration - elapsed);
+      
+      if (elapsed > this.estimatedDuration) {
+        timeDisplay.textContent = i18n('almostDone');
+        timeDisplay.classList.add('nlm-loading-slow');
+      } else if (elapsed > this.estimatedDuration * 1.5) {
+        timeDisplay.textContent = i18n('takingLonger');
+      } else {
+        timeDisplay.textContent = `~${remaining} ${i18n('seconds')}`;
+      }
+    }
+  }
+
+  /**
    * Main entry point for video summarization
    */
   async summarizeVideo() {
@@ -896,7 +1401,7 @@ TRANSCRIPT (with [M:SS] timestamp markers):
       this.showDetailedError('invalidApiKeyFormat', {
         title: i18n('invalidApiKey') || 'Invalid API Key',
         message: i18n('apiKeyTooShort') || 'The API key appears to be invalid. Please check and re-enter your Gemini API key.',
-        suggestion: i18n('getNewApiKey') || 'Get a valid API key from Google AI Studio',
+        suggestion: i18n('getNewApiKey') || 'Learn how to get a valid API key at notelm.ai',
         action: 'settings'
       });
       return;
@@ -905,6 +1410,11 @@ TRANSCRIPT (with [M:SS] timestamp markers):
     this.isLoading = true;
     this.summary = null;
     this.currentError = null; // Clear any previous error
+    
+    // Start progress animation BEFORE rendering (estimate based on typical generation time)
+    this.startLoadingProgress(25);
+    
+    // Now render with the correct loading state
     this.renderPanel();
 
     try {
@@ -1007,8 +1517,14 @@ TRANSCRIPT (with [M:SS] timestamp markers):
           type: 'SUBTITLE_FETCH_ERROR',
           title: i18n('subtitleFetchError') || 'Failed to Load Subtitles',
           message: i18n('subtitleFetchErrorMsg') || 'Could not fetch subtitle data from YouTube.',
-          suggestion: i18n('refreshAndRetry') || 'Refresh the page and try again.',
-          icon: 'error'
+          suggestions: [
+            i18n('subtitleFetchStep1') || '1. Refresh the page (F5)',
+            i18n('subtitleFetchStep2') || '2. Play the video for 5-10 seconds',
+            i18n('subtitleFetchStep3') || '3. Make sure the CC button is enabled',
+            i18n('subtitleFetchStep4') || '4. Click "Try Again" below'
+          ],
+          icon: 'error',
+          showRefreshButton: true
         };
       }
 
@@ -1038,15 +1554,21 @@ TRANSCRIPT (with [M:SS] timestamp markers):
       // Store error for display in renderPanel
       if (error.type) {
         this.currentError = error;
+        // Add retry options flag for API errors
+        if (['API_ERROR', 'RATE_LIMITED', 'SERVER_ERROR', 'NO_RESPONSE', 'CONTENT_FILTERED', 'INCOMPLETE_RESPONSE', 'SUBTITLE_FETCH_ERROR', 'NO_SUBTITLES', 'SUBTITLE_ERROR'].includes(error.type)) {
+          this.currentError.showRetryOptions = true;
+        }
       } else {
         this.currentError = {
           type: 'GENERIC_ERROR',
           title: i18n('error') || 'Error',
           message: error.message || 'An unknown error occurred',
-          icon: 'error'
+          icon: 'error',
+          showRetryOptions: true
         };
       }
     } finally {
+      this.stopLoadingProgress();
       this.isLoading = false;
       this.renderPanel();
     }
@@ -1145,7 +1667,7 @@ TRANSCRIPT (with [M:SS] timestamp markers):
 
   renderPanel() {
     const hasApiKey = !!this.apiKey;
-    const logoUrl = chrome.runtime.getURL('icons/icon128.png');
+    const logoUrl = chrome.runtime.getURL('icon128.png');
     
     this.panel.innerHTML = `
       <div class="nlm-header">
@@ -1177,10 +1699,33 @@ TRANSCRIPT (with [M:SS] timestamp markers):
 
   renderContent(hasApiKey) {
     if (this.isLoading) {
+      const stages = [
+        { icon: '📋', text: i18n('loadingStage1') },
+        { icon: '🔍', text: i18n('loadingStage2') },
+        { icon: '🤖', text: i18n('loadingStage3') },
+        { icon: '✨', text: i18n('loadingStage4') }
+      ];
+      const currentStage = this.loadingStage || 1;
+      
       return `
-        <div class="nlm-loading">
-          <div class="nlm-spinner"></div>
-          <span class="nlm-loading-text">${i18n('generating')}</span>
+        <div class="nlm-loading nlm-loading-enhanced">
+          <div class="nlm-loading-animation">
+            <div class="nlm-loading-circle"></div>
+            <div class="nlm-loading-icon">${stages[currentStage - 1]?.icon || '🤖'}</div>
+          </div>
+          <span class="nlm-loading-text">${stages[currentStage - 1]?.text || i18n('generating')}</span>
+          <div class="nlm-progress-bar">
+            <div class="nlm-progress-bar-fill"></div>
+          </div>
+          <span class="nlm-loading-time">~${this.estimatedDuration} ${i18n('seconds')}</span>
+          <div class="nlm-loading-stages">
+            ${stages.map((stage, idx) => `
+              <div class="nlm-stage ${idx < currentStage ? 'completed' : ''} ${idx === currentStage - 1 ? 'active' : ''}">
+                <span class="nlm-stage-icon">${stage.icon}</span>
+              </div>
+            `).join('')}
+          </div>
+          <div class="nlm-loading-tip">${i18n('pleaseWait')}</div>
         </div>
       `;
     }
@@ -1191,63 +1736,28 @@ TRANSCRIPT (with [M:SS] timestamp markers):
     }
 
     if (this.summary) {
+      // Check if summary was truncated
+      const truncatedWarning = this.summaryTruncated ? `
+        <div class="nlm-truncated-warning">
+          <div class="nlm-truncated-header">
+            <span class="nlm-warning-icon">${ICONS.warning}</span>
+            <span class="nlm-truncated-title">${i18n('summaryIncomplete')}</span>
+          </div>
+          <div class="nlm-truncated-hint">${i18n('tryDifferentModel')}</div>
+        </div>
+      ` : '';
+      
       return `
+        ${truncatedWarning}
         <div class="nlm-summary">${this.formatSummary(this.summary)}</div>
         <div class="nlm-regenerate-section">
-          <div class="nlm-regenerate-lang">
-            <label class="nlm-lang-label-inline">${i18n('outputLanguage')}:</label>
-            <select class="nlm-lang-select-compact" id="nlm-output-lang">
-              <option value="az" ${this.outputLanguage === 'az' ? 'selected' : ''}>${i18n('langAzerbaijani')}</option>
-              <option value="bg" ${this.outputLanguage === 'bg' ? 'selected' : ''}>${i18n('langBulgarian')}</option>
-              <option value="bn" ${this.outputLanguage === 'bn' ? 'selected' : ''}>${i18n('langBengali')}</option>
-              <option value="ca" ${this.outputLanguage === 'ca' ? 'selected' : ''}>${i18n('langCatalan')}</option>
-              <option value="cs" ${this.outputLanguage === 'cs' ? 'selected' : ''}>${i18n('langCzech')}</option>
-              <option value="da" ${this.outputLanguage === 'da' ? 'selected' : ''}>${i18n('langDanish')}</option>
-              <option value="de" ${this.outputLanguage === 'de' ? 'selected' : ''}>${i18n('langGerman')}</option>
-              <option value="el" ${this.outputLanguage === 'el' ? 'selected' : ''}>${i18n('langGreek')}</option>
-              <option value="en" ${this.outputLanguage === 'en' ? 'selected' : ''}>${i18n('langEnglish')}</option>
-              <option value="es" ${this.outputLanguage === 'es' ? 'selected' : ''}>${i18n('langSpanish')}</option>
-              <option value="fi" ${this.outputLanguage === 'fi' ? 'selected' : ''}>${i18n('langFinnish')}</option>
-              <option value="fil" ${this.outputLanguage === 'fil' ? 'selected' : ''}>${i18n('langFilipino')}</option>
-              <option value="fr" ${this.outputLanguage === 'fr' ? 'selected' : ''}>${i18n('langFrench')}</option>
-              <option value="gu" ${this.outputLanguage === 'gu' ? 'selected' : ''}>${i18n('langGujarati')}</option>
-              <option value="hi" ${this.outputLanguage === 'hi' ? 'selected' : ''}>${i18n('langHindi')}</option>
-              <option value="hr" ${this.outputLanguage === 'hr' ? 'selected' : ''}>${i18n('langCroatian')}</option>
-              <option value="hu" ${this.outputLanguage === 'hu' ? 'selected' : ''}>${i18n('langHungarian')}</option>
-              <option value="id" ${this.outputLanguage === 'id' ? 'selected' : ''}>${i18n('langIndonesian')}</option>
-              <option value="it" ${this.outputLanguage === 'it' ? 'selected' : ''}>${i18n('langItalian')}</option>
-              <option value="ja" ${this.outputLanguage === 'ja' ? 'selected' : ''}>${i18n('langJapanese')}</option>
-              <option value="kk" ${this.outputLanguage === 'kk' ? 'selected' : ''}>${i18n('langKazakh')}</option>
-              <option value="km" ${this.outputLanguage === 'km' ? 'selected' : ''}>${i18n('langKhmer')}</option>
-              <option value="kn" ${this.outputLanguage === 'kn' ? 'selected' : ''}>${i18n('langKannada')}</option>
-              <option value="ko" ${this.outputLanguage === 'ko' ? 'selected' : ''}>${i18n('langKorean')}</option>
-              <option value="ml" ${this.outputLanguage === 'ml' ? 'selected' : ''}>${i18n('langMalayalam')}</option>
-              <option value="mr" ${this.outputLanguage === 'mr' ? 'selected' : ''}>${i18n('langMarathi')}</option>
-              <option value="ms" ${this.outputLanguage === 'ms' ? 'selected' : ''}>${i18n('langMalay')}</option>
-              <option value="my" ${this.outputLanguage === 'my' ? 'selected' : ''}>${i18n('langBurmese')}</option>
-              <option value="ne" ${this.outputLanguage === 'ne' ? 'selected' : ''}>${i18n('langNepali')}</option>
-              <option value="nl" ${this.outputLanguage === 'nl' ? 'selected' : ''}>${i18n('langDutch')}</option>
-              <option value="no" ${this.outputLanguage === 'no' ? 'selected' : ''}>${i18n('langNorwegian')}</option>
-              <option value="pa" ${this.outputLanguage === 'pa' ? 'selected' : ''}>${i18n('langPunjabi')}</option>
-              <option value="pl" ${this.outputLanguage === 'pl' ? 'selected' : ''}>${i18n('langPolish')}</option>
-              <option value="pt" ${this.outputLanguage === 'pt' ? 'selected' : ''}>${i18n('langPortuguese')}</option>
-              <option value="ro" ${this.outputLanguage === 'ro' ? 'selected' : ''}>${i18n('langRomanian')}</option>
-              <option value="ru" ${this.outputLanguage === 'ru' ? 'selected' : ''}>${i18n('langRussian')}</option>
-              <option value="si" ${this.outputLanguage === 'si' ? 'selected' : ''}>${i18n('langSinhala')}</option>
-              <option value="sk" ${this.outputLanguage === 'sk' ? 'selected' : ''}>${i18n('langSlovak')}</option>
-              <option value="sr" ${this.outputLanguage === 'sr' ? 'selected' : ''}>${i18n('langSerbian')}</option>
-              <option value="sv" ${this.outputLanguage === 'sv' ? 'selected' : ''}>${i18n('langSwedish')}</option>
-              <option value="sw" ${this.outputLanguage === 'sw' ? 'selected' : ''}>${i18n('langSwahili')}</option>
-              <option value="ta" ${this.outputLanguage === 'ta' ? 'selected' : ''}>${i18n('langTamil')}</option>
-              <option value="te" ${this.outputLanguage === 'te' ? 'selected' : ''}>${i18n('langTelugu')}</option>
-              <option value="th" ${this.outputLanguage === 'th' ? 'selected' : ''}>${i18n('langThai')}</option>
-              <option value="tr" ${this.outputLanguage === 'tr' ? 'selected' : ''}>${i18n('langTurkish')}</option>
-              <option value="uk" ${this.outputLanguage === 'uk' ? 'selected' : ''}>${i18n('langUkrainian')}</option>
-              <option value="uz" ${this.outputLanguage === 'uz' ? 'selected' : ''}>${i18n('langUzbek')}</option>
-              <option value="vi" ${this.outputLanguage === 'vi' ? 'selected' : ''}>${i18n('langVietnamese')}</option>
-              <option value="zh" ${this.outputLanguage === 'zh' ? 'selected' : ''}>${i18n('langChinese')}</option>
-              <option value="zh-TW" ${this.outputLanguage === 'zh-TW' ? 'selected' : ''}>${i18n('langTraditionalChinese')}</option>
-            </select>
+          <div class="nlm-regenerate-row">
+            <label class="nlm-regen-label">${i18n('outputLanguage')}:</label>
+            ${this.generateLanguagePicker(true)}
+          </div>
+          <div class="nlm-regenerate-row">
+            <label class="nlm-regen-label">${i18n('model')}:</label>
+            ${this.renderModelSelector(true)}
           </div>
           <div class="nlm-action-bar">
             <button class="nlm-action-btn" id="nlm-copy-btn">
@@ -1292,58 +1802,7 @@ TRANSCRIPT (with [M:SS] timestamp markers):
         </div>
         <div class="nlm-language-selector">
           <label class="nlm-lang-label">${i18n('outputLanguage')}:</label>
-          <select class="nlm-lang-select" id="nlm-output-lang">
-            <option value="az" ${this.outputLanguage === 'az' ? 'selected' : ''}>${i18n('langAzerbaijani')}</option>
-            <option value="bg" ${this.outputLanguage === 'bg' ? 'selected' : ''}>${i18n('langBulgarian')}</option>
-            <option value="bn" ${this.outputLanguage === 'bn' ? 'selected' : ''}>${i18n('langBengali')}</option>
-            <option value="ca" ${this.outputLanguage === 'ca' ? 'selected' : ''}>${i18n('langCatalan')}</option>
-            <option value="cs" ${this.outputLanguage === 'cs' ? 'selected' : ''}>${i18n('langCzech')}</option>
-            <option value="da" ${this.outputLanguage === 'da' ? 'selected' : ''}>${i18n('langDanish')}</option>
-            <option value="de" ${this.outputLanguage === 'de' ? 'selected' : ''}>${i18n('langGerman')}</option>
-            <option value="el" ${this.outputLanguage === 'el' ? 'selected' : ''}>${i18n('langGreek')}</option>
-            <option value="en" ${this.outputLanguage === 'en' ? 'selected' : ''}>${i18n('langEnglish')}</option>
-            <option value="es" ${this.outputLanguage === 'es' ? 'selected' : ''}>${i18n('langSpanish')}</option>
-            <option value="fi" ${this.outputLanguage === 'fi' ? 'selected' : ''}>${i18n('langFinnish')}</option>
-            <option value="fil" ${this.outputLanguage === 'fil' ? 'selected' : ''}>${i18n('langFilipino')}</option>
-            <option value="fr" ${this.outputLanguage === 'fr' ? 'selected' : ''}>${i18n('langFrench')}</option>
-            <option value="gu" ${this.outputLanguage === 'gu' ? 'selected' : ''}>${i18n('langGujarati')}</option>
-            <option value="hi" ${this.outputLanguage === 'hi' ? 'selected' : ''}>${i18n('langHindi')}</option>
-            <option value="hr" ${this.outputLanguage === 'hr' ? 'selected' : ''}>${i18n('langCroatian')}</option>
-            <option value="hu" ${this.outputLanguage === 'hu' ? 'selected' : ''}>${i18n('langHungarian')}</option>
-            <option value="id" ${this.outputLanguage === 'id' ? 'selected' : ''}>${i18n('langIndonesian')}</option>
-            <option value="it" ${this.outputLanguage === 'it' ? 'selected' : ''}>${i18n('langItalian')}</option>
-            <option value="ja" ${this.outputLanguage === 'ja' ? 'selected' : ''}>${i18n('langJapanese')}</option>
-            <option value="kk" ${this.outputLanguage === 'kk' ? 'selected' : ''}>${i18n('langKazakh')}</option>
-            <option value="km" ${this.outputLanguage === 'km' ? 'selected' : ''}>${i18n('langKhmer')}</option>
-            <option value="kn" ${this.outputLanguage === 'kn' ? 'selected' : ''}>${i18n('langKannada')}</option>
-            <option value="ko" ${this.outputLanguage === 'ko' ? 'selected' : ''}>${i18n('langKorean')}</option>
-            <option value="ml" ${this.outputLanguage === 'ml' ? 'selected' : ''}>${i18n('langMalayalam')}</option>
-            <option value="mr" ${this.outputLanguage === 'mr' ? 'selected' : ''}>${i18n('langMarathi')}</option>
-            <option value="ms" ${this.outputLanguage === 'ms' ? 'selected' : ''}>${i18n('langMalay')}</option>
-            <option value="my" ${this.outputLanguage === 'my' ? 'selected' : ''}>${i18n('langBurmese')}</option>
-            <option value="ne" ${this.outputLanguage === 'ne' ? 'selected' : ''}>${i18n('langNepali')}</option>
-            <option value="nl" ${this.outputLanguage === 'nl' ? 'selected' : ''}>${i18n('langDutch')}</option>
-            <option value="no" ${this.outputLanguage === 'no' ? 'selected' : ''}>${i18n('langNorwegian')}</option>
-            <option value="pa" ${this.outputLanguage === 'pa' ? 'selected' : ''}>${i18n('langPunjabi')}</option>
-            <option value="pl" ${this.outputLanguage === 'pl' ? 'selected' : ''}>${i18n('langPolish')}</option>
-            <option value="pt" ${this.outputLanguage === 'pt' ? 'selected' : ''}>${i18n('langPortuguese')}</option>
-            <option value="ro" ${this.outputLanguage === 'ro' ? 'selected' : ''}>${i18n('langRomanian')}</option>
-            <option value="ru" ${this.outputLanguage === 'ru' ? 'selected' : ''}>${i18n('langRussian')}</option>
-            <option value="si" ${this.outputLanguage === 'si' ? 'selected' : ''}>${i18n('langSinhala')}</option>
-            <option value="sk" ${this.outputLanguage === 'sk' ? 'selected' : ''}>${i18n('langSlovak')}</option>
-            <option value="sr" ${this.outputLanguage === 'sr' ? 'selected' : ''}>${i18n('langSerbian')}</option>
-            <option value="sv" ${this.outputLanguage === 'sv' ? 'selected' : ''}>${i18n('langSwedish')}</option>
-            <option value="sw" ${this.outputLanguage === 'sw' ? 'selected' : ''}>${i18n('langSwahili')}</option>
-            <option value="ta" ${this.outputLanguage === 'ta' ? 'selected' : ''}>${i18n('langTamil')}</option>
-            <option value="te" ${this.outputLanguage === 'te' ? 'selected' : ''}>${i18n('langTelugu')}</option>
-            <option value="th" ${this.outputLanguage === 'th' ? 'selected' : ''}>${i18n('langThai')}</option>
-            <option value="tr" ${this.outputLanguage === 'tr' ? 'selected' : ''}>${i18n('langTurkish')}</option>
-            <option value="uk" ${this.outputLanguage === 'uk' ? 'selected' : ''}>${i18n('langUkrainian')}</option>
-            <option value="uz" ${this.outputLanguage === 'uz' ? 'selected' : ''}>${i18n('langUzbek')}</option>
-            <option value="vi" ${this.outputLanguage === 'vi' ? 'selected' : ''}>${i18n('langVietnamese')}</option>
-            <option value="zh" ${this.outputLanguage === 'zh' ? 'selected' : ''}>${i18n('langChinese')}</option>
-            <option value="zh-TW" ${this.outputLanguage === 'zh-TW' ? 'selected' : ''}>${i18n('langTraditionalChinese')}</option>
-          </select>
+          ${this.generateLanguagePicker(false)}
         </div>
         <button class="nlm-btn-primary" id="nlm-summarize-btn">
           ${ICONS.sparkles}
@@ -1351,6 +1810,315 @@ TRANSCRIPT (with [M:SS] timestamp markers):
         </button>
       </div>
     `;
+  }
+
+  /**
+   * YouTube i18nLanguages BCP-47 codes - all languages sorted alphabetically by English name
+   * Language names are localized via i18n
+   */
+  getAllLanguages() {
+    return [
+      { code: 'af', i18nKey: 'langAfrikaans', en: 'Afrikaans', native: 'Afrikaans' },
+      { code: 'sq', i18nKey: 'langAlbanian', en: 'Albanian', native: 'Shqip' },
+      { code: 'am', i18nKey: 'langAmharic', en: 'Amharic', native: 'አማርኛ' },
+      { code: 'ar', i18nKey: 'langArabic', en: 'Arabic', native: 'العربية' },
+      { code: 'hy', i18nKey: 'langArmenian', en: 'Armenian', native: 'Հայերեն' },
+      { code: 'as', i18nKey: 'langAssamese', en: 'Assamese', native: 'অসমীয়া' },
+      { code: 'az', i18nKey: 'langAzerbaijani', en: 'Azerbaijani', native: 'Azərbaycan' },
+      { code: 'bn', i18nKey: 'langBangla', en: 'Bangla', native: 'বাংলা' },
+      { code: 'eu', i18nKey: 'langBasque', en: 'Basque', native: 'Euskara' },
+      { code: 'be', i18nKey: 'langBelarusian', en: 'Belarusian', native: 'Беларуская' },
+      { code: 'bs', i18nKey: 'langBosnian', en: 'Bosnian', native: 'Bosanski' },
+      { code: 'bg', i18nKey: 'langBulgarian', en: 'Bulgarian', native: 'Български' },
+      { code: 'my', i18nKey: 'langBurmese', en: 'Burmese', native: 'မြန်မာ' },
+      { code: 'ca', i18nKey: 'langCatalan', en: 'Catalan', native: 'Català' },
+      { code: 'zh-HK', i18nKey: 'langChineseHK', en: 'Chinese (Hong Kong)', native: '中文 (香港)' },
+      { code: 'zh-CN', i18nKey: 'langChineseCN', en: 'Chinese (Simplified)', native: '中文 (简体)' },
+      { code: 'zh-TW', i18nKey: 'langChineseTW', en: 'Chinese (Traditional)', native: '中文 (繁體)' },
+      { code: 'hr', i18nKey: 'langCroatian', en: 'Croatian', native: 'Hrvatski' },
+      { code: 'cs', i18nKey: 'langCzech', en: 'Czech', native: 'Čeština' },
+      { code: 'da', i18nKey: 'langDanish', en: 'Danish', native: 'Dansk' },
+      { code: 'nl', i18nKey: 'langDutch', en: 'Dutch', native: 'Nederlands' },
+      { code: 'en', i18nKey: 'langEnglish', en: 'English', native: 'English' },
+      { code: 'en-IN', i18nKey: 'langEnglishIN', en: 'English (India)', native: 'English (IN)' },
+      { code: 'en-GB', i18nKey: 'langEnglishUK', en: 'English (UK)', native: 'English (UK)' },
+      { code: 'et', i18nKey: 'langEstonian', en: 'Estonian', native: 'Eesti' },
+      { code: 'fil', i18nKey: 'langFilipino', en: 'Filipino', native: 'Filipino' },
+      { code: 'fi', i18nKey: 'langFinnish', en: 'Finnish', native: 'Suomi' },
+      { code: 'fr', i18nKey: 'langFrench', en: 'French', native: 'Français' },
+      { code: 'fr-CA', i18nKey: 'langFrenchCA', en: 'French (Canada)', native: 'Français (CA)' },
+      { code: 'gl', i18nKey: 'langGalician', en: 'Galician', native: 'Galego' },
+      { code: 'ka', i18nKey: 'langGeorgian', en: 'Georgian', native: 'ქართული' },
+      { code: 'de', i18nKey: 'langGerman', en: 'German', native: 'Deutsch' },
+      { code: 'el', i18nKey: 'langGreek', en: 'Greek', native: 'Ελληνικά' },
+      { code: 'gu', i18nKey: 'langGujarati', en: 'Gujarati', native: 'ગુજરાતી' },
+      { code: 'iw', i18nKey: 'langHebrew', en: 'Hebrew', native: 'עברית' },
+      { code: 'hi', i18nKey: 'langHindi', en: 'Hindi', native: 'हिन्दी' },
+      { code: 'hu', i18nKey: 'langHungarian', en: 'Hungarian', native: 'Magyar' },
+      { code: 'is', i18nKey: 'langIcelandic', en: 'Icelandic', native: 'Íslenska' },
+      { code: 'id', i18nKey: 'langIndonesian', en: 'Indonesian', native: 'Indonesia' },
+      { code: 'it', i18nKey: 'langItalian', en: 'Italian', native: 'Italiano' },
+      { code: 'ja', i18nKey: 'langJapanese', en: 'Japanese', native: '日本語' },
+      { code: 'kn', i18nKey: 'langKannada', en: 'Kannada', native: 'ಕನ್ನಡ' },
+      { code: 'kk', i18nKey: 'langKazakh', en: 'Kazakh', native: 'Қазақша' },
+      { code: 'km', i18nKey: 'langKhmer', en: 'Khmer', native: 'ខ្មែរ' },
+      { code: 'ko', i18nKey: 'langKorean', en: 'Korean', native: '한국어' },
+      { code: 'ky', i18nKey: 'langKyrgyz', en: 'Kyrgyz', native: 'Кыргызча' },
+      { code: 'lo', i18nKey: 'langLao', en: 'Lao', native: 'ລາວ' },
+      { code: 'lv', i18nKey: 'langLatvian', en: 'Latvian', native: 'Latviešu' },
+      { code: 'lt', i18nKey: 'langLithuanian', en: 'Lithuanian', native: 'Lietuvių' },
+      { code: 'mk', i18nKey: 'langMacedonian', en: 'Macedonian', native: 'Македонски' },
+      { code: 'ms', i18nKey: 'langMalay', en: 'Malay', native: 'Melayu' },
+      { code: 'ml', i18nKey: 'langMalayalam', en: 'Malayalam', native: 'മലയാളം' },
+      { code: 'mr', i18nKey: 'langMarathi', en: 'Marathi', native: 'मराठी' },
+      { code: 'mn', i18nKey: 'langMongolian', en: 'Mongolian', native: 'Монгол' },
+      { code: 'ne', i18nKey: 'langNepali', en: 'Nepali', native: 'नेपाली' },
+      { code: 'no', i18nKey: 'langNorwegian', en: 'Norwegian', native: 'Norsk' },
+      { code: 'or', i18nKey: 'langOdia', en: 'Odia', native: 'ଓଡ଼ିଆ' },
+      { code: 'fa', i18nKey: 'langPersian', en: 'Persian', native: 'فارسی' },
+      { code: 'pl', i18nKey: 'langPolish', en: 'Polish', native: 'Polski' },
+      { code: 'pt', i18nKey: 'langPortuguese', en: 'Portuguese', native: 'Português' },
+      { code: 'pt-PT', i18nKey: 'langPortuguesePT', en: 'Portuguese (Portugal)', native: 'Português (PT)' },
+      { code: 'pa', i18nKey: 'langPunjabi', en: 'Punjabi', native: 'ਪੰਜਾਬੀ' },
+      { code: 'ro', i18nKey: 'langRomanian', en: 'Romanian', native: 'Română' },
+      { code: 'ru', i18nKey: 'langRussian', en: 'Russian', native: 'Русский' },
+      { code: 'sr', i18nKey: 'langSerbian', en: 'Serbian', native: 'Српски' },
+      { code: 'sr-Latn', i18nKey: 'langSerbianLatin', en: 'Serbian (Latin)', native: 'Srpski' },
+      { code: 'si', i18nKey: 'langSinhala', en: 'Sinhala', native: 'සිංහල' },
+      { code: 'sk', i18nKey: 'langSlovak', en: 'Slovak', native: 'Slovenčina' },
+      { code: 'sl', i18nKey: 'langSlovenian', en: 'Slovenian', native: 'Slovenščina' },
+      { code: 'es', i18nKey: 'langSpanish', en: 'Spanish', native: 'Español' },
+      { code: 'es-419', i18nKey: 'langSpanishLatam', en: 'Spanish (Latin America)', native: 'Español (LA)' },
+      { code: 'es-US', i18nKey: 'langSpanishUS', en: 'Spanish (US)', native: 'Español (US)' },
+      { code: 'sw', i18nKey: 'langSwahili', en: 'Swahili', native: 'Kiswahili' },
+      { code: 'sv', i18nKey: 'langSwedish', en: 'Swedish', native: 'Svenska' },
+      { code: 'ta', i18nKey: 'langTamil', en: 'Tamil', native: 'தமிழ்' },
+      { code: 'te', i18nKey: 'langTelugu', en: 'Telugu', native: 'తెలుగు' },
+      { code: 'th', i18nKey: 'langThai', en: 'Thai', native: 'ไทย' },
+      { code: 'tr', i18nKey: 'langTurkish', en: 'Turkish', native: 'Türkçe' },
+      { code: 'uk', i18nKey: 'langUkrainian', en: 'Ukrainian', native: 'Українська' },
+      { code: 'ur', i18nKey: 'langUrdu', en: 'Urdu', native: 'اردو' },
+      { code: 'uz', i18nKey: 'langUzbek', en: 'Uzbek', native: "Oʻzbek" },
+      { code: 'vi', i18nKey: 'langVietnamese', en: 'Vietnamese', native: 'Tiếng Việt' },
+      { code: 'zu', i18nKey: 'langZulu', en: 'Zulu', native: 'isiZulu' }
+    ];
+  }
+  
+  /**
+   * Get localized language name using i18n
+   */
+  getLocalizedLangName(lang) {
+    if (lang.i18nKey) {
+      const localized = i18n(lang.i18nKey);
+      if (localized) return localized;
+    }
+    return lang.native || lang.en;
+  }
+
+  /**
+   * Get languages grouped by first letter of English name
+   */
+  getLanguageData() {
+    const allLangs = this.getAllLanguages();
+    const groups = {};
+    allLangs.forEach(lang => {
+      const firstLetter = lang.en.charAt(0).toUpperCase();
+      if (!groups[firstLetter]) groups[firstLetter] = [];
+      groups[firstLetter].push(lang);
+    });
+    const sortedLetters = Object.keys(groups).sort();
+    return {
+      groups: sortedLetters.map(letter => ({
+        id: letter,
+        name: letter,
+        languages: groups[letter]
+      }))
+    };
+  }
+
+  /**
+   * Get language info by code
+   */
+  getLanguageByCode(code) {
+    const allLangs = this.getAllLanguages();
+    const lang = allLangs.find(l => l.code === code);
+    return lang || { code, en: code, native: code };
+  }
+
+  /**
+   * Generate language picker trigger button HTML
+   */
+  generateLanguagePicker(isCompact = false) {
+    const currentLang = this.getLanguageByCode(this.outputLanguage);
+    const compactClass = isCompact ? 'nlm-lang-picker-compact' : '';
+    const langName = this.getLocalizedLangName(currentLang);
+    
+    return `
+      <div class="nlm-lang-picker-wrapper ${compactClass}">
+        <div class="nlm-lang-picker-trigger" id="nlm-lang-trigger">
+          <span class="nlm-lang-picker-value">
+            <span class="nlm-lang-picker-code">${currentLang.code}</span>
+            <span>${langName}</span>
+          </span>
+          <svg class="nlm-lang-picker-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </div>
+      </div>
+    `;
+  }
+
+  /**
+   * Show language picker modal
+   */
+  showLanguagePickerModal() {
+    // Remove existing modal if any
+    const existing = document.querySelector('.nlm-lang-modal-overlay');
+    if (existing) existing.remove();
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'nlm-lang-modal-overlay';
+    overlay.innerHTML = `
+      <div class="nlm-lang-modal">
+        <div class="nlm-lang-modal-header">
+          <span class="nlm-lang-modal-title">${i18n('outputLanguage')}</span>
+          <button class="nlm-lang-modal-close" id="nlm-lang-close">
+            ${ICONS.close}
+          </button>
+        </div>
+        <div class="nlm-lang-search-box">
+          <div class="nlm-lang-search-wrapper">
+            <svg class="nlm-lang-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input type="text" class="nlm-lang-search-input" id="nlm-lang-search" placeholder="${i18n('searchLanguagePlaceholder') || 'Search: en, English, 中文, Español...'}">
+          </div>
+        </div>
+        <div class="nlm-lang-grid-container" id="nlm-lang-grid">
+          ${this.renderLanguageGrid()}
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(overlay);
+    
+    // Focus search input
+    const searchInput = overlay.querySelector('#nlm-lang-search');
+    setTimeout(() => searchInput?.focus(), 100);
+    
+    // Close button
+    overlay.querySelector('#nlm-lang-close').addEventListener('click', () => overlay.remove());
+    
+    // Click outside to close
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.remove();
+    });
+    
+    // Search functionality
+    const gridContainer = overlay.querySelector('#nlm-lang-grid');
+    searchInput?.addEventListener('input', (e) => {
+      gridContainer.innerHTML = this.renderLanguageGrid(e.target.value);
+      this.bindModalLanguageClicks(overlay);
+    });
+    
+    // Language item clicks
+    this.bindModalLanguageClicks(overlay);
+  }
+
+  /**
+   * Bind click events to language items in modal
+   */
+  bindModalLanguageClicks(overlay) {
+    const items = overlay.querySelectorAll('.nlm-lang-item');
+    
+    items.forEach(item => {
+      item.addEventListener('click', async () => {
+        const code = item.dataset.code;
+        await this.saveOutputLanguage(code);
+        
+        // Update trigger display in panel
+        const trigger = this.panel.querySelector('#nlm-lang-trigger');
+        if (trigger) {
+          const lang = this.getLanguageByCode(code);
+          const langName = this.getLocalizedLangName(lang);
+          const valueEl = trigger.querySelector('.nlm-lang-picker-value');
+          if (valueEl) {
+            valueEl.innerHTML = `
+              <span class="nlm-lang-picker-code">${lang.code}</span>
+              <span>${langName}</span>
+            `;
+          }
+        }
+        
+        // Close modal
+        overlay.remove();
+      });
+    });
+  }
+
+  /**
+   * Render the language grid grouped by first letter
+   */
+  renderLanguageGrid(filter = '') {
+    const data = this.getLanguageData();
+    const filterLower = filter.toLowerCase().trim();
+    let html = '';
+    
+    for (const group of data.groups) {
+      // Filter languages - also search in localized names
+      const filteredLangs = filterLower
+        ? group.languages.filter(lang => {
+            const localizedName = this.getLocalizedLangName(lang);
+            return lang.code.toLowerCase().includes(filterLower) ||
+              lang.en.toLowerCase().includes(filterLower) ||
+              lang.native.toLowerCase().includes(filterLower) ||
+              localizedName.toLowerCase().includes(filterLower);
+          })
+        : group.languages;
+      
+      if (filteredLangs.length === 0) continue;
+      
+      html += `
+        <div class="nlm-lang-region" data-region="${group.id}">
+          <div class="nlm-lang-region-header">
+            <span class="nlm-lang-region-letter">${group.name}</span>
+          </div>
+          <div class="nlm-lang-grid">
+            ${filteredLangs.map(lang => {
+              const localizedName = this.getLocalizedLangName(lang);
+              return `
+              <div class="nlm-lang-item ${this.outputLanguage === lang.code ? 'selected' : ''}" 
+                   data-code="${lang.code}" 
+                   title="${lang.code} - ${localizedName} - ${lang.native}">
+                <span class="nlm-lang-item-code">${lang.code}</span>
+                <span class="nlm-lang-item-name">${localizedName}</span>
+                <span class="nlm-lang-item-native">${lang.native}</span>
+              </div>
+            `;}).join('')}
+          </div>
+        </div>
+      `;
+    }
+    
+    if (!html) {
+      html = `<div class="nlm-lang-no-results">${i18n('noLanguagesFound') || 'No languages found'}</div>`;
+    }
+    
+    return html;
+  }
+
+  /**
+   * Initialize language picker event handlers
+   */
+  initLanguagePicker() {
+    const trigger = this.panel.querySelector('#nlm-lang-trigger');
+    if (!trigger) return;
+    
+    // Click trigger to open modal
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.showLanguagePickerModal();
+    });
   }
 
   // ============================================================
@@ -1376,13 +2144,11 @@ TRANSCRIPT (with [M:SS] timestamp markers):
       setupBtn.addEventListener('click', () => this.showSettingsModal());
     }
 
-    // Language selector
-    const langSelect = this.panel.querySelector('#nlm-output-lang');
-    if (langSelect) {
-      langSelect.addEventListener('change', (e) => {
-        this.saveOutputLanguage(e.target.value);
-      });
-    }
+    // Initialize advanced language picker
+    this.initLanguagePicker();
+    
+    // Initialize model selector
+    this.initModelSelector();
 
     // Summarize button
     const summarizeBtn = this.panel.querySelector('#nlm-summarize-btn');
@@ -1449,8 +2215,13 @@ TRANSCRIPT (with [M:SS] timestamp markers):
   showSettingsModal() {
     const overlay = document.createElement('div');
     overlay.className = 'nlm-modal-overlay';
+    
+    // Check if we have verified models
+    const hasModels = this.availableModels && this.availableModels.length > 0;
+    const currentModel = this.selectedModel || DEFAULT_MODEL;
+    
     overlay.innerHTML = `
-      <div class="nlm-modal">
+      <div class="nlm-modal nlm-modal-settings">
         <div class="nlm-modal-header">
           <span class="nlm-modal-title">${i18n('settings')}</span>
           <button class="nlm-modal-close" id="nlm-modal-close">
@@ -1460,24 +2231,41 @@ TRANSCRIPT (with [M:SS] timestamp markers):
         <div class="nlm-modal-body">
           <div class="nlm-form-group">
             <label class="nlm-label">${i18n('geminiApiKey')}</label>
-            <input 
-              type="password" 
-              class="nlm-input" 
-              id="nlm-api-key-input"
-              placeholder="${i18n('enterApiKey')}"
-              value="${this.apiKey || ''}"
-            />
+            <div class="nlm-input-with-button">
+              <input 
+                type="password" 
+                class="nlm-input nlm-input-flex" 
+                id="nlm-api-key-input"
+                placeholder="${i18n('enterApiKey')}"
+                value="${this.apiKey || ''}"
+              />
+              <button class="nlm-btn-verify" id="nlm-verify-btn">
+                ${i18n('verify')}
+              </button>
+            </div>
             <div class="nlm-help-text">
               ${i18n('getApiKey')} 
-              <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a>
+              <a href="https://www.notelm.ai/support/api-key-guide" target="_blank">NoteLM.ai</a>
             </div>
+            <div class="nlm-verify-status" id="nlm-verify-status" style="display: none;"></div>
           </div>
-          ${this.apiKey ? `
-            <div class="nlm-status">
-              <span class="nlm-status-dot success"></span>
-              <span>${i18n('apiKeyConfigured')}</span>
+          
+          <div class="nlm-form-group nlm-model-section" id="nlm-model-section">
+            <label class="nlm-label">${i18n('selectModel')}</label>
+            <div class="nlm-model-list" id="nlm-model-list">
+              ${hasModels ? this.renderModelList(this.availableModels, currentModel) : `
+                <div class="nlm-model-empty">
+                  <span>${i18n('verifyFirst')}</span>
+                </div>
+              `}
             </div>
-          ` : ''}
+            ${hasModels ? `
+              <div class="nlm-current-model">
+                <span class="nlm-current-model-label">${i18n('currentModel')}:</span>
+                <span class="nlm-current-model-value" id="nlm-current-model-display">${currentModel}</span>
+              </div>
+            ` : ''}
+          </div>
         </div>
         <div class="nlm-modal-footer">
           <button class="nlm-btn-secondary" id="nlm-modal-cancel">${i18n('cancel')}</button>
@@ -1488,9 +2276,43 @@ TRANSCRIPT (with [M:SS] timestamp markers):
 
     document.body.appendChild(overlay);
 
+    // State for this modal instance
+    let pendingApiKey = this.apiKey || '';
+    let pendingModel = this.selectedModel || DEFAULT_MODEL;
+    let pendingModels = [...this.availableModels];
+    let isVerifying = false;
+
     // Bind modal events
     const closeModal = () => {
       overlay.remove();
+    };
+
+    const updateVerifyStatus = (status, type = 'info') => {
+      const statusEl = overlay.querySelector('#nlm-verify-status');
+      if (statusEl) {
+        statusEl.style.display = 'flex';
+        statusEl.className = `nlm-verify-status nlm-verify-${type}`;
+        statusEl.innerHTML = status;
+      }
+    };
+
+    const updateModelList = (models, selectedModel) => {
+      const listEl = overlay.querySelector('#nlm-model-list');
+      const displayEl = overlay.querySelector('#nlm-current-model-display');
+      if (listEl) {
+        listEl.innerHTML = this.renderModelList(models, selectedModel);
+        this.bindModelListEvents(overlay, (modelId) => {
+          pendingModel = modelId;
+          if (displayEl) displayEl.textContent = modelId;
+          // Update visual selection
+          listEl.querySelectorAll('.nlm-model-item').forEach(item => {
+            item.classList.toggle('selected', item.dataset.modelId === modelId);
+          });
+        });
+      }
+      if (displayEl) {
+        displayEl.textContent = selectedModel;
+      }
     };
 
     overlay.querySelector('#nlm-modal-close').addEventListener('click', closeModal);
@@ -1499,21 +2321,186 @@ TRANSCRIPT (with [M:SS] timestamp markers):
       if (e.target === overlay) closeModal();
     });
 
+    // Verify button click handler
+    overlay.querySelector('#nlm-verify-btn').addEventListener('click', async () => {
+      if (isVerifying) return;
+      
+      const input = overlay.querySelector('#nlm-api-key-input');
+      const verifyBtn = overlay.querySelector('#nlm-verify-btn');
+      const key = input.value.trim();
+      
+      if (!key) {
+        updateVerifyStatus(i18n('enterApiKey'), 'error');
+        return;
+      }
+      
+      isVerifying = true;
+      verifyBtn.innerHTML = `<span class="nlm-spinner-small"></span> ${i18n('verifying')}`;
+      verifyBtn.disabled = true;
+      
+      try {
+        const result = await this.validateApiKey(key);
+        
+        if (result.valid) {
+          pendingApiKey = key;
+          pendingModels = result.models;
+          
+          // Auto-select the best model
+          const bestModel = this.getBestModel(result.models);
+          pendingModel = bestModel;
+          
+          updateVerifyStatus(`✓ ${i18n('apiKeyVerified')} (${result.models.length} models)`, 'success');
+          updateModelList(result.models, bestModel);
+          
+        } else {
+          updateVerifyStatus(`✗ ${i18n('apiKeyInvalid')}`, 'error');
+        }
+      } catch (error) {
+        updateVerifyStatus(`✗ ${i18n('apiKeyInvalid')}`, 'error');
+      } finally {
+        isVerifying = false;
+        verifyBtn.innerHTML = i18n('verify');
+        verifyBtn.disabled = false;
+      }
+    });
+
+    // Bind model selection events if we already have models
+    if (hasModels) {
+      this.bindModelListEvents(overlay, (modelId) => {
+        pendingModel = modelId;
+        const displayEl = overlay.querySelector('#nlm-current-model-display');
+        if (displayEl) displayEl.textContent = modelId;
+        // Update visual selection
+        const listEl = overlay.querySelector('#nlm-model-list');
+        if (listEl) {
+          listEl.querySelectorAll('.nlm-model-item').forEach(item => {
+            item.classList.toggle('selected', item.dataset.modelId === modelId);
+          });
+        }
+      });
+    }
+
+    // Save button click handler
     overlay.querySelector('#nlm-modal-save').addEventListener('click', async () => {
       const input = overlay.querySelector('#nlm-api-key-input');
       const key = input.value.trim();
       
+      // If key changed but not verified, prompt to verify
+      if (key && key !== this.apiKey && pendingModels.length === 0) {
+        updateVerifyStatus(i18n('verifyFirst'), 'warning');
+        return;
+      }
+      
+      // Save API key
       if (key) {
         await this.saveApiKey(key);
-        this.showToast(i18n('apiKeySaved'));
       } else {
         await this.saveApiKey('');
+        await this.saveAvailableModels([]);
+        await this.saveSelectedModel(DEFAULT_MODEL);
+      }
+      
+      // Save models and selection
+      if (pendingModels.length > 0) {
+        await this.saveAvailableModels(pendingModels);
+        await this.saveSelectedModel(pendingModel);
+        this.showToast(`${i18n('apiKeySaved')} - ${pendingModel}`);
+      } else if (key) {
+        this.showToast(i18n('apiKeySaved'));
+      } else {
         this.showToast(i18n('apiKeyCleared'));
       }
       
       closeModal();
       this.renderPanel();
     });
+  }
+
+  /**
+   * Render model list HTML
+   */
+  renderModelList(models, selectedModel) {
+    if (!models || models.length === 0) {
+      return `
+        <div class="nlm-model-empty">
+          <span>${i18n('noModelsAvailable')}</span>
+        </div>
+      `;
+    }
+    
+    return models.map((model, index) => {
+      const isSelected = model.id === selectedModel;
+      const isRecommended = index === 0; // First model is best ranked
+      
+      return `
+        <div class="nlm-model-item ${isSelected ? 'selected' : ''}" data-model-id="${model.id}">
+          <div class="nlm-model-radio">
+            <div class="nlm-model-radio-inner ${isSelected ? 'checked' : ''}"></div>
+          </div>
+          <div class="nlm-model-info">
+            <div class="nlm-model-name">
+              ${model.name}
+              ${isRecommended ? `<span class="nlm-model-badge">${i18n('recommendedModel')}</span>` : ''}
+            </div>
+            <div class="nlm-model-id">${model.id}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  /**
+   * Bind click events to model list items
+   */
+  bindModelListEvents(overlay, onSelect) {
+    const items = overlay.querySelectorAll('.nlm-model-item');
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        const modelId = item.dataset.modelId;
+        onSelect(modelId);
+      });
+    });
+  }
+
+  /**
+   * Render compact model selector (dropdown style)
+   */
+  renderModelSelector(isCompact = false) {
+    const models = this.availableModels || [];
+    const currentModel = this.selectedModel || DEFAULT_MODEL;
+    const compactClass = isCompact ? 'nlm-model-select-compact' : '';
+    
+    if (models.length === 0) {
+      return `
+        <select class="nlm-model-select ${compactClass}" id="nlm-model-select" disabled>
+          <option value="${currentModel}">${currentModel}</option>
+        </select>
+      `;
+    }
+    
+    const options = models.map(model => {
+      const isSelected = model.id === currentModel;
+      return `<option value="${model.id}" ${isSelected ? 'selected' : ''}>${model.id}</option>`;
+    }).join('');
+    
+    return `
+      <select class="nlm-model-select ${compactClass}" id="nlm-model-select">
+        ${options}
+      </select>
+    `;
+  }
+
+  /**
+   * Initialize model selector event handler
+   */
+  initModelSelector() {
+    const select = this.panel?.querySelector('#nlm-model-select');
+    if (select) {
+      select.addEventListener('change', async (e) => {
+        const newModel = e.target.value;
+        await this.saveSelectedModel(newModel);
+      });
+    }
   }
 
   showError(message) {
@@ -1576,6 +2563,23 @@ TRANSCRIPT (with [M:SS] timestamp markers):
       `;
     }
 
+    // Build retry options section (model + language selectors)
+    let retryOptionsHtml = '';
+    if (errorInfo.showRetryOptions) {
+      retryOptionsHtml = `
+        <div class="nlm-error-retry-options">
+          <div class="nlm-retry-option">
+            <label class="nlm-retry-label">${i18n('model')}:</label>
+            ${this.renderModelSelector(true)}
+          </div>
+          <div class="nlm-retry-option">
+            <label class="nlm-retry-label">${i18n('outputLanguage')}:</label>
+            ${this.generateLanguagePicker(true)}
+          </div>
+        </div>
+      `;
+    }
+
     // Build action buttons
     let actionButtons = '';
     
@@ -1610,6 +2614,7 @@ TRANSCRIPT (with [M:SS] timestamp markers):
         <div class="nlm-error-title">${errorInfo.title}</div>
         <div class="nlm-error-message">${errorInfo.message}</div>
         ${suggestionsHtml}
+        ${retryOptionsHtml}
         <div class="nlm-error-actions">
           ${actionButtons}
         </div>
