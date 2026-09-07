@@ -735,8 +735,8 @@ Local Storage (API key, preferences)
 | Tool | Description |
 |------|-------------|
 | **[YouTube Subtitle Downloader](../YouTube%20Subtitle%20Downloader/)** | Download subtitles in SRT, TXT, or JSON format |
-| **[NoteLM.ai Website](https://notelm.ai)** | Learn more about our AI-powered tools |
-| **[YouTube Transcript Generator](https://notelm.ai/tools/youtube-transcript-generator)** | Online transcript extraction tool |
+| **[NoteLM.ai Website](https://www.notelm.ai)** | Learn more about our AI-powered tools |
+| **[YouTube Transcript Generator](https://www.notelm.ai/youtube-transcript-generator)** | Online transcript extraction tool |
 | **[API Key Guide](https://www.notelm.ai/support/api-key-guide)** | Step-by-step guide to get your Gemini API key |
 
 ---
@@ -750,7 +750,7 @@ Having issues or suggestions? We'd love to hear from you!
 | 🐛 **Bug Reports** | [GitHub Issues](https://github.com/NoteLMai/YouTube-Video-Summarizer/issues) |
 | 💡 **Feature Requests** | [GitHub Discussions](https://github.com/NoteLMai/YouTube-Video-Summarizer/discussions) |
 | 📧 **Email** | hello@notelm.ai |
-| 🌐 **Website** | [notelm.ai](https://notelm.ai) |
+| 🌐 **Website** | [www.notelm.ai](https://www.notelm.ai) |
 | 📖 **Documentation** | [Support Center](https://www.notelm.ai/support) |
 
 ---
@@ -863,7 +863,7 @@ SOFTWARE.
 ## 🙏 Credits
 
 <p align="center">
-  Built with ❤️ by <a href="https://notelm.ai">NoteLM.ai</a> - Your AI-powered note-taking companion
+  Built with ❤️ by <a href="https://www.notelm.ai">NoteLM.ai</a> - Your AI-powered note-taking companion
 </p>
 
 <p align="center">
@@ -871,8 +871,8 @@ SOFTWARE.
 </p>
 
 <p align="center">
-  <a href="https://notelm.ai">
-    <img src="https://notelm.ai/logo.svg" alt="NoteLM.ai" width="120">
+  <a href="https://www.notelm.ai">
+    <img src="https://www.notelm.ai/logo.svg" alt="NoteLM.ai" width="120">
   </a>
 </p>
 
