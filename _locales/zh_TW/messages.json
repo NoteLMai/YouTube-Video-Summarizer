@@ -312,7 +312,7 @@
     "description": "Error message for invalid API key"
   },
   "checkApiKey": {
-    "message": "請在設定中檢查您的 API 金鑰，或造訪 notelm.ai/support/api-key-guide 取得幫助。",
+    "message": "請在設定中檢查您的 API 金鑰，或造訪 www.notelm.ai/support/api-key-guide 取得幫助。",
     "description": "Suggestion for API key error"
   },
   "apiKeyTooShort": {
@@ -320,7 +320,7 @@
     "description": "Error for malformed API key"
   },
   "getNewApiKey": {
-    "message": "了解如何在 notelm.ai 取得有效的 API 金鑰",
+    "message": "了解如何在 www.notelm.ai 取得有效的 API 金鑰",
     "description": "Help text for getting new API key"
   },
   "requestError": {

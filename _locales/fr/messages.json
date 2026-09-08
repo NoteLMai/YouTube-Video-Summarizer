@@ -312,7 +312,7 @@
     "description": "Error message for invalid API key"
   },
   "checkApiKey": {
-    "message": "Vérifiez votre clé API dans les paramètres ou visitez notelm.ai/support/api-key-guide.",
+    "message": "Vérifiez votre clé API dans les paramètres ou visitez www.notelm.ai/support/api-key-guide.",
     "description": "Suggestion for API key error"
   },
   "apiKeyTooShort": {
@@ -320,7 +320,7 @@
     "description": "Error for malformed API key"
   },
   "getNewApiKey": {
-    "message": "Découvrez comment obtenir une clé API valide sur notelm.ai",
+    "message": "Découvrez comment obtenir une clé API valide sur www.notelm.ai",
     "description": "Help text for getting new API key"
   },
   "requestError": {

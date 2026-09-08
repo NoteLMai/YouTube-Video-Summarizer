@@ -97,9 +97,9 @@ const UI_STRINGS = {
   // Errors - API
   invalidApiKey: 'Invalid API Key',
   apiKeyInvalidMsg: 'Your Gemini API key is invalid or has been revoked.',
-  checkApiKey: 'Please check your API key in settings or visit notelm.ai/support/api-key-guide for help.',
+  checkApiKey: 'Please check your API key in settings or visit www.notelm.ai/support/api-key-guide for help.',
   apiKeyTooShort: 'The API key appears to be invalid. Please check and re-enter your Gemini API key.',
-  getNewApiKey: 'Learn how to get a valid API key at notelm.ai',
+  getNewApiKey: 'Learn how to get a valid API key at www.notelm.ai',
   requestError: 'Request Error',
   badRequestMsg: 'The request to Gemini API failed.',
   tryAgainLater: 'Please try again later.',
@@ -1165,7 +1165,7 @@ TRANSCRIPT (with [M:SS] timestamp markers):
             type: 'INVALID_API_KEY',
             title: i18n('invalidApiKey') || 'Invalid API Key',
             message: i18n('apiKeyInvalidMsg') || 'Your Gemini API key is invalid or has been revoked.',
-            suggestion: i18n('checkApiKey') || 'Please check your API key in settings or visit notelm.ai/support/api-key-guide for help.',
+            suggestion: i18n('checkApiKey') || 'Please check your API key in settings or visit www.notelm.ai/support/api-key-guide for help.',
             icon: 'settings',
             action: 'settings'
           };
@@ -1401,7 +1401,7 @@ TRANSCRIPT (with [M:SS] timestamp markers):
       this.showDetailedError('invalidApiKeyFormat', {
         title: i18n('invalidApiKey') || 'Invalid API Key',
         message: i18n('apiKeyTooShort') || 'The API key appears to be invalid. Please check and re-enter your Gemini API key.',
-        suggestion: i18n('getNewApiKey') || 'Learn how to get a valid API key at notelm.ai',
+        suggestion: i18n('getNewApiKey') || 'Learn how to get a valid API key at www.notelm.ai',
         action: 'settings'
       });
       return;
@@ -1689,7 +1689,7 @@ TRANSCRIPT (with [M:SS] timestamp markers):
       </div>
       <div class="nlm-footer">
         <span>${i18n('poweredBy')}</span>
-        <a href="https://notelm.ai" target="_blank">${i18n('moreToolsAt')} NoteLM.ai</a>
+        <a href="https://www.notelm.ai" target="_blank">${i18n('moreToolsAt')} NoteLM.ai</a>
       </div>
     `;
 
